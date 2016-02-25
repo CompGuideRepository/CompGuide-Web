@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PatientViewDlg" widgetVar="PatientViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPatientTitle}">
+            <h:form id="PatientViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{patientController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPatientLabel_idpatient}"/>
+                        <h:outputText value="#{patientController.selected.idpatient}" title="#{bundle.ViewPatientTitle_idpatient}"/>
+                        <h:outputText value="#{bundle.ViewPatientLabel_name}"/>
+                        <h:outputText value="#{patientController.selected.name}" title="#{bundle.ViewPatientTitle_name}"/>
+                        <h:outputText value="#{bundle.ViewPatientLabel_lastname}"/>
+                        <h:outputText value="#{patientController.selected.lastname}" title="#{bundle.ViewPatientTitle_lastname}"/>
+                        <h:outputText value="#{bundle.ViewPatientLabel_nutente}"/>
+                        <h:outputText value="#{patientController.selected.nutente}" title="#{bundle.ViewPatientTitle_nutente}"/>
+                        <h:outputText value="#{bundle.ViewPatientLabel_birthdate}"/>
+                        <h:outputText value="#{patientController.selected.birthdate}" title="#{bundle.ViewPatientTitle_birthdate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPatientLabel_address}"/>
+                        <h:outputText value="#{patientController.selected.address}" title="#{bundle.ViewPatientTitle_address}"/>
+                        <h:outputText value="#{bundle.ViewPatientLabel_phone}"/>
+                        <h:outputText value="#{patientController.selected.phone}" title="#{bundle.ViewPatientTitle_phone}"/>
+                        <h:outputText value="#{bundle.ViewPatientLabel_homephone}"/>
+                        <h:outputText value="#{patientController.selected.homephone}" title="#{bundle.ViewPatientTitle_homephone}"/>
+                        <h:outputText value="#{bundle.ViewPatientLabel_type}"/>
+                        <h:outputText value="#{patientController.selected.type}" title="#{bundle.ViewPatientTitle_type}"/>
+                        <h:outputText value="#{bundle.ViewPatientLabel_email}"/>
+                        <h:outputText value="#{patientController.selected.email}" title="#{bundle.ViewPatientTitle_email}"/>
+                        <h:outputText value="#{bundle.ViewPatientLabel_time}"/>
+                        <h:outputText value="#{patientController.selected.time}" title="#{bundle.ViewPatientTitle_time}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" 
+                                     ajax="true"
+                                     onclick="PF('PatientViewDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FormulaCreateDlg" widgetVar="FormulaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateFormulaTitle}">
+            <h:form id="FormulaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{formulaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateFormulaLabel_idformula}" for="idformula" />
+                        <p:inputText id="idformula" value="#{formulaController.selected.idformula}" title="#{bundle.CreateFormulaTitle_idformula}" required="true" requiredMessage="#{bundle.CreateFormulaRequiredMessage_idformula}"/>
+                        <p:outputLabel value="#{bundle.CreateFormulaLabel_parameter}" for="parameter" />
+                        <p:inputTextarea rows="4" cols="30" id="parameter" value="#{formulaController.selected.parameter}" title="#{bundle.CreateFormulaTitle_parameter}" />
+                        <p:outputLabel value="#{bundle.CreateFormulaLabel_description}" for="description" />
+                        <p:inputTextarea rows="4" cols="30" id="description" value="#{formulaController.selected.description}" title="#{bundle.CreateFormulaTitle_description}" />
+                        <p:outputLabel value="#{bundle.CreateFormulaLabel_time}" for="time" />
+                        <p:calendar id="time" pattern="MM/dd/yyyy HH:mm:ss" value="#{formulaController.selected.time}" title="#{bundle.EditFormulaTitle_time}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateFormulaLabel_identifier}" for="identifier" />
+                        <p:inputText id="identifier" value="#{formulaController.selected.identifier}" title="#{bundle.CreateFormulaTitle_identifier}" />
+                        <p:outputLabel value="#{bundle.CreateFormulaLabel_idtask}" for="idtask" />
+                        <p:selectOneMenu id="idtask" value="#{formulaController.selected.idtask}" required="true" requiredMessage="#{bundle.EditFormulaRequiredMessage_idtask}">
+                            <f:selectItems value="#{taskController.itemsAvailableSelectOne}"
+                                           var="idtaskItem"
+                                           itemValue="#{idtaskItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{formulaController.create}" value="#{bundle.Save}" update="display,:FormulaListForm:datalist,:growl" oncomplete="handleSubmit(args,'FormulaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="FormulaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

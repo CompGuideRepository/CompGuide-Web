@@ -1,0 +1,47 @@
+<ui:composition     xmlns="http://www.w3.org/1999/xhtml"
+                    xmlns:h="http://xmlns.jcp.org/jsf/html"
+                    xmlns:b="http://bootsfaces.net/ui"
+                    xmlns:f="http://java.sun.com/jsf/core"
+                    xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+                    xmlns:p="http://primefaces.org/ui"
+                    xmlns:pe="http://primefaces.org/ui/extensions">
+    <b:modal id="stopCondition" closeOnEscape="false"
+             backdrop="false" closable="false"
+             title="Outcome" size="modal-lg"
+             styleClass="modalStopCondition">
+        <h:form id="stopConditionContent">
+            <b:row>
+                <b:column>                    
+                    <p>
+                        <b:row styleClass="show-grid">
+                            <b:column span="9" colMd="6">
+                                <h:outputLabel 
+                                    for="identifier" 
+                                    value="Identifier" /> 
+
+                                <p><h:outputText                                          
+                                        id="taskIdentifier"   
+                                        value="#{scheduleTaskController.selectedStopConditionSet.identifier}"/>
+                                </p>
+                            </b:column>
+                        </b:row>
+                    </p>
+                </b:column>
+            </b:row>
+        </h:form>
+        <f:facet name="footer">
+            <h:form id="stopConditionForm">
+                <b:commandButton id="continue" value="Yes"
+                                 look="success" icon="ok" 
+                                 actionListener="#{scheduleTaskController.continueExecution}" 
+                                 ajax="true" oncomplete="$('.modalStopCondition').modal('hide');"/>
+
+                <b:commandButton id="next" value="No"
+                                 iconAwesome="close" look="danger"
+                                 actionListener="#{scheduleTaskController.nextTask}" 
+                                 ajax="true" oncomplete="$('.modalStopCondition').modal('hide');"/>
+            </h:form>
+        </f:facet>
+    </b:modal>
+</ui:composition>
+

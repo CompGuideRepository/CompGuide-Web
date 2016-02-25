@@ -1,0 +1,56 @@
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces" 
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+               xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+
+   
+    <url-mapping id="home">
+        <pattern value="/" />
+        <view-id value="/faces/index.xhtml" />
+    </url-mapping>
+    <url-mapping id="contact">
+        <pattern value="/Contact" />
+        <view-id value="/faces/contact.xhtml" />
+    </url-mapping>   
+    <url-mapping id="register">
+        <pattern value="/Register" />
+        <view-id value="/faces/account/register.xhtml" />
+    </url-mapping>
+    <url-mapping id="login">
+        <pattern value="/Sign-in" />
+        <view-id value="/faces/account/login.xhtml" />
+    </url-mapping>
+    <url-mapping id="schedule">
+        <pattern value="/Clinical-Tasks" />
+        <view-id value="/faces/task/tasks.xhtml" />
+    </url-mapping>
+    <url-mapping id="executeguideline">
+        <pattern value="/Guidelines/Execute" />
+        <view-id value="/faces/guideExec/execute.xhtml" />
+    </url-mapping>
+    <url-mapping id="guideline">
+        <pattern value="/Guidelines" />
+        <view-id value="/faces/guideline/List.xhtml" />
+    </url-mapping>
+    <url-mapping id="patient" >
+        <pattern value="/Patients" />
+        <view-id value="/faces/patient/List.xhtml" />
+    </url-mapping>
+    <url-mapping id="user" >
+        <pattern value="/Health-Professionals" />
+        <view-id value="/faces/user/List.xhtml" />
+    </url-mapping>
+    ~<url-mapping id="infouser" >
+        <pattern value="/My-Info" />
+        <view-id value="/faces/account/info.xhtml" />
+    </url-mapping>
+    <url-mapping id="editinfo" >
+        <pattern value="/Edit-Info" />
+        <view-id value="/faces/account/editinfo.xhtml" />
+    </url-mapping>
+    <lifecycle>
+        <phase-listener>
+            com.ocpsoft.pretty.application.MultiPageMessagesSupport
+        </phase-listener>
+    </lifecycle>
+</pretty-config>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TaskViewDlg" widgetVar="TaskViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTaskTitle}">
+            <h:form id="TaskViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{taskController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTaskLabel_idtask}"/>
+                        <h:outputText value="#{taskController.selected.idtask}" title="#{bundle.ViewTaskTitle_idtask}"/>
+                        <h:outputText value="#{bundle.ViewTaskLabel_time}"/>
+                        <h:outputText value="#{taskController.selected.time}" title="#{bundle.ViewTaskTitle_time}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewTaskLabel_taskType}"/>
+                        <h:outputText value="#{taskController.selected.taskType}" title="#{bundle.ViewTaskTitle_taskType}"/>
+                        <h:outputText value="#{bundle.ViewTaskLabel_taskFormat}"/>
+                        <h:outputText value="#{taskController.selected.taskFormat}" title="#{bundle.ViewTaskTitle_taskFormat}"/>
+                        <h:outputText value="#{bundle.ViewTaskLabel_taskDescription}"/>
+                        <h:outputText value="#{taskController.selected.taskDescription}" title="#{bundle.ViewTaskTitle_taskDescription}"/>
+                        <h:outputText value="#{bundle.ViewTaskLabel_taskIdentifier}"/>
+                        <h:outputText value="#{taskController.selected.taskIdentifier}" title="#{bundle.ViewTaskTitle_taskIdentifier}"/>
+                        <h:outputText value="#{bundle.ViewTaskLabel_taskPlan}"/>
+                        <h:outputText value="#{taskController.selected.taskPlan}" title="#{bundle.ViewTaskTitle_taskPlan}"/>
+                        <h:outputText value="#{bundle.ViewTaskLabel_nextTask}"/>
+                        <h:outputText value="#{taskController.selected.nextTask}" title="#{bundle.ViewTaskTitle_nextTask}"/>
+                        <h:outputText value="#{bundle.ViewTaskLabel_completed}"/>
+                        <p:selectBooleanCheckbox value="#{taskController.selected.completed}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewTaskLabel_repetitionValue}"/>
+                        <h:outputText value="#{taskController.selected.repetitionValue}" title="#{bundle.ViewTaskTitle_repetitionValue}"/>
+                        <h:outputText value="#{bundle.ViewTaskLabel_idguideexec}"/>
+                        <h:outputText value="#{taskController.selected.idguideexec}" title="#{bundle.ViewTaskTitle_idguideexec}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="TaskViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

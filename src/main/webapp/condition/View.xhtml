@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ConditionViewDlg" widgetVar="ConditionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewConditionTitle}">
+            <h:form id="ConditionViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{conditionController.selected != null}">
+                        <h:outputText value="#{bundle.ViewConditionLabel_conditionID}"/>
+                        <h:outputText value="#{conditionController.selected.conditionID}" title="#{bundle.ViewConditionTitle_conditionID}"/>
+                        <h:outputText value="#{bundle.ViewConditionLabel_numericalValue}"/>
+                        <h:outputText value="#{conditionController.selected.numericalValue}" title="#{bundle.ViewConditionTitle_numericalValue}"/>
+                        <h:outputText value="#{bundle.ViewConditionLabel_qualitativeValue}"/>
+                        <h:outputText value="#{conditionController.selected.qualitativeValue}" title="#{bundle.ViewConditionTitle_qualitativeValue}"/>
+                        <h:outputText value="#{bundle.ViewConditionLabel_comparisonOperator}"/>
+                        <h:outputText value="#{conditionController.selected.comparisonOperator}" title="#{bundle.ViewConditionTitle_comparisonOperator}"/>
+                        <h:outputText value="#{bundle.ViewConditionLabel_parameterIdentifier}"/>
+                        <h:outputText value="#{conditionController.selected.parameterIdentifier}" title="#{bundle.ViewConditionTitle_parameterIdentifier}"/>
+                        <h:outputText value="#{bundle.ViewConditionLabel_conditionParameter}"/>
+                        <h:outputText value="#{conditionController.selected.conditionParameter}" title="#{bundle.ViewConditionTitle_conditionParameter}"/>
+                        <h:outputText value="#{bundle.ViewConditionLabel_unit}"/>
+                        <h:outputText value="#{conditionController.selected.unit}" title="#{bundle.ViewConditionTitle_unit}"/>
+                        <h:outputText value="#{bundle.ViewConditionLabel_canAsk}"/>
+                        <p:selectBooleanCheckbox value="#{conditionController.selected.canAsk}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewConditionLabel_asked}"/>
+                        <p:selectBooleanCheckbox value="#{conditionController.selected.asked}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewConditionLabel_conditionSetID}"/>
+                        <h:outputText value="#{conditionController.selected.conditionSetID}" title="#{bundle.ViewConditionTitle_conditionSetID}"/>
+                        <h:outputText value="#{bundle.ViewConditionLabel_temporalRestrictionID}"/>
+                        <h:outputText value="#{conditionController.selected.temporalRestrictionID}" title="#{bundle.ViewConditionTitle_temporalRestrictionID}"/>
+                        <h:outputText value="#{bundle.ViewConditionLabel_stopConditionSetID}"/>
+                        <h:outputText value="#{conditionController.selected.stopConditionSetID}" title="#{bundle.ViewConditionTitle_stopConditionSetID}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ConditionViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

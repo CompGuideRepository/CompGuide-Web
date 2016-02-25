@@ -1,0 +1,38 @@
+.newsletter{
+	h6{
+		color: #fff;
+		font-weight: normal;
+	}
+	input{
+		background: #fff;
+	}
+	.input-group{
+		margin: 0 auto;
+		width: 570px;
+	}
+	.btn{
+		background-color: @base-color;
+		color: #fff;
+		border-radius: 0;
+		line-height: 3;
+		margin: 0;
+		padding: 0;
+		width: 28%;
+		&:hover{
+			background: @link-hover-color;
+		}
+	}
+	form{
+		.form-control{
+			width: 72%!important;
+		}
+	}
+
+}
+@media handheld, only screen and (max-width: 610px){
+	.newsletter{
+		.input-group{
+			width: 100%;
+		}
+	}
+}

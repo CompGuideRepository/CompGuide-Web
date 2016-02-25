@@ -1,0 +1,90 @@
+.comments-box{
+	img{
+		width: 100%
+	}
+	.author {
+		background: #f6fbff;
+		border-left: 3px solid #6a8799;
+		padding: 40px 40px 40px 190px;
+		position: relative;
+		figure{
+			left: 40px;
+			overflow: hidden;
+			position: absolute;
+			top: 40px;
+			width: 125px;
+		}
+		span{
+			strong{
+				color: #596371;
+				font-size: 1.2em;
+			}
+			&.area{
+				display: block;
+				font-size: 0.7em;
+				letter-spacing: 1px;
+				margin-bottom: 12px;
+				text-transform: uppercase;
+			}
+		}
+	}
+}
+.comments{
+	padding-top: 0;
+	form{
+		textarea{
+			height: 186px;
+		}
+		.btn{
+			float: right;
+		}
+	}
+	.comment{
+		padding: 40px 0 40px 140px;
+		position: relative;
+		&.reply{
+			border-top: none;
+			margin-left: 100px;
+		}
+		figure{
+			left: 20px;
+			overflow: hidden;
+			position: absolute;
+			top: 40px;
+			width: 100px;
+		}
+		.tag-post{
+			margin-bottom: 12px;
+			a{
+				text-decoration: underline;
+			}
+		}
+		.links{
+			float: right;
+		}
+	}
+}
+.comments .comment+.comment {
+	border-top: 1px solid #e4e4e4;
+}
+@media handheld, only screen and (max-width: 510px){
+	.comments-box{
+		.author{
+			padding: 20px;
+			figure{
+				margin-bottom: 20px;
+				position: static;
+			}
+		}
+	}
+	.comments{
+		.comment {
+			padding: 40px 0 40px 20px;
+			figure{
+				margin-bottom: 10px;
+				position: static;
+				width: 50px;
+			}
+		}
+	}
+}

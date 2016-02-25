@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ObservationEditDlg" widgetVar="ObservationEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditObservationTitle}">
+            <h:form id="ObservationEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{observationController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditObservationLabel_idobservation}" for="idobservation" />
+                        <p:inputText id="idobservation" value="#{observationController.selected.idobservation}" title="#{bundle.EditObservationTitle_idobservation}" required="true" requiredMessage="#{bundle.EditObservationRequiredMessage_idobservation}"/>
+                        <p:outputLabel value="#{bundle.EditObservationLabel_parameter}" for="parameter" />
+                        <p:inputTextarea rows="4" cols="30" id="parameter" value="#{observationController.selected.parameter}" title="#{bundle.EditObservationTitle_parameter}" />
+                        <p:outputLabel value="#{bundle.EditObservationLabel_unit}" for="unit" />
+                        <p:inputText id="unit" value="#{observationController.selected.unit}" title="#{bundle.EditObservationTitle_unit}" />
+                        <p:outputLabel value="#{bundle.EditObservationLabel_isnumeric}" for="isnumeric" />
+                        <p:inputText id="isnumeric" value="#{observationController.selected.isnumeric}" title="#{bundle.EditObservationTitle_isnumeric}" />
+                        <p:outputLabel value="#{bundle.EditObservationLabel_parameterIdentifier}" for="parameterIdentifier" />
+                        <p:inputText id="parameterIdentifier" value="#{observationController.selected.parameterIdentifier}" title="#{bundle.EditObservationTitle_parameterIdentifier}" />
+                        <p:outputLabel value="#{bundle.EditObservationLabel_variableName}" for="variableName" />
+                        <p:inputText id="variableName" value="#{observationController.selected.variableName}" title="#{bundle.EditObservationTitle_variableName}" />
+                        <p:outputLabel value="#{bundle.EditObservationLabel_parameterValue}" for="parameterValue" />
+                        <p:inputTextarea rows="4" cols="30" id="parameterValue" value="#{observationController.selected.parameterValue}" title="#{bundle.EditObservationTitle_parameterValue}" />
+                        <p:outputLabel value="#{bundle.EditObservationLabel_task}" for="task" />
+                        <p:inputText id="task" value="#{observationController.selected.task}" title="#{bundle.EditObservationTitle_task}" />
+                        <p:outputLabel value="#{bundle.EditObservationLabel_time}" for="time" />
+                        <p:calendar id="time" pattern="MM/dd/yyyy HH:mm:ss" value="#{observationController.selected.time}" title="#{bundle.EditObservationTitle_time}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditObservationLabel_identifier}" for="identifier" />
+                        <p:inputText id="identifier" value="#{observationController.selected.identifier}" title="#{bundle.EditObservationTitle_identifier}" />
+                        <p:outputLabel value="#{bundle.EditObservationLabel_idtask}" for="idtask" />
+                        <p:selectOneMenu id="idtask" value="#{observationController.selected.idtask}" required="true" requiredMessage="#{bundle.EditObservationRequiredMessage_idtask}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{taskController.itemsAvailableSelectOne}"
+                                           var="idtaskItem"
+                                           itemValue="#{idtaskItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{observationController.update}" value="#{bundle.Save}" update="display,:ObservationListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ObservationEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ObservationEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

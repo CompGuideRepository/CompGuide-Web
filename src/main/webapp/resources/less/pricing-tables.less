@@ -1,0 +1,93 @@
+//
+// Pricing Tables
+//
+.pricing-table {
+	background-color: #f3f5f9;
+}
+// Header
+.pricing-table-header  {
+	background: @base-color;
+	color: #fff;
+	padding: 24px;
+	position: relative;
+	span {
+		display: block;
+	}
+	.plan-level {
+		font-size: 12px;
+		line-height: 18px;
+		text-transform: uppercase;
+	}
+	.plan-name {
+		font-size: 24px;
+	}
+	.plan-price {
+		bottom: 24px;
+		font-size: 48px;
+		font-weight: 700;
+		line-height: 1;
+		position: absolute;
+		right: 24px;
+		.currency {
+			font-size: 18px;
+			font-weight: 400;
+		}
+		.decimal-points {
+			font-size: 14px;
+			font-weight: 400;
+			position: absolute;
+			top: 5px;
+		}
+		.period {
+			font-size: 12px;
+			font-weight: 400;
+		}
+	}
+}
+// Body
+.plan-features {
+	list-style-type: none;
+	margin: 0 24px;
+	padding: 24px 0;
+	li:nth-child(odd) {
+		background-color: #f3f5f9;
+	}
+	li {
+		background-color: #fff;
+		border-bottom: 1px dashed #dbe1ed;
+		padding: 6px;
+		text-align: center;
+		span {
+			display: block;
+		}
+		.feature-name {
+			color: #656d78;
+			font-size: 14px;
+			line-height: 24px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+		.feature-value {
+			color: #434a54;
+			font-size: 14px;
+			font-weight: 700;
+			line-height: 24px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+	}
+}
+// Footer
+.pricing-table-footer {
+	padding: 0 24px 24px;
+	button {
+		display: block;
+		font-weight: 700;
+		outline: 0;
+		padding: 12px 0;
+		text-align: center;
+		width: 100%;
+	}
+}

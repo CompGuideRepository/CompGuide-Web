@@ -1,0 +1,76 @@
+.owl-carousel {
+	position: relative;
+	.owl-item{
+		height: 80px;
+		line-height: 80px;
+		.item{
+			margin: 0 auto;
+			a{
+				display: block;
+				line-height: 80px;
+				text-align: center;
+				width: 100%;
+			}
+		}
+	}
+}
+.owl-theme{
+	.owl-controls{
+		height: 0;
+		position: absolute;
+		top: 20%;
+		width: 100%;
+		.owl-prev{
+			left: -7px;
+			&::before{
+				color: @base-color;
+				content: '\e132';
+				-webkit-transition: all 0.2s ease-in-out;
+				-moz-transition: all 0.2s ease-in-out;
+				-o-transition: all 0.2s ease-in-out;
+				-ms-transition: all 0.2s ease-in-out;
+				transition: all 0.2s ease-in-out;
+			}
+		}
+		.owl-next{
+			right: -16px;
+			&:before{
+				color: @base-color;
+				content: '\e131';
+				-webkit-transition: all 0.2s ease-in-out;
+				-moz-transition: all 0.2s ease-in-out;
+				-o-transition: all 0.2s ease-in-out;
+				-ms-transition: all 0.2s ease-in-out;
+				transition: all 0.2s ease-in-out;
+			}
+		}
+		.owl-prev, .owl-next{
+			line-height: 0px;
+			top: -13px;
+			position: absolute;
+		}
+		.owl-prev:before, .owl-next:before{
+			font-family: 'Glyphicons Halflings';
+			opacity: .5;
+			font-size: 1.5em;
+			-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+			filter: alpha(opacity=90);
+		}
+		.owl-prev:hover:before, .owl-next:hover:before{
+			opacity: 1;
+			-ms-filter: none;
+			filter: none;
+		}
+		.owl-nav [class*=owl-]:hover{
+			background-color: transparent;
+		}
+		.owl-page{
+			span{
+				background-color: @base-color;
+			}
+		}
+	}
+}
+.owl-pagination{
+	margin: 50px;
+}

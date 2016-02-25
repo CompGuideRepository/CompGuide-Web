@@ -1,0 +1,234 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://java.sun.com/jsf/html"
+             xmlns:c="http://java.sun.com/jsp/jstl/core"
+             xmlns:ui="http://java.sun.com/jsf/facelets"
+             xmlns:f="http://java.sun.com/jsf/core"
+             xmlns:b="http://bootsfaces.net/ui"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:pe="http://primefaces.org/ui/extensions">
+    <b:modal title="Task Description" size="modal-lg"
+             styleClass="modalPseudoClass1">
+        <h:form id="timelinecontent">
+            <b:row>
+                <b:column col-sm="1"></b:column>
+                <b:column col-sm="10">
+                    <b:row>
+                        <b:column col-md="7">
+                            <div class="sidebar sidebar-right">
+                                <h5 class="sidebar-title">Details of  
+                                    <h:outputText
+                                        value="#{taskTimeLineController.selected.scheduleTaskID.taskIdentifier}" />
+                                </h5>
+                                <div class="panel-group" id="accordion-work3">
+                                    <div class="panel">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion-work3" href="#collapseTimeLeft" class="collapsed">
+                                                    <i class="fa fa-plus-square"></i> 
+                                                    <h:outputText id="timeleftlabelTimeLine"                                           
+                                                                  value="Time Left" /> 
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseTimeLeft" class="panel-collapse in" style="height: auto;">
+                                            <div class="panel-body">
+                                                <p id="timeleftp">
+                                                    <strong>
+                                                        Time until the task must be executed.
+                                                    </strong>
+                                                </p>
+
+                                                <p>
+                                                    <div id="clockTimeLine">
+                                                        <p> <span id="weeksTimeLine"></span> Weeks </p>
+                                                        <div class="space">:</div>
+                                                        <p> <span id="daysLeftTimeLine"></span> Days </p>
+                                                        <div class="space">:</div>
+                                                        <p> <span id="hoursTimeLine"></span> Hours </p>
+                                                        <div class="space">:</div>
+                                                        <p> <span id="minutesTimeLine"></span> Minutes </p>
+                                                        <div class="space">:</div>
+                                                        <p> <span id="secondsTimeLine"></span> Seconds </p>
+                                                    </div>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion-work" href="#collapseFinishDate" class="collapsed">
+                                                    <i class="fa fa-plus-square"></i> 
+                                                    <h:outputText value="Finishing Date of the Task" /> 
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseFinishDate" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <p>
+                                                    <strong>
+                                                        Date in which the task must be finished.
+                                                    </strong>
+                                                </p>
+
+                                                <p>
+                                                    <p:calendar  
+                                                        mode="inline" 
+                                                        id="timelineTime" 
+                                                        value="#{taskTimeLineController.selected.endDate}"
+                                                        mindate="#{taskTimeLineController.selected.endDate}"
+                                                        maxdate="#{taskTimeLineController.selected.endDate}"/>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion-work" href="#collapseStartDate" class="collapsed">
+                                                    <i class="fa fa-plus-square"></i>
+                                                    <h:outputText value="Started Date of the Task" /> 
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseStartDate" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <p>
+                                                    <strong>
+                                                        Start date of the task.
+                                                    </strong>
+                                                </p>
+                                                <p>
+                                                    <p:calendar  
+                                                        mode="inline" 
+                                                        id="timelineStartedTime"
+                                                        value="#{taskTimeLineController.selected.startDate}"
+                                                        mindate="#{taskTimeLineController.selected.startDate}"
+                                                        maxdate="#{taskTimeLineController.selected.startDate}"/>
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion-work" href="#collapseTimelineExecution" class="collapsed">
+                                                    <i class="fa fa-plus-square"></i>
+                                                    <h:outputText value="Task Execution" /> 
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseTimelineExecution" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <p>
+                                                    <strong>
+                                                        The task <h:outputText value="#{taskTimeLineController.selected.scheduleTaskID.taskIdentifier}" /> was executed 
+                                                        <h:outputText value="#{taskTimeLineController.selected.scheduleTaskID.currentNumberOfRepetitions}" />
+                                                        time(s)
+                                                        and must be executed <h:outputText value="#{taskTimeLineController.selected.numberOfRepetitions}" /> time(s).
+                                                    </strong>
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion-work" href="#collapseOtherTimelines" class="collapsed">
+                                                    <i class="fa fa-plus-square"></i> 
+                                                    <h:outputText value="Other Tasks" /> 
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseOtherTimelines" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <p>
+                                                    <strong> Tasks can be executed in parallel as well as in alternative.
+                                                        Click <img src="resources/images/details_open.png" /> to see aditional information for clinical task.</strong>
+                                                </p>
+
+                                                <p>
+                                                    <p:outputPanel autoUpdate="true">
+                                                        <c:if test="#{taskTimeLineController.decision}">
+                                                            <ui:include src="/task/decision.xhtml" />
+                                                        </c:if>
+                                                        <c:if test="#{taskTimeLineController.action}">
+                                                            <ui:include src="/task/action.xhtml"/>
+                                                        </c:if>
+                                                        <c:if test="#{taskTimeLineController.plan}">
+                                                            <ui:include src="/task/plan.xhtml" />
+                                                        </c:if>
+                                                        <c:if test="#{taskTimeLineController.question}">
+                                                            <ui:include src="/task/question.xhtml" />
+                                                        </c:if>
+                                                        <c:if test="#{taskTimeLineController.end}">
+                                                            <ui:include src="/task/end.xhtml"/>
+                                                        </c:if>
+                                                    </p:outputPanel>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion-work" href="#collapseTimelineTree" class="collapsed">
+                                                    <i class="fa fa-plus-square"></i> 
+                                                    <h:outputText value="Task Tree" /> 
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseTimelineTree" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <p>
+                                                    <strong>Tasks can be executed in parallel as well as in alternative</strong>
+                                                </p>
+
+                                                <p>
+                                                    <ui:include src="/task/tasktree.xhtml" />
+                                                </p>
+                                                <p/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </b:column>
+                        <b:column col-md="5">
+                            <h5 class="sidebar-title">
+                                <h:outputText
+                                    value="Task Description" /> 
+                            </h5>
+                            <p>
+                                <h:outputText    
+                                    class="text-justify"
+                                    value="#{taskTimeLineController.selected.scheduleTaskID.taskDescription}"/>
+                            </p>
+                        </b:column>
+                    </b:row>
+                </b:column>
+                <b:column col-sm="1"></b:column>
+
+            </b:row>
+        </h:form>
+        <f:facet name="footer">  
+            <h:form id="buttonstimeline">
+                <b:button value="close" icon="remove" class="btn btn-small btn-color-shadow"
+                          dismiss="modal" onclick="return false;"/>
+
+                <b:commandButton id="check" value="Check"
+                                 disabled="#{taskTimeLineController.selected.isCanCheck}"                                       
+                                 icon="ok" update=":schedule"
+                                 class="btn btn-small btn-color-shadow"
+                                 actionListener="#{taskTimeLineController.checkTask}" 
+                                 oncomplete="PF('timeLineTaskEvents').update();$('.modalPseudoClass1').close();"/>
+            </h:form>
+        </f:facet>
+    </b:modal>
+
+</ui:fragment>
+

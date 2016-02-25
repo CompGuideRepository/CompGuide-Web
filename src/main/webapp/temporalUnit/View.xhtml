@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TemporalUnitViewDlg" widgetVar="TemporalUnitViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTemporalUnitTitle}">
+            <h:form id="TemporalUnitViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{temporalUnitController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTemporalUnitLabel_temporalUnitID}"/>
+                        <h:outputText value="#{temporalUnitController.selected.temporalUnitID}" title="#{bundle.ViewTemporalUnitTitle_temporalUnitID}"/>
+                        <h:outputText value="#{bundle.ViewTemporalUnitLabel_value}"/>
+                        <h:outputText value="#{temporalUnitController.selected.value}" title="#{bundle.ViewTemporalUnitTitle_value}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="TemporalUnitViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

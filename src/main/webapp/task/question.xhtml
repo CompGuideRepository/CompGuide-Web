@@ -1,0 +1,74 @@
+<ui:composition     xmlns="http://www.w3.org/1999/xhtml"
+                    xmlns:c="http://java.sun.com/jsp/jstl/core"
+                    xmlns:h="http://xmlns.jcp.org/jsf/html"
+                    xmlns:b="http://bootsfaces.net/ui"
+                    xmlns:f="http://java.sun.com/jsf/core"
+                    xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+                    xmlns:p="http://primefaces.org/ui"
+                    xmlns:pe="http://primefaces.org/ui/extensions">
+
+    <h:panelGrid id="questionDetails">
+        <h:form id="contentQuestion">
+            <p:outputPanel id="s" autoUpdate="true">
+                <c:forEach items="#{scheduleTaskController.processedTask.tasks}" var="clinicalTask">
+                    <h:form id="question" rendered="#{clinicalTask.taskType == 'Question'}">
+                        <b:row class="page-header">
+                            <h4 class='text-warning'>
+                                Questions
+                            </h4>
+                        </b:row>
+                        <c:forEach items='#{clinicalTask.parameters}' var="parameter">
+                            <b:panel title="#{parameter.questionParameter}" look="info"
+                                     collapsed="true">
+                                <h:panelGrid rendered="#{parameter.numeric}">
+                                    <p>
+                                        <strong> Question </strong><br />
+                                        <b:inputText value='#{parameter.parameterDescription}' class="textarea" disabled="true"/>
+                                    </p>
+                                    <p>
+                                        <strong> Identifier </strong><br />
+                                        <h:outputText value='#{parameter.parameterIdentifier}' class="textarea" />
+                                    </p>
+
+                                    <b:selectOneMenu >
+                                        <f:selectItems value="#{parameter.possibleValue}" var="value" 
+                                                       itemLabel="#{value}" 
+                                                       itemValue="#{value}" />
+                                    </b:selectOneMenu>
+
+                                </h:panelGrid>
+                                <h:panelGrid rendered="#{!parameter.numeric}">
+
+                                    <p>
+                                        <strong> Question </strong><br />
+                                        <h:outputText value='#{parameter.parameterDescription}' class="textarea"/>
+                                    </p>
+                                    <p>
+                                        <strong> Identifier </strong><br />
+                                        <h:outputText value='#{parameter.parameterIdentifier}' class="textarea" />
+                                    </p>
+
+                                    <b:selectOneMenu >
+                                        <f:selectItems value="#{parameter.possibleValue}" var="value" 
+                                                       itemLabel="#{value}" 
+                                                       itemValue="#{value}" />
+                                    </b:selectOneMenu>
+
+                                </h:panelGrid>
+                            </b:panel>
+                        </c:forEach>
+
+                    </h:form>
+
+                </c:forEach>
+            </p:outputPanel>
+        </h:form>
+    </h:panelGrid>
+    <f:facet name="footer">
+        <h:form>
+            <b:button value="close" dismiss="modal" onclick="return false;"/>
+            <b:button value="Ok" look="primary" dismiss="modal" onclick="return false;"/>
+        </h:form>
+    </f:facet>
+</ui:composition>
+

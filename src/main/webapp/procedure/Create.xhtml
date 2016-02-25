@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProcedureCreateDlg" widgetVar="ProcedureCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateProcedureTitle}">
+            <h:form id="ProcedureCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{procedureController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateProcedureLabel_idprocedure}" for="idprocedure" />
+                        <p:inputText id="idprocedure" value="#{procedureController.selected.idprocedure}" title="#{bundle.CreateProcedureTitle_idprocedure}" required="true" requiredMessage="#{bundle.CreateProcedureRequiredMessage_idprocedure}"/>
+                        <p:outputLabel value="#{bundle.CreateProcedureLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{procedureController.selected.name}" title="#{bundle.CreateProcedureTitle_name}" />
+                        <p:outputLabel value="#{bundle.CreateProcedureLabel_description}" for="description" />
+                        <p:inputTextarea rows="4" cols="30" id="description" value="#{procedureController.selected.description}" title="#{bundle.CreateProcedureTitle_description}" />
+                        <p:outputLabel value="#{bundle.CreateProcedureLabel_time}" for="time" />
+                        <p:calendar id="time" pattern="MM/dd/yyyy HH:mm:ss" value="#{procedureController.selected.time}" title="#{bundle.EditProcedureTitle_time}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateProcedureLabel_identifier}" for="identifier" />
+                        <p:inputText id="identifier" value="#{procedureController.selected.identifier}" title="#{bundle.CreateProcedureTitle_identifier}" />
+                        <p:outputLabel value="#{bundle.CreateProcedureLabel_idtask}" for="idtask" />
+                        <p:selectOneMenu id="idtask" value="#{procedureController.selected.idtask}" required="true" requiredMessage="#{bundle.EditProcedureRequiredMessage_idtask}">
+                            <f:selectItems value="#{taskController.itemsAvailableSelectOne}"
+                                           var="idtaskItem"
+                                           itemValue="#{idtaskItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{procedureController.create}" value="#{bundle.Save}" update="display,:ProcedureListForm:datalist,:growl" oncomplete="handleSubmit(args,'ProcedureCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ProcedureCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

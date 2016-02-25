@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PatientEditDlg" widgetVar="PatientEditDialog" modal="true" width="860" resizable="false" appendTo="@(body)" header="#{bundle.EditPatientTitle}">
+            <h:form id="PatientEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="3" rendered="#{patientController.selected != null}">
+                        <b:inputText id="name" value="#{patientController.selected.name}" title="#{bundle.EditPatientTitle_name}" 
+                                     label="#{bundle.EditPatientLabel_name}" renderLabel="true"/>
+                        <b:inputText id="lastname" value="#{patientController.selected.lastname}" title="#{bundle.EditPatientTitle_lastname}"
+                                     label="#{bundle.EditPatientLabel_lastname}" renderLabel="true"/>
+                        <b:inputText id="nutente" value="#{patientController.selected.nutente}" title="#{bundle.EditPatientTitle_nutente}" 
+                                     label="#{bundle.EditPatientLabel_nutente}" renderLabel="true"/>
+                        <b:row>
+                            <b:column col-sm="12">
+                                <div class="form-group">
+                                    <i class="fa fa-calendar-o">
+                                        <b:datepicker id="birthdate" value="#{patientController.selected.birthdate}" 
+                                                      changeMonth="true" changeYear="true"
+                                                      mode="popup" placeholder="#{bundle.EditPatientTitle_birthdate}"/>
+                                    </i>
+                                </div>
+                            </b:column>
+                        </b:row>
+                        <b:inputText id="address" value="#{patientController.selected.address}" title="#{bundle.EditPatientTitle_address}" 
+                                     label="#{bundle.EditPatientLabel_address}" renderLabel="true"/>
+                        <b:inputText id="phone" value="#{patientController.selected.phone}" title="#{bundle.EditPatientTitle_phone}" 
+                                     label="#{bundle.EditPatientLabel_phone}" renderLabel="true"/>
+                        <b:inputText id="homephone" value="#{patientController.selected.homephone}" title="#{bundle.EditPatientTitle_homephone}" 
+                                     label="#{bundle.EditPatientLabel_homephone}" renderLabel="true"/>
+                        <b:inputText id="type" value="#{patientController.selected.type}" title="#{bundle.EditPatientTitle_type}" 
+                                     label="#{bundle.EditPatientLabel_type}" renderLabel="true"/>
+                        <b:inputText id="email" value="#{patientController.selected.email}" title="#{bundle.EditPatientTitle_email}" 
+                                     label="#{bundle.EditPatientLabel_email}" renderLabel="true"/>
+                        <b:row>
+                            <b:column id="panelbirthday" col-sm="12">
+                                <div class="form-group">
+                                    <i class="fa fa-calendar-o">
+                                        <b:datepicker id="time" value="#{patientController.selected.time}"
+                                                      changeMonth="true" changeYear="true"
+                                                      mode="popup" placeholder="#{bundle.EditPatientTitle_time}" />
+                                    </i>
+                                </div>
+                            </b:column>
+                        </b:row>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{patientController.update}" value="#{bundle.Save}" 
+                                     update="display,:PatientListForm:datalist,:growl" 
+                                     oncomplete="handleSubmit(args, 'PatientEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" 
+                                     ajax="true"
+                                     onclick="PF('PatientEditDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

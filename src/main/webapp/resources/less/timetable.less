@@ -1,0 +1,77 @@
+.timetable {
+	margin: 30px 0 50px;
+	table{
+		width: 100%;
+		td{
+			a{
+				color: #91979f;
+				display: block;
+				height: 55px;
+				line-height: 55px;
+			}
+		}
+		th{
+			font-size: 0.875em;
+			font-weight: 400;
+		}
+	}
+	.ct-orange{
+		background-color: #FFF1C8;
+		color: #e1823c;
+	}
+	.ct-red{
+		background-color: #FFE5E5;
+		color: #e13c6e;
+	}
+	.ct-green{
+		background-color: #E4FCD9;
+		color: #6ee13c;
+	}
+	.ct-blue{
+		background-color: #D2EAFD;
+		color: #3ca4e1;
+	}
+	&.mini{
+		list-style: none;
+		li{
+			background-color: #fbfbfb;
+			font-size: 0.8em;
+			line-height: 30px;
+			margin: 5px 0;
+			padding: 4px 4px 4px 130px;
+			span{
+				-webkit-border-radius: 3px;
+				border-radius: 3px;
+				color: #fff;
+				display: inline-block;
+				margin: 3px;
+				padding: 0 20px;
+				text-transform: uppercase;
+				&:first-child{
+					color: #919191;
+					font-size: 1.1em;
+					text-transform: none;
+					width: 120px;
+					margin: 0 0 0 -120px;
+				}
+			}
+		}
+	}
+}
+.timetable table td,
+.timetable table th {
+	border: 1px solid #e1e1e1;
+	height: 65px;
+	padding: 5px;
+	text-align: center;
+	width: 12.5%;
+}
+.timetable-responsive {
+	width: 100%;
+	height: auto;
+	overflow-x: auto;
+	padding: 0 0 10px 0;
+	table{
+		min-width: 940px;
+	}
+}

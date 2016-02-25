@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="GuideExecViewDlg" widgetVar="GuideExecViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewGuideExecTitle}">
+            <h:form id="GuideExecViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{guideExecController.selected != null}" style="border: none;">
+                        <h:outputText value="#{bundle.ViewGuideExecLabel_idguideexec}"/>
+                        <h:outputText value="#{guideExecController.selected.idguideexec}" title="#{bundle.ViewGuideExecTitle_idguideexec}"/>
+                        <h:outputText value="#{bundle.ViewGuideExecLabel_start}"/>
+                        <h:outputText value="#{guideExecController.selected.start}" title="#{bundle.ViewGuideExecTitle_start}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewGuideExecLabel_time}"/>
+                        <h:outputText value="#{guideExecController.selected.time}" title="#{bundle.ViewGuideExecTitle_time}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewGuideExecLabel_description}"/>
+                        <h:outputText value="#{guideExecController.selected.description}" title="#{bundle.ViewGuideExecTitle_description}"/>
+                        <h:outputText value="#{bundle.ViewGuideExecLabel_completed}"/>
+                        <h:outputText value="#{guideExecController.selected.completed}" title="#{bundle.ViewGuideExecTitle_completed}"/>
+                        <h:outputText value="#{bundle.ViewGuideExecLabel_nextTasks}"/>
+                        <h:outputText value="#{guideExecController.selected.nextTasks}" title="#{bundle.ViewGuideExecTitle_nextTasks}"/>
+                        <h:outputText value="#{bundle.ViewGuideExecLabel_pendingTasks}"/>
+                        <h:outputText value="#{guideExecController.selected.pendingTasks}" title="#{bundle.ViewGuideExecTitle_pendingTasks}"/>
+                        <h:outputText value="#{bundle.ViewGuideExecLabel_idguideline}"/>
+                        <h:outputText value="#{guideExecController.selected.idguideline}" title="#{bundle.ViewGuideExecTitle_idguideline}"/>
+                        <h:outputText value="#{bundle.ViewGuideExecLabel_idpatient}"/>
+                        <h:outputText value="#{guideExecController.selected.idpatient}" title="#{bundle.ViewGuideExecTitle_idpatient}"/>
+                        <h:outputText value="#{bundle.ViewGuideExecLabel_iduser}"/>
+                        <h:outputText value="#{guideExecController.selected.iduser}" title="#{bundle.ViewGuideExecTitle_iduser}"/>
+                    </p:panelGrid>
+                </h:panelGroup>
+            </h:form>
+
+            <f:facet name="footer">
+                <h:form>
+                    <b:row>
+                        <b:column col-md="10"></b:column>
+                        <b:column col-md="2">
+                            <b:button style="float: right !important;"  id="close" value="close" onclick="PF('GuideExecViewDialog').hide();"/>
+                        </b:column>
+                    </b:row>
+                </h:form>
+
+            </f:facet>
+        </p:dialog>
+
+    </ui:composition>
+</html>

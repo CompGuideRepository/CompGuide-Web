@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TemporalRestrictionCreateDlg" widgetVar="TemporalRestrictionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTemporalRestrictionTitle}">
+            <h:form id="TemporalRestrictionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{temporalRestrictionController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTemporalRestrictionLabel_temporalRestrictionID}" for="temporalRestrictionID" />
+                        <p:inputText id="temporalRestrictionID" value="#{temporalRestrictionController.selected.temporalRestrictionID}" title="#{bundle.CreateTemporalRestrictionTitle_temporalRestrictionID}" required="true" requiredMessage="#{bundle.CreateTemporalRestrictionRequiredMessage_temporalRestrictionID}"/>
+                        <p:outputLabel value="#{bundle.CreateTemporalRestrictionLabel_minTemporalRestrictionValue}" for="minTemporalRestrictionValue" />
+                        <p:inputText id="minTemporalRestrictionValue" value="#{temporalRestrictionController.selected.minTemporalRestrictionValue}" title="#{bundle.CreateTemporalRestrictionTitle_minTemporalRestrictionValue}" />
+                        <p:outputLabel value="#{bundle.CreateTemporalRestrictionLabel_maxTemporalRestrictionValue}" for="maxTemporalRestrictionValue" />
+                        <p:inputText id="maxTemporalRestrictionValue" value="#{temporalRestrictionController.selected.maxTemporalRestrictionValue}" title="#{bundle.CreateTemporalRestrictionTitle_maxTemporalRestrictionValue}" />
+                        <p:outputLabel value="#{bundle.CreateTemporalRestrictionLabel_temporalRestrictionValue}" for="temporalRestrictionValue" />
+                        <p:inputText id="temporalRestrictionValue" value="#{temporalRestrictionController.selected.temporalRestrictionValue}" title="#{bundle.CreateTemporalRestrictionTitle_temporalRestrictionValue}" required="true" requiredMessage="#{bundle.CreateTemporalRestrictionRequiredMessage_temporalRestrictionValue}"/>
+                        <p:outputLabel value="#{bundle.CreateTemporalRestrictionLabel_temporalOperatorID}" for="temporalOperatorID" />
+                        <p:selectOneMenu id="temporalOperatorID" value="#{temporalRestrictionController.selected.temporalOperatorID}" required="true" requiredMessage="#{bundle.EditTemporalRestrictionRequiredMessage_temporalOperatorID}">
+                            <f:selectItems value="#{temporalOperatorController.itemsAvailableSelectOne}"
+                                           var="temporalOperatorIDItem"
+                                           itemValue="#{temporalOperatorIDItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateTemporalRestrictionLabel_temporalUnitID}" for="temporalUnitID" />
+                        <p:selectOneMenu id="temporalUnitID" value="#{temporalRestrictionController.selected.temporalUnitID}" required="true" requiredMessage="#{bundle.EditTemporalRestrictionRequiredMessage_temporalUnitID}">
+                            <f:selectItems value="#{temporalUnitController.itemsAvailableSelectOne}"
+                                           var="temporalUnitIDItem"
+                                           itemValue="#{temporalUnitIDItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{temporalRestrictionController.create}" value="#{bundle.Save}" update="display,:TemporalRestrictionListForm:datalist,:growl" oncomplete="handleSubmit(args,'TemporalRestrictionCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TemporalRestrictionCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

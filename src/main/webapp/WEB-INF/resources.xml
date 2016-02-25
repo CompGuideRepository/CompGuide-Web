@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <Resource id="jdbc/compguidedb" type="javax.sql.DataSource">#Tue Feb 23 21:38:25 GMT 2016
+        jdbcDriver=com.mysql.jdbc.Driver
+        password=123
+        userName=root
+        jdbcUrl=jdbc\:mysql\://localhost\:3306/compguidedb
+    </Resource>
+</resources>

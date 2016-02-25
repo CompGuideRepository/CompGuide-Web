@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AutenticationEditDlg" widgetVar="AutenticationEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditAutenticationTitle}">
+            <h:form id="AutenticationEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{autenticationController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditAutenticationLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{autenticationController.selected.id}" title="#{bundle.EditAutenticationTitle_id}" required="true" requiredMessage="#{bundle.EditAutenticationRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditAutenticationLabel_duracao}" for="duracao" />
+                        <p:calendar id="duracao" pattern="MM/dd/yyyy HH:mm:ss" value="#{autenticationController.selected.duracao}" title="#{bundle.EditAutenticationTitle_duracao}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditAutenticationLabel_auth}" for="auth" />
+                        <p:inputText id="auth" value="#{autenticationController.selected.auth}" title="#{bundle.EditAutenticationTitle_auth}" />
+                        <p:outputLabel value="#{bundle.EditAutenticationLabel_utilizadorId}" for="utilizadorId" />
+                        <p:selectOneMenu id="utilizadorId" value="#{autenticationController.selected.utilizadorId}" required="true" requiredMessage="#{bundle.EditAutenticationRequiredMessage_utilizadorId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{userController.itemsAvailableSelectOne}"
+                                           var="utilizadorIdItem"
+                                           itemValue="#{utilizadorIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{autenticationController.update}" value="#{bundle.Save}" update="display,:AutenticationListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AutenticationEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AutenticationEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

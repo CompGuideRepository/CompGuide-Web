@@ -1,0 +1,59 @@
+//
+// Icon List
+//
+.list-group {
+	list-style: none;
+	li{
+		display: block;
+		line-height: 2em;
+	}
+}
+.list-group-line{
+	li {
+		border-bottom: 1px solid #eee;
+		line-height: 3em;
+		&:last-child{
+			border-bottom: 1px solid transparent;
+		}
+		a{
+			color: @link-hover-color;
+			font-family: 'PT Sans';
+		}
+		&:hover{
+			a{
+				color: @base-color;
+			}
+		}
+		&:before{
+			color: @link-hover-color;
+			margin-right: 1em;
+			vertical-align: middle;
+		}
+	}
+}
+//
+// Icon List 2
+//
+.list-arrow{
+	li{
+		font-size: 14px;
+		line-height: 26px;
+		padding-bottom: 6px;
+		&:before{
+			color: #aeb3b9;
+			margin-right: 10px;
+		}
+		a{
+			color: #aeb3b9;
+			font-size: 1em;
+		}
+	}
+}
+//
+// Siderbar List icon and Number Right
+//
+.sr-number{
+	color: @base-color;
+	display: inline-block;
+	float: right;
+}

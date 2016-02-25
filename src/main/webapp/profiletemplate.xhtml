@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:b="http://bootsfaces.net/ui"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+       xmlns:p="http://primefaces.org/ui"
+       xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/pagetemplate.xhtml">
+        <ui:define name="navbar">
+            <ui:include src="/navbar/profilenavbar.xhtml" />
+        </ui:define>
+        <ui:define name="pageheader">
+            <ui:include src="/header/homeheader.xhtml" />
+        </ui:define>
+        <ui:define name="beforebody">
+            <h:form id="formOutcome">
+                <b:commandButton id="showOutcome" style="display: none;" update=":outcome, outcomeContent" actionListener="#{scheduleTaskController.showOutcome}" 
+                                 oncomplete="$('.modalClass').modal('show');return false;" ajax="true" value="modal" ></b:commandButton>
+            </h:form>
+            <ui:include src="outcome/outcome.xhtml" />
+
+            <h:form id="formStopCondition">
+                <b:commandButton id="showStopCondition" style="display: none;" update=":stopCondition, stopConditionContent" actionListener="#{scheduleTaskController.taskStopCondition}" 
+                                 oncomplete="$('.modalStopCondition').modal('show');return false;" ajax="true" value="modal" ></b:commandButton>
+            </h:form>
+            <ui:include src="stopConditionSet/stopcondition.xhtml" />
+        </ui:define>
+        <ui:define name="events">
+            <f:metadata>
+                <f:event type="preRenderView" listener="#{userController.sessionValidate}" />
+            </f:metadata>
+        </ui:define>
+        <ui:define name="footer">
+            <ui:include src="/footer/profilefooter.xhtml" />
+        </ui:define>
+    </ui:composition>
+</html>

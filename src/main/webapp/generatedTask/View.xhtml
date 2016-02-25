@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="GeneratedTaskViewDlg" widgetVar="GeneratedTaskViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewGeneratedTaskTitle}">
+            <h:form id="GeneratedTaskViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{generatedTaskController.selected != null}">
+                        <h:outputText value="#{bundle.ViewGeneratedTaskLabel_idgeneratedTask}"/>
+                        <h:outputText value="#{generatedTaskController.selected.idgeneratedTask}" title="#{bundle.ViewGeneratedTaskTitle_idgeneratedTask}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedTaskLabel_idplan}"/>
+                        <h:outputText value="#{generatedTaskController.selected.idplan}" title="#{bundle.ViewGeneratedTaskTitle_idplan}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedTaskLabel_idsync}"/>
+                        <h:outputText value="#{generatedTaskController.selected.idsync}" title="#{bundle.ViewGeneratedTaskTitle_idsync}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedTaskLabel_identifier}"/>
+                        <h:outputText value="#{generatedTaskController.selected.identifier}" title="#{bundle.ViewGeneratedTaskTitle_identifier}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedTaskLabel_idguideexec}"/>
+                        <h:outputText value="#{generatedTaskController.selected.idguideexec}" title="#{bundle.ViewGeneratedTaskTitle_idguideexec}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="GeneratedTaskViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

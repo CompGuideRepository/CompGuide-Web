@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CyclePartPeriodicityCreateDlg" widgetVar="CyclePartPeriodicityCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCyclePartPeriodicityTitle}">
+            <h:form id="CyclePartPeriodicityCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{cyclePartPeriodicityController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCyclePartPeriodicityLabel_cyclePartPeriodicityID}" for="cyclePartPeriodicityID" />
+                        <p:inputText id="cyclePartPeriodicityID" value="#{cyclePartPeriodicityController.selected.cyclePartPeriodicityID}" title="#{bundle.CreateCyclePartPeriodicityTitle_cyclePartPeriodicityID}" required="true" requiredMessage="#{bundle.CreateCyclePartPeriodicityRequiredMessage_cyclePartPeriodicityID}"/>
+                        <p:outputLabel value="#{bundle.CreateCyclePartPeriodicityLabel_repetitionValue}" for="repetitionValue" />
+                        <p:inputText id="repetitionValue" value="#{cyclePartPeriodicityController.selected.repetitionValue}" title="#{bundle.CreateCyclePartPeriodicityTitle_repetitionValue}" />
+                        <p:outputLabel value="#{bundle.CreateCyclePartPeriodicityLabel_periodicityValue}" for="periodicityValue" />
+                        <p:inputText id="periodicityValue" value="#{cyclePartPeriodicityController.selected.periodicityValue}" title="#{bundle.CreateCyclePartPeriodicityTitle_periodicityValue}" required="true" requiredMessage="#{bundle.CreateCyclePartPeriodicityRequiredMessage_periodicityValue}"/>
+                        <p:outputLabel value="#{bundle.CreateCyclePartPeriodicityLabel_durationID}" for="durationID" />
+                        <p:selectOneMenu id="durationID" value="#{cyclePartPeriodicityController.selected.durationID}" >
+                            <f:selectItems value="#{durationController.itemsAvailableSelectOne}"
+                                           var="durationIDItem"
+                                           itemValue="#{durationIDItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCyclePartPeriodicityLabel_temporalUnitID}" for="temporalUnitID" />
+                        <p:selectOneMenu id="temporalUnitID" value="#{cyclePartPeriodicityController.selected.temporalUnitID}" required="true" requiredMessage="#{bundle.EditCyclePartPeriodicityRequiredMessage_temporalUnitID}">
+                            <f:selectItems value="#{temporalUnitController.itemsAvailableSelectOne}"
+                                           var="temporalUnitIDItem"
+                                           itemValue="#{temporalUnitIDItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{cyclePartPeriodicityController.create}" value="#{bundle.Save}" update="display,:CyclePartPeriodicityListForm:datalist,:growl" oncomplete="handleSubmit(args,'CyclePartPeriodicityCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CyclePartPeriodicityCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="GuidelineCreateDlg" widgetVar="GuidelineCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateGuidelineTitle}">
+            <h:form id="GuidelineCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{guidelineController.selected != null}">
+                        <b:datepicker mode="popup" 
+                                      changeMonth="true" changeYear="true"
+                                      id="dateOfCreation" value="#{guidelineController.selected.dateOfCreation}" placeholder="#{bundle.EditGuidelineTitle_dateOfCreation}"/>
+                        <b:datepicker mode="popup" 
+                                      changeMonth="true" changeYear="true"
+                                      id="dateOfUpdate" value="#{guidelineController.selected.dateOfUpdate}" placeholder="#{bundle.EditGuidelineTitle_dateOfUpdate}"/>
+                        <b:inputText id="versionNumber" value="#{guidelineController.selected.versionNumber}" title="#{bundle.CreateGuidelineTitle_versionNumber}"
+                                     label="#{bundle.CreateGuidelineLabel_versionNumber}" renderLabel="true"/>
+                        <b:inputText id="guidelineName" value="#{guidelineController.selected.guidelineName}" title="#{bundle.CreateGuidelineTitle_guidelineName}" 
+                                     label="#{bundle.CreateGuidelineLabel_guidelineName}" renderLabel="true"/>
+                        <b:inputText id="authorship" value="#{guidelineController.selected.authorship}" title="#{bundle.CreateGuidelineTitle_authorship}" 
+                                     label="#{bundle.CreateGuidelineLabel_authorship}" renderLabel="true"/>
+                        <b:inputText id="identifier" value="#{guidelineController.selected.identifier}" title="#{bundle.CreateGuidelineTitle_identifier}" 
+                                     label="#{bundle.CreateGuidelineLabel_identifier}" renderLabel="true"/>
+                        <b:inputTextarea rows="4" id="description" value="#{guidelineController.selected.description}" title="#{bundle.CreateGuidelineTitle_description}" 
+                                         label="#{bundle.CreateGuidelineLabel_description}" renderLabel="true"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{guidelineController.create}" value="#{bundle.Save}" update="display,:GuidelineListForm:datalist,:growl" oncomplete="handleSubmit(args,'GuidelineCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" ajax="true" onclick="PF('GuidelineCreateDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

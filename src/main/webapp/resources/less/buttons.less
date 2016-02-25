@@ -1,0 +1,194 @@
+//
+// Buttons
+// --------------------------------------------------
+.btn{
+	line-height: 40px;
+	margin: 1em auto;
+	overflow: hidden;
+	padding: 0px 3.5em;
+	-webkit-transition: all .3s ease-in-out;
+	-moz-transition: all .3s ease-in-out;
+	-ms-transition: all .3s ease-in-out;
+	-o-transition: all .3s ease-in-out;
+	transition: all .3s ease-in-out;
+}
+.btn-icon {
+	border: 1px solid #ebebeb;
+	border-radius: 0;
+	color: #596371;
+	font-size: 19px;
+	height: 36px;
+	line-height: 36px;
+	margin: 0 0 0 5px;
+	padding: 0;
+	width: 36px;
+	-webkit-border-radius: 0;
+	&.active{
+		color: @base-color;
+		&:hover{
+			background: @base-color;
+			color: #fff;
+		}
+	}
+}
+.btn-filter {
+	background: #fff;
+	border: 1px solid #efefef;
+	border-radius: 5px;
+	padding: 0px 14px;
+	&:hover{
+		background: @base-color;
+		border-color: @base-color;
+		color: #fff;
+	}
+}
+.btn-no-radius {
+	border-radius: 0;
+}
+.btn-default {
+	border-style: solid;
+	border-color: @text-color;
+	color: @text-color;
+	position: relative;
+	&:hover{
+		border-color: @base-color;
+		background: @base-color;
+		color: @light-color;
+	}
+}
+.btn-color-bg {
+	background: @base-color;
+	border-color: @base-color;
+	color: @light-color;
+	&:hover{
+		background: @light-color;
+	color: @base-color;
+	}
+}
+.btn-color-border-round {
+	border-style: solid;
+	border-radius: 4px;
+	border-color: @base-color;
+	&:after{
+		width: 0;
+		height: 100%;
+		left: 0;
+		top: 0;
+		content: '';
+	}
+	&:hover{
+		&:after{
+			width: 100%;
+			content: '';
+		}
+	}
+}
+.btn-color-border {
+	border-style: solid;
+	border-color: @base-color;
+}
+.btn-color-border-solid {
+	background-color: @base-color;
+	border-style: solid;
+	border-radius: 24px;
+	border-color: @base-color;
+	color: @light-color;
+	margin: 0 0 28px 0;
+	&:hover{
+		background-color: @light-color;
+		border-color: @base-color;
+		color: @base-color;
+	}
+}
+.btn-color-bg-dark {
+	background: @link-hover-color;
+	border-color: @link-hover-color;
+	color: @light-color;
+}
+.btn-color-border-dotted {
+	border-style: dotted;
+	background: @light-color;
+	border-color: @base-color;
+	color: @base-color;
+}
+.btn-color-border-dashed-2 {
+	border-width: 2px;
+	border-style: dashed;
+	background: @light-color;
+	border-color: @base-color;
+	color: @base-color;
+}
+.btn-color-border-solid-3 {
+	background: @light-color;
+	border-radius: 29px;
+	border-width: 2px;
+	border-style: solid;
+	border-color: @base-color;
+	color: @base-color;
+	&:hover{
+		background: @base-color;
+		color: @light-color;
+	}
+}
+.btn-color-bg-radius {
+	border-radius: 6px;
+}
+.btn-color-shadow {
+	background: @base-color;
+	border-color: @base-color;
+	color: @light-color;
+	box-shadow: inset 0 -3px 0 0 rgba(0, 0, 0, 0.2);
+}
+.btn-color-bg-dark-border {
+	background: @link-hover-color;
+	border-color: @base-color;
+	color: @light-color;
+}
+.btn-color-bg-light-icon {
+	background: @base-color;
+	border-color: @base-color;
+	color: @light-color;
+	padding-left: 4em;
+	&:before{
+		background: rgba(255, 255, 255, 0.4);
+		border-color: @base-color;
+		color: @light-color;
+		line-height: inherit !important;
+		margin: auto !important;
+		position: absolute;
+		left: 0;
+		top: 0;
+		content: "\e181";
+		width: 40px;
+	}
+}
+.btn-color-bg-icon {
+	background: @base-color;
+	border-color: @base-color;
+	color: @light-color;
+	padding-left: 3em;
+	&:before{
+		line-height: inherit !important;
+		margin: auto !important;
+		position: absolute;
+		left: 0;
+		top: 0;
+		content: "\e181";
+		width: 40px;
+	}
+	&:hover{
+		background: @light-color;
+		border-color: @base-color;
+		color: @base-color;
+		padding-left: 3em;
+	}
+}
+//
+// Responsive
+//
+@media handheld, only screen and (max-width: 468px){
+	.btn {
+		padding: .2em .8em;
+	}
+}
+

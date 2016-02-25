@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://java.sun.com/jsf/html"
+             xmlns:ui="http://java.sun.com/jsf/facelets"
+             xmlns:f="http://java.sun.com/jsf/core"
+             xmlns:b="http://bootsfaces.net/ui">
+
+    <!-- Page Titles -->
+    <div class="page-title" style="padding-top: 150px;">
+        <div class="container">
+            <h1>Let food be thy medicine and medicine be the food.</h1>
+            <ui:insert name="pagenation">
+                <div class="pagenation">
+                    <a href="#{request.contextPath}">
+                        Home
+                    </a> 
+                    <i> &gt;</i> 
+                    <a href="#{request.requestURI}">
+                        <ui:insert name="title" />
+                    </a>
+                </div>
+            </ui:insert>
+        </div>
+    </div>
+    <!-- End Page Titles -->
+</ui:fragment>

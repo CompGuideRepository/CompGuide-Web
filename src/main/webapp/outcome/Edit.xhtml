@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OutcomeEditDlg" widgetVar="OutcomeEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditOutcomeTitle}">
+            <h:form id="OutcomeEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{outcomeController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditOutcomeLabel_outcomeID}" for="outcomeID" />
+                        <p:inputText id="outcomeID" value="#{outcomeController.selected.outcomeID}" title="#{bundle.EditOutcomeTitle_outcomeID}" required="true" requiredMessage="#{bundle.EditOutcomeRequiredMessage_outcomeID}"/>
+                        <p:outputLabel value="#{bundle.EditOutcomeLabel_canAsk}" for="canAsk" />
+                        <p:selectBooleanCheckbox id="canAsk" value="#{outcomeController.selected.canAsk}" />
+                        <p:outputLabel value="#{bundle.EditOutcomeLabel_scheduleTaskID}" for="scheduleTaskID" />
+                        <p:selectOneMenu id="scheduleTaskID" value="#{outcomeController.selected.scheduleTaskID}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{scheduleTaskController.itemsAvailableSelectOne}"
+                                           var="scheduleTaskIDItem"
+                                           itemValue="#{scheduleTaskIDItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditOutcomeLabel_taskID}" for="taskID" />
+                        <p:selectOneMenu id="taskID" value="#{outcomeController.selected.taskID}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{taskController.itemsAvailableSelectOne}"
+                                           var="taskIDItem"
+                                           itemValue="#{taskIDItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditOutcomeLabel_conditionSetID}" for="conditionSetID" />
+                        <p:selectOneMenu id="conditionSetID" value="#{outcomeController.selected.conditionSetID}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{conditionSetController.itemsAvailableSelectOne}"
+                                           var="conditionSetIDItem"
+                                           itemValue="#{conditionSetIDItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{outcomeController.update}" value="#{bundle.Save}" update="display,:OutcomeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'OutcomeEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="OutcomeEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

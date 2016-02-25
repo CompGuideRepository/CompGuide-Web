@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FormulaViewDlg" widgetVar="FormulaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewFormulaTitle}">
+            <h:form id="FormulaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{formulaController.selected != null}">
+                        <h:outputText value="#{bundle.ViewFormulaLabel_idformula}"/>
+                        <h:outputText value="#{formulaController.selected.idformula}" title="#{bundle.ViewFormulaTitle_idformula}"/>
+                        <h:outputText value="#{bundle.ViewFormulaLabel_parameter}"/>
+                        <h:outputText value="#{formulaController.selected.parameter}" title="#{bundle.ViewFormulaTitle_parameter}"/>
+                        <h:outputText value="#{bundle.ViewFormulaLabel_description}"/>
+                        <h:outputText value="#{formulaController.selected.description}" title="#{bundle.ViewFormulaTitle_description}"/>
+                        <h:outputText value="#{bundle.ViewFormulaLabel_time}"/>
+                        <h:outputText value="#{formulaController.selected.time}" title="#{bundle.ViewFormulaTitle_time}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewFormulaLabel_identifier}"/>
+                        <h:outputText value="#{formulaController.selected.identifier}" title="#{bundle.ViewFormulaTitle_identifier}"/>
+                        <h:outputText value="#{bundle.ViewFormulaLabel_idtask}"/>
+                        <h:outputText value="#{formulaController.selected.idtask}" title="#{bundle.ViewFormulaTitle_idtask}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="FormulaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

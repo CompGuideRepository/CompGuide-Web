@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="GeneratedTaskCreateDlg" widgetVar="GeneratedTaskCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateGeneratedTaskTitle}">
+            <h:form id="GeneratedTaskCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{generatedTaskController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateGeneratedTaskLabel_idgeneratedTask}" for="idgeneratedTask" />
+                        <p:inputText id="idgeneratedTask" value="#{generatedTaskController.selected.idgeneratedTask}" title="#{bundle.CreateGeneratedTaskTitle_idgeneratedTask}" required="true" requiredMessage="#{bundle.CreateGeneratedTaskRequiredMessage_idgeneratedTask}"/>
+                        <p:outputLabel value="#{bundle.CreateGeneratedTaskLabel_idplan}" for="idplan" />
+                        <p:inputText id="idplan" value="#{generatedTaskController.selected.idplan}" title="#{bundle.CreateGeneratedTaskTitle_idplan}" />
+                        <p:outputLabel value="#{bundle.CreateGeneratedTaskLabel_idsync}" for="idsync" />
+                        <p:inputText id="idsync" value="#{generatedTaskController.selected.idsync}" title="#{bundle.CreateGeneratedTaskTitle_idsync}" />
+                        <p:outputLabel value="#{bundle.CreateGeneratedTaskLabel_identifier}" for="identifier" />
+                        <p:inputText id="identifier" value="#{generatedTaskController.selected.identifier}" title="#{bundle.CreateGeneratedTaskTitle_identifier}" />
+                        <p:outputLabel value="#{bundle.CreateGeneratedTaskLabel_idguideexec}" for="idguideexec" />
+                        <p:selectOneMenu id="idguideexec" value="#{generatedTaskController.selected.idguideexec}" required="true" requiredMessage="#{bundle.EditGeneratedTaskRequiredMessage_idguideexec}">
+                            <f:selectItems value="#{guideExecController.itemsAvailableSelectOne}"
+                                           var="idguideexecItem"
+                                           itemValue="#{idguideexecItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{generatedTaskController.create}" value="#{bundle.Save}" update="display,:GeneratedTaskListForm:datalist,:growl" oncomplete="handleSubmit(args,'GeneratedTaskCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="GeneratedTaskCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
