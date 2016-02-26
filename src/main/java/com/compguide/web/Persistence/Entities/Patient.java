@@ -46,6 +46,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Patient.findByEmail", query = "SELECT p FROM Patient p WHERE p.email = :email"),
     @NamedQuery(name = "Patient.findByTime", query = "SELECT p FROM Patient p WHERE p.time = :time")})
 public class Patient implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -215,5 +216,5 @@ public class Patient implements Serializable {
     public String toString() {
         return "com.compguide.web.Persistence.Entities.Patient[ idpatient=" + idpatient + " ]";
     }
-    
+
 }

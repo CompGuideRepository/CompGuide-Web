@@ -16,6 +16,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class AutenticationFacade extends AbstractFacade<Autentication> {
+
     @PersistenceContext(unitName = "com.compguide_CompGuide-Web_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -27,5 +28,5 @@ public class AutenticationFacade extends AbstractFacade<Autentication> {
     public AutenticationFacade() {
         super(Autentication.class);
     }
-    
+
 }

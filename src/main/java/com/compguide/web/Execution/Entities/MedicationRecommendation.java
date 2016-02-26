@@ -3,24 +3,22 @@ package com.compguide.web.Execution.Entities;
 import com.google.gson.Gson;
 
 /**
- * Created with IntelliJ IDEA.
- * User: tiago
- * Date: 20-08-2013
- * Time: 23:36
- * To change this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. User: tiago Date: 20-08-2013 Time: 23:36 To
+ * change this template use File | Settings | File Templates.
  */
 public class MedicationRecommendation extends ClinicalAction {
-            private String activeIngredient;
-            private String dosage;
-            private String pharmaceuticalForm;
-            private String posology;
 
-    public static MedicationRecommendation fromJson(String json){
+    private String activeIngredient;
+    private String dosage;
+    private String pharmaceuticalForm;
+    private String posology;
+
+    public static MedicationRecommendation fromJson(String json) {
         Gson gson = new Gson();
         return gson.fromJson(json, MedicationRecommendation.class);
     }
 
-    public String toJson(){
+    public String toJson() {
         Gson gson = new Gson();
         return gson.toJson(this);
     }

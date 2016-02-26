@@ -26,6 +26,7 @@ import javax.ws.rs.Produces;
 @Stateless
 @Path("com.compguide.web.persistence.entities.scheduletask")
 public class ScheduleTaskFacadeREST extends AbstractFacade<ScheduleTask> {
+
     @PersistenceContext(unitName = "com.compguide_CompGuide-Web_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -85,5 +86,5 @@ public class ScheduleTaskFacadeREST extends AbstractFacade<ScheduleTask> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }

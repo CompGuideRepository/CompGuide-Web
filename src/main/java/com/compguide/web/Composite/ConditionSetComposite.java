@@ -24,63 +24,63 @@ import javax.inject.Named;
 @Named
 @SessionScoped
 public class ConditionSetComposite implements Serializable {
-    
+
     private ConditionSet conditionSet;
     @EJB
     private com.compguide.web.Persistence.SessionBeans.ConditionSetFacade conditionSetFacade;
     @EJB
     private com.compguide.web.Persistence.SessionBeans.ConditionFacade conditionFacade;
-    
+
     @Inject
     private ConditionComposite conditionComposite;
-    
+
     public ConditionSetComposite() {
         conditionSet = new ConditionSet();
     }
-    
+
     public ConditionSetFacade getConditionSetFacade() {
         return conditionSetFacade;
     }
-    
+
     public ConditionFacade getConditionFacade() {
         return conditionFacade;
     }
-    
+
     public ConditionSet getConditionSet() {
         return conditionSet;
     }
-    
+
     public void setConditionSet(ConditionSet conditionSet) {
         this.conditionSet = conditionSet;
     }
-    
+
     public void addCondition(Condition condition) {
         if (conditionSet.getConditionList() == null) {
             conditionSet.setConditionList(new ArrayList<Condition>());
         }
         conditionSet.getConditionList().add(condition);
     }
-    
+
     public ConditionSetComposite(ConditionFacade conditionFacade) {
         this.conditionFacade = conditionFacade;
     }
-    
+
     public void check() {
         ConditionSet aux = checkConditionSet(conditionSet);
     }
-    
+
     private ConditionSet checkConditionSet(ConditionSet conditionSet) {
-        
+
         List<Condition> list = conditionSet.getConditionList();
         List<Condition> conditions = new ArrayList<Condition>();
-        
+
         ConditionSet aux = getConditionSetFacade().findByIdentifier(conditionSet.getIdentifier());
-        
+
         if (aux == null) {
             getConditionSetFacade().create(conditionSet);
             aux = conditionSet;
         }
-        
+
         if (list != null) {
             for (Condition condition : list) {
                 condition.setConditionSetID(aux);
@@ -88,11 +88,11 @@ public class ConditionSetComposite implements Serializable {
                 conditions.add(condition);
             }
         }
-        
+
         aux.setConditionList(conditions);
         this.conditionSet = aux;
-        
+
         return aux;
     }
-    
+
 }

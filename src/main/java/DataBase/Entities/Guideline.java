@@ -2,14 +2,11 @@ package DataBase.Entities;
 
 import com.google.gson.Gson;
 
-
 /**
- * Created by IntelliJ IDEA.
- * Guideline: tiago
- * Date: 18/07/12
- * Time: 10:25 PM
+ * Created by IntelliJ IDEA. Guideline: tiago Date: 18/07/12 Time: 10:25 PM
  */
 public class Guideline {
+
     private String idguideline;
     private String dateofcreation;
     private String dateofupdate;
@@ -22,20 +19,17 @@ public class Guideline {
     public Guideline() {
     }
 
-    public String toJson(){
+    public String toJson() {
         Gson gson = new Gson();
         return gson.toJson(this);
     }
 
-    public static Guideline fromJson(String json){
+    public static Guideline fromJson(String json) {
         Gson gson = new Gson();
         return gson.fromJson(json, Guideline.class);
     }
 
-
-
     // getters and setters
-
     public String getDateofcreation() {
         return dateofcreation;
     }
@@ -44,13 +38,13 @@ public class Guideline {
         this.dateofcreation = dateofcreation;
     }
 
-    public void setIdguideline(String idguideline){
-        this.idguideline=idguideline;
-    }
-    public String getIdguideline(){
-        return this.idguideline;
+    public void setIdguideline(String idguideline) {
+        this.idguideline = idguideline;
     }
 
+    public String getIdguideline() {
+        return this.idguideline;
+    }
 
     public String getVersionnumber() {
         return versionnumber;
@@ -60,7 +54,6 @@ public class Guideline {
         this.versionnumber = versionnumber;
     }
 
-
     public String getAuthorship() {
         return authorship;
     }
@@ -68,7 +61,6 @@ public class Guideline {
     public void setAuthorship(String authorship) {
         this.authorship = authorship;
     }
-
 
     public String getGuidelinename() {
         return guidelinename;

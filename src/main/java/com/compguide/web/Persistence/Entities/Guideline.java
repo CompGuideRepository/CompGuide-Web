@@ -43,6 +43,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Guideline.findByAuthorship", query = "SELECT g FROM Guideline g WHERE g.authorship = :authorship"),
     @NamedQuery(name = "Guideline.findByIdentifier", query = "SELECT g FROM Guideline g WHERE g.identifier = :identifier")})
 public class Guideline implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -178,5 +179,5 @@ public class Guideline implements Serializable {
     public String toString() {
         return "com.compguide.web.Persistence.Entities.Guideline[ idguideline=" + idguideline + " ]";
     }
-    
+
 }

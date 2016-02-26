@@ -5,13 +5,11 @@ import org.apache.commons.lang.builder.*;
 import java.io.Serializable;
 
 /**
- * Created with IntelliJ IDEA.
- * User: tiago
- * Date: 31-07-2013
- * Time: 13:19
- * To change this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. User: tiago Date: 31-07-2013 Time: 13:19 To
+ * change this template use File | Settings | File Templates.
  */
 public class GuideexecBean implements Serializable {
+
     private Long iduser;
     private Long idguideline;
     private Long idpatient;
@@ -22,7 +20,6 @@ public class GuideexecBean implements Serializable {
     private String description;
     private Boolean completed;
 
-
     public String getTime() {
         return time;
     }
@@ -30,7 +27,6 @@ public class GuideexecBean implements Serializable {
     public void setTime(String time) {
         this.time = time;
     }
-
 
     public Long getIdguideexec() {
         return idguideexec;
@@ -41,8 +37,7 @@ public class GuideexecBean implements Serializable {
     }
 
     //UTILS
-    public void copy(GuideexecBean bean)
-    {
+    public void copy(GuideexecBean bean) {
         setTime(bean.getTime());
         setIdpatient(bean.getIdpatient());
         setIduser(bean.getIduser());
@@ -53,8 +48,8 @@ public class GuideexecBean implements Serializable {
         setDescription(bean.getDescription());
         setStart(bean.getStart());
     }
-    public boolean equals(Object object)
-    {
+
+    public boolean equals(Object object) {
         if (!(object instanceof GuideexecBean)) {
             return false;
         }
@@ -63,18 +58,17 @@ public class GuideexecBean implements Serializable {
         return new EqualsBuilder()
                 .append(getTime(), obj.getTime())
                 .append(getIdpatient(), obj.getIdpatient())
-                .append(getIduser(),obj.getIduser())
-                .append(getIdguideline(),obj.getIdguideline())
+                .append(getIduser(), obj.getIduser())
+                .append(getIdguideline(), obj.getIdguideline())
                 .append(getIdguideexec(), obj.getIdguideexec())
-                .append(getCompleted(),obj.getCompleted())
-                .append(getNextTasks(),obj.getNextTasks())
-                .append(getDescription(),obj.getDescription())
-                .append(getStart(),obj.getStart())
+                .append(getCompleted(), obj.getCompleted())
+                .append(getNextTasks(), obj.getNextTasks())
+                .append(getDescription(), obj.getDescription())
+                .append(getStart(), obj.getStart())
                 .isEquals();
     }
 
-    public int hashCode()
-    {
+    public int hashCode() {
         return new HashCodeBuilder(-82280557, -700257973)
                 .append(getTime())
                 .append(getIdpatient())
@@ -89,8 +83,7 @@ public class GuideexecBean implements Serializable {
                 .toHashCode();
     }
 
-    public String toString()
-    {
+    public String toString() {
         return toString(ToStringStyle.MULTI_LINE_STYLE);
     }
 
@@ -104,8 +97,7 @@ public class GuideexecBean implements Serializable {
      */
     public String toString(ToStringStyle style) {
         return new ToStringBuilder(this, style)
-
-                .append("time",getTime())
+                .append("time", getTime())
                 .append("idpatient", getIdpatient())
                 .append("iduser", getIduser())
                 .append("idguideline", getIdguideline())
@@ -113,21 +105,21 @@ public class GuideexecBean implements Serializable {
                 .append("nextTasks", getNextTasks())
                 .append("completed", getCompleted())
                 .append("description", getDescription())
-                .append("start",getStart())
+                .append("start", getStart())
                 .toString();
     }
-    public int compareTo(Object object)
-    {
+
+    public int compareTo(Object object) {
         GuideexecBean obj = (GuideexecBean) object;
         return new CompareToBuilder()
-                .append(getTime(),obj.getTime())
+                .append(getTime(), obj.getTime())
                 .append(getIdpatient(), obj.getIdpatient())
                 .append(getIduser(), obj.getIduser())
                 .append(getIdguideline(), obj.getIdguideline())
                 .append(getIdguideexec(), obj.getIdguideexec())
-                .append(getNextTasks(),obj.getNextTasks())
-                .append(getCompleted(),obj.getCompleted())
-                .append(getDescription(),obj.getDescription())
+                .append(getNextTasks(), obj.getNextTasks())
+                .append(getCompleted(), obj.getCompleted())
+                .append(getDescription(), obj.getDescription())
                 .toComparison();
     }
 

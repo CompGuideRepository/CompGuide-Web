@@ -37,6 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Formula.findByTime", query = "SELECT f FROM Formula f WHERE f.time = :time"),
     @NamedQuery(name = "Formula.findByIdentifier", query = "SELECT f FROM Formula f WHERE f.identifier = :identifier")})
 public class Formula implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -140,5 +141,5 @@ public class Formula implements Serializable {
     public String toString() {
         return "com.compguide.web.Persistence.Entities.Formula[ idformula=" + idformula + " ]";
     }
-    
+
 }

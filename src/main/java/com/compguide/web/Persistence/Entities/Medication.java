@@ -43,6 +43,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Medication.findByIdentifier", query = "SELECT m FROM Medication m WHERE m.identifier = :identifier"),
     @NamedQuery(name = "Medication.findByTimeend", query = "SELECT m FROM Medication m WHERE m.timeend = :timeend")})
 public class Medication implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -200,5 +201,5 @@ public class Medication implements Serializable {
     public String toString() {
         return "com.compguide.web.Persistence.Entities.Medication[ idmedication=" + idmedication + " ]";
     }
-    
+
 }

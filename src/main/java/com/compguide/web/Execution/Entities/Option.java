@@ -5,13 +5,11 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 
 /**
- * Created with IntelliJ IDEA.
- * User: tiago
- * Date: 20-08-2013
- * Time: 23:17
- * To change this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. User: tiago Date: 20-08-2013 Time: 23:17 To
+ * change this template use File | Settings | File Templates.
  */
 public class Option {
+
     private String id;
     private String value;
     private Boolean isNumeric;
@@ -20,16 +18,16 @@ public class Option {
     private String optionIdentifier;
     private String unit;
 
-    public Option(){
+    public Option() {
         optionConditionSet = new ArrayList<ConditionSet>();
     }
 
-    public static Option fromJson(String json){
+    public static Option fromJson(String json) {
         Gson gson = new Gson();
         return gson.fromJson(json, Option.class);
     }
 
-    public String toJson(){
+    public String toJson() {
         Gson gson = new Gson();
         return gson.toJson(this);
     }
@@ -49,6 +47,7 @@ public class Option {
     public void setNumeric(Boolean numeric) {
         isNumeric = numeric;
     }
+
     public String getUnit() {
         return unit;
     }
@@ -64,8 +63,6 @@ public class Option {
     public void setId(String id) {
         this.id = id;
     }
-
-
 
     public ArrayList<ConditionSet> getOptionConditionSet() {
         return optionConditionSet;

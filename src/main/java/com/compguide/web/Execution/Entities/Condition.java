@@ -5,13 +5,11 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 
 /**
- * Created with IntelliJ IDEA.
- * User: tiago
- * Date: 20-08-2013
- * Time: 14:58
- * To change this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. User: tiago Date: 20-08-2013 Time: 14:58 To
+ * change this template use File | Settings | File Templates.
  */
 public class Condition {
+
     private String id;
     private String value;
     private Boolean isNumeric;
@@ -21,26 +19,26 @@ public class Condition {
     private String conditionParameter;
     private String unit;
 
-    public static Condition fromJson(String json){
+    public static Condition fromJson(String json) {
         Gson gson = new Gson();
         return gson.fromJson(json, Condition.class);
     }
 
-    public String toJson(){
+    public String toJson() {
         Gson gson = new Gson();
         return gson.toJson(this);
     }
 
-    public Condition(){
-           temporalRestriction = new ArrayList<TemporalRestriction>();
-           parameterIdentifier = new ArrayList<String>();
+    public Condition() {
+        temporalRestriction = new ArrayList<TemporalRestriction>();
+        parameterIdentifier = new ArrayList<String>();
     }
 
-    public void addTemporalRestriction(TemporalRestriction temporalRestriction){
+    public void addTemporalRestriction(TemporalRestriction temporalRestriction) {
         this.temporalRestriction.add(temporalRestriction);
     }
 
-    public void addParameterIdentifier(String parameterIdentifier){
+    public void addParameterIdentifier(String parameterIdentifier) {
         this.parameterIdentifier.add(parameterIdentifier);
     }
 

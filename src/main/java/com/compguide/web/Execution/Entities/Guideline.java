@@ -3,12 +3,11 @@ package com.compguide.web.Execution.Entities;
 import com.google.gson.Gson;
 
 /**
- * Created by IntelliJ IDEA.
- * Entities.Guideline: tiago
- * Date: 18/07/12
- * Time: 10:25 PM
+ * Created by IntelliJ IDEA. Entities.Guideline: tiago Date: 18/07/12 Time:
+ * 10:25 PM
  */
 public class Guideline {
+
     private String id;
     private String dateofcreation;
     private String dateofupdate;
@@ -16,18 +15,19 @@ public class Guideline {
     private String guidelinename;
     private String authorship;
     private String guidelinedescription;
-    private Scope  scope;
-    private Plan   plan;
+    private Scope scope;
+    private Plan plan;
 
     public Guideline() {
     }
+
     // getters and setters
-    public static Guideline fromJson(String json){
+    public static Guideline fromJson(String json) {
         Gson gson = new Gson();
         return gson.fromJson(json, Guideline.class);
     }
 
-    public String toJson(){
+    public String toJson() {
         Gson gson = new Gson();
         return gson.toJson(this);
     }
@@ -40,7 +40,6 @@ public class Guideline {
         this.dateofcreation = dateofcreation;
     }
 
-
     public String getVersionnumber() {
         return versionnumber;
     }
@@ -49,7 +48,6 @@ public class Guideline {
         this.versionnumber = versionnumber;
     }
 
-
     public String getAuthorship() {
         return authorship;
     }
@@ -57,7 +55,6 @@ public class Guideline {
     public void setAuthorship(String authorship) {
         this.authorship = authorship;
     }
-
 
     public String getGuidelinename() {
         return guidelinename;

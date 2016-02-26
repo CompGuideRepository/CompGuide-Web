@@ -37,6 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "TemporalRestriction.findByMaxTemporalRestrictionValue", query = "SELECT t FROM TemporalRestriction t WHERE t.maxTemporalRestrictionValue = :maxTemporalRestrictionValue"),
     @NamedQuery(name = "TemporalRestriction.findByTemporalRestrictionValue", query = "SELECT t FROM TemporalRestriction t WHERE t.temporalRestrictionValue = :temporalRestrictionValue")})
 public class TemporalRestriction implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -154,5 +155,5 @@ public class TemporalRestriction implements Serializable {
     public String toString() {
         return "com.compguide.web.Persistence.Entities.TemporalRestriction[ temporalRestrictionID=" + temporalRestrictionID + " ]";
     }
-    
+
 }

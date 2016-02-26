@@ -34,6 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "GeneratedTask.findByIdsync", query = "SELECT g FROM GeneratedTask g WHERE g.idsync = :idsync"),
     @NamedQuery(name = "GeneratedTask.findByIdentifier", query = "SELECT g FROM GeneratedTask g WHERE g.identifier = :identifier")})
 public class GeneratedTask implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -123,5 +124,5 @@ public class GeneratedTask implements Serializable {
     public String toString() {
         return "com.compguide.web.Persistence.Entities.GeneratedTask[ idgeneratedTask=" + idgeneratedTask + " ]";
     }
-    
+
 }

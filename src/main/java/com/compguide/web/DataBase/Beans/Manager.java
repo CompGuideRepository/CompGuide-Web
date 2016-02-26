@@ -1,4 +1,3 @@
-
 package com.compguide.web.DataBase.Beans;
 
 import com.compguide.web.DataBase.Exception.DAOException;
@@ -18,17 +17,17 @@ import java.util.PropertyResourceBundle;
 /**
  * The Manager provides connections and manages transactions transparently.
  * <br>
- * It is a singleton, you get its instance with the getInstance() method.
- * All of the XxxxManager classes use the Manager to get database connections.
- * Before doing any operation, you must pass either a
- * datasource or a jdbc driver/url/username/password.
- * You may extend it and use setInstance() method to make sure your
- * implementation is used as a singleton.
+ * It is a singleton, you get its instance with the getInstance() method. All of
+ * the XxxxManager classes use the Manager to get database connections. Before
+ * doing any operation, you must pass either a datasource or a jdbc
+ * driver/url/username/password. You may extend it and use setInstance() method
+ * to make sure your implementation is used as a singleton.
+ *
  * @author sql2java
  * @version $Revision: 1.5 $
  */
-public final class Manager
-{
+public final class Manager {
+
     private static Manager instance = new Manager();
     private static InheritableThreadLocal<Connection> transactionConnection = new InheritableThreadLocal<Connection>();
 
@@ -42,46 +41,43 @@ public final class Manager
     /**
      * Returns the manager singleton instance.
      */
-    private Manager()
-    {
-         jdbcDriver = "com.mysql.jdbc.Driver";
-         jdbcUrl = "jdbc:mysql://localhost:3306/cguide";
-         jdbcUsername = "root";
-         jdbcPassword = "123";
+    private Manager() {
+        jdbcDriver = "com.mysql.jdbc.Driver";
+        jdbcUrl = "jdbc:mysql://localhost:3306/cguide";
+        jdbcUsername = "root";
+        jdbcPassword = "123";
     }
 
     /**
      * Returns the manager singleton instance.
      */
-    public static Manager getInstance()
-    {
+    public static Manager getInstance() {
         return instance;
     }
 
     /**
      * database configuration with the default property values set in .
      * com/capgemini/scp/generated/Manager.properties
+     *
      * @throws Exception
      */
-    public void defaultConfigure() throws DAOException
-    {
+    public void defaultConfigure() throws DAOException {
         this.configure("database.properties");
     }
 
     /**
      * configure with the parameters given in the given resource filename
+     *
      * @param fileName the resource filename to be used
      * @throws Exception
      */
-    public void configure(String fileName) throws DAOException
-    {
-        try
-        {
+    public void configure(String fileName) throws DAOException {
+        try {
             InputStream inputStream = Manager.class.getClassLoader().getResourceAsStream(fileName);
             PropertyResourceBundle bundle = new PropertyResourceBundle(inputStream);
-            try{
-                if (bundle.getString("jdbc.datasourceString") != null &&
-                    bundle.getString("jdbc.datasourceString").length() > 0){
+            try {
+                if (bundle.getString("jdbc.datasourceString") != null
+                        && bundle.getString("jdbc.datasourceString").length() > 0) {
                     System.out.println("A datasourceString was found and will be used instead of jdbc settings from file: " + fileName);
                     String strDSName = "java:jboss/datasources/cguide";
                     Context context = new InitialContext();
@@ -89,7 +85,7 @@ public final class Manager
                     this.setDataSource(ds);
                     return;
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 System.out.println("An exception was found while setting data source.");
             }
             System.out.println("Trying to set the jdbc values from file: " + fileName);
@@ -97,23 +93,16 @@ public final class Manager
             this.setJdbcUrl(bundle.getString("jdbc.url"));
             this.setJdbcUsername(bundle.getString("jdbc.username"));
             this.setJdbcPassword(bundle.getString("jdbc.password"));
-        }catch(IOException ioe)
-        {
+        } catch (IOException ioe) {
             System.err.println("The property file " + fileName + " could not be found.");
             throw new DAOException(ioe.getMessage(), ioe);
-        }
-        catch(ClassNotFoundException cnfe)
-        {
+        } catch (ClassNotFoundException cnfe) {
             System.err.println("The driver class " + this.jdbcDriver + " could not be found.");
             throw new DAOException(cnfe.getMessage(), cnfe);
-        }
-        catch(InstantiationException ie)
-        {
+        } catch (InstantiationException ie) {
             System.err.println("The driver class " + this.jdbcDriver + " could not be instantiated.");
             throw new DAOException(ie.getMessage(), ie);
-        }
-        catch(IllegalAccessException iae)
-        {
+        } catch (IllegalAccessException iae) {
             System.err.println("The driver class " + this.jdbcDriver + " could not be instantiated.");
             throw new DAOException(iae.getMessage(), iae);
         }
@@ -126,8 +115,7 @@ public final class Manager
      *
      * @param ds the data source
      */
-    public void setDataSource(DataSource ds)
-    {
+    public void setDataSource(DataSource ds) {
         this.ds = ds;
     }
 
@@ -137,8 +125,7 @@ public final class Manager
      * Only needed if the datasource is not set.
      */
     public void setJdbcDriver(String jdbcDriver)
-            throws ClassNotFoundException, InstantiationException, IllegalAccessException
-    {
+            throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         this.jdbcDriver = jdbcDriver;
         Class.forName(jdbcDriver).newInstance();
     }
@@ -148,8 +135,7 @@ public final class Manager
      * <br>
      * Only needed if the datasource is not set.
      */
-    public void setJdbcUrl(String jdbcUrl)
-    {
+    public void setJdbcUrl(String jdbcUrl) {
         this.jdbcUrl = jdbcUrl;
     }
 
@@ -158,8 +144,7 @@ public final class Manager
      * <br>
      * Only needed if the datasource is not set.
      */
-    public void setJdbcUsername(String jdbcUsername)
-    {
+    public void setJdbcUsername(String jdbcUsername) {
         this.jdbcUsername = jdbcUsername;
     }
 
@@ -168,8 +153,7 @@ public final class Manager
      * <br>
      * Only needed if the datasource is not set.
      */
-    public void setJdbcPassword(String jdbcPassword)
-    {
+    public void setJdbcPassword(String jdbcPassword) {
         this.jdbcPassword = jdbcPassword;
     }
 
@@ -180,15 +164,14 @@ public final class Manager
      *
      * @return an auto commit connection
      */
-    public Connection getConnection() throws SQLException
-    {
+    public Connection getConnection() throws SQLException {
         synchronized (transactionConnection) {
             Connection tc = transactionConnection.get();
             if (tc != null) {
                 return tc;
             }
 
-            if (ds!=null) {
+            if (ds != null) {
                 return ds.getConnection();
             } else if (jdbcDriver != null && jdbcUrl != null && jdbcUsername != null && jdbcPassword != null) {
                 return DriverManager.getConnection(jdbcUrl, jdbcUsername, jdbcPassword);
@@ -203,25 +186,19 @@ public final class Manager
      * <br>
      * Normally you should not need this method ;-)
      */
-    public void releaseConnection(Connection c)
-    {
+    public void releaseConnection(Connection c) {
         synchronized (transactionConnection) {
             Connection tc = transactionConnection.get();
-            if (tc != null)
-            {
+            if (tc != null) {
                 return;
             }
 
-            try
-            {
-                if (c != null)
-                {
+            try {
+                if (c != null) {
                     c.close();
                 }
-            }
-            catch (SQLException x)
-            {
-                log("Could not release the connection: "+x.toString());
+            } catch (SQLException x) {
+                log("Could not release the connection: " + x.toString());
             }
         }
     }
@@ -230,12 +207,13 @@ public final class Manager
      * Initiates a database transaction.
      * <br>
      * When working within a transaction, you should invoke this method first.
-     * The connection is returned just in case you need to set the isolation level.
+     * The connection is returned just in case you need to set the isolation
+     * level.
      *
-     * @return a non-auto commit connection with the default transaction isolation level
+     * @return a non-auto commit connection with the default transaction
+     * isolation level
      */
-    public Connection beginTransaction() throws SQLException
-    {
+    public Connection beginTransaction() throws SQLException {
         Connection c = this.getConnection();
         c.setAutoCommit(false);
         transactionConnection.set(c);
@@ -243,32 +221,25 @@ public final class Manager
     }
 
     /**
-     * Releases connection used for the transaction and performs a commit or rollback.
+     * Releases connection used for the transaction and performs a commit or
+     * rollback.
      *
-     * @param commit tells whether this connection should be committed
-     *        true for commit(), false for rollback()
+     * @param commit tells whether this connection should be committed true for
+     * commit(), false for rollback()
      */
-    public void endTransaction(boolean commit) throws SQLException
-    {
+    public void endTransaction(boolean commit) throws SQLException {
         Connection c = transactionConnection.get();
-        if (c == null)
-        {
+        if (c == null) {
             return;
         }
 
-        try
-        {
-            if (commit)
-            {
+        try {
+            if (commit) {
                 c.commit();
-            }
-            else
-            {
+            } else {
                 c.rollback();
             }
-        }
-        finally
-        {
+        } finally {
             c.setAutoCommit(true);
             transactionConnection.set(null);
             releaseConnection(c);
@@ -282,20 +253,17 @@ public final class Manager
      *
      * @param pw the PrintWriter for log messages
      */
-    public void setLogWriter(PrintWriter pw)
-    {
+    public void setLogWriter(PrintWriter pw) {
         this.pw = pw;
     }
 
 ////////////////////////////////////////////////////
 // cleaning method
 ////////////////////////////////////////////////////
-
     /**
      * Logs a message using the underlying logwriter, if not null.
      */
-    public void log(String message)
-    {
+    public void log(String message) {
         if (pw != null) {
             pw.println(message);
         }
@@ -304,16 +272,12 @@ public final class Manager
     /**
      * Closes the passed Statement.
      */
-    public void close(Statement s)
-    {
-        try
-        {
+    public void close(Statement s) {
+        try {
             if (s != null) {
                 s.close();
             }
-        }
-        catch (SQLException x)
-        {
+        } catch (SQLException x) {
             log("Could not close statement!: " + x.toString());
         }
     }
@@ -321,16 +285,12 @@ public final class Manager
     /**
      * Closes the passed ResultSet.
      */
-    public void close(ResultSet rs)
-    {
-        try
-        {
+    public void close(ResultSet rs) {
+        try {
             if (rs != null) {
                 rs.close();
             }
-        }
-        catch (SQLException x)
-        {
+        } catch (SQLException x) {
             log("Could not close result set!: " + x.toString());
         }
     }
@@ -338,8 +298,7 @@ public final class Manager
     /**
      * Closes the passed Statement and ResultSet.
      */
-    public void close(Statement s, ResultSet rs)
-    {
+    public void close(Statement s, ResultSet rs) {
         close(rs);
         close(s);
     }
@@ -347,36 +306,30 @@ public final class Manager
 ////////////////////////////////////////////////////
 // Helper methods for fetching numbers using IDs or names
 ////////////////////////////////////////////////////
-
     /**
      * Retrieves an int value from the passed result set as an Integer object.
      */
-    public static Integer getInteger(ResultSet rs, int pos) throws SQLException
-    {
+    public static Integer getInteger(ResultSet rs, int pos) throws SQLException {
         int i = rs.getInt(pos);
-        return rs.wasNull() ? (Integer)null : new Integer(i);
+        return rs.wasNull() ? (Integer) null : new Integer(i);
     }
 
     /**
      * Retrieves an int value from the passed result set as an Integer object.
      */
-    public static Integer getInteger(ResultSet rs, String column) throws SQLException
-    {
+    public static Integer getInteger(ResultSet rs, String column) throws SQLException {
         int i = rs.getInt(column);
-        return rs.wasNull() ? (Integer)null : new Integer(i);
+        return rs.wasNull() ? (Integer) null : new Integer(i);
     }
 
     /**
-     * Set an Integer object to the passed prepared statement as an int or as null.
+     * Set an Integer object to the passed prepared statement as an int or as
+     * null.
      */
-    public static void  setInteger(PreparedStatement ps, int pos, Integer i) throws SQLException
-    {
-        if (i==null)
-        {
+    public static void setInteger(PreparedStatement ps, int pos, Integer i) throws SQLException {
+        if (i == null) {
             ps.setNull(pos, Types.INTEGER);
-        }
-        else
-        {
+        } else {
             ps.setInt(pos, i.intValue());
         }
     }
@@ -384,32 +337,27 @@ public final class Manager
     /**
      * Retrieves a float value from the passed result set as a Float object.
      */
-    public static Float getFloat(ResultSet rs, int pos) throws SQLException
-    {
+    public static Float getFloat(ResultSet rs, int pos) throws SQLException {
         float f = rs.getFloat(pos);
-        return rs.wasNull() ? (Float)null : new Float(f);
+        return rs.wasNull() ? (Float) null : new Float(f);
     }
 
     /**
      * Retrieves a float value from the passed result set as a Float object.
      */
-    public static Float getFloat(ResultSet rs, String column) throws SQLException
-    {
+    public static Float getFloat(ResultSet rs, String column) throws SQLException {
         float f = rs.getFloat(column);
-        return rs.wasNull() ? (Float)null : new Float(f);
+        return rs.wasNull() ? (Float) null : new Float(f);
     }
 
     /**
-     * Set a Float object to the passed prepared statement as a float or as null.
+     * Set a Float object to the passed prepared statement as a float or as
+     * null.
      */
-    public static void  setFloat(PreparedStatement ps, int pos, Float f) throws SQLException
-    {
-        if (f==null)
-        {
+    public static void setFloat(PreparedStatement ps, int pos, Float f) throws SQLException {
+        if (f == null) {
             ps.setNull(pos, Types.FLOAT);
-        }
-        else
-        {
+        } else {
             ps.setFloat(pos, f.floatValue());
         }
     }
@@ -417,32 +365,27 @@ public final class Manager
     /**
      * Retrieves a double value from the passed result set as a Double object.
      */
-    public static Double getDouble(ResultSet rs, int pos) throws SQLException
-    {
+    public static Double getDouble(ResultSet rs, int pos) throws SQLException {
         double d = rs.getDouble(pos);
-        return rs.wasNull() ? (Double)null : new Double(d);
+        return rs.wasNull() ? (Double) null : new Double(d);
     }
 
     /**
      * Retrieves a double value from the passed result set as a Double object.
      */
-    public static Double getDouble(ResultSet rs, String column) throws SQLException
-    {
+    public static Double getDouble(ResultSet rs, String column) throws SQLException {
         double d = rs.getDouble(column);
-        return rs.wasNull() ? (Double)null : new Double(d);
+        return rs.wasNull() ? (Double) null : new Double(d);
     }
 
     /**
-     * Set a Double object to the passed prepared statement as a double or as null.
+     * Set a Double object to the passed prepared statement as a double or as
+     * null.
      */
-    public static void  setDouble(PreparedStatement ps, int pos, Double d) throws SQLException
-    {
-        if (d==null)
-        {
+    public static void setDouble(PreparedStatement ps, int pos, Double d) throws SQLException {
+        if (d == null) {
             ps.setNull(pos, Types.DOUBLE);
-        }
-        else
-        {
+        } else {
             ps.setDouble(pos, d.doubleValue());
         }
     }
@@ -450,32 +393,26 @@ public final class Manager
     /**
      * Retrieves a long value from the passed result set as a Long object.
      */
-    public static Long getLong(ResultSet rs, int pos) throws SQLException
-    {
+    public static Long getLong(ResultSet rs, int pos) throws SQLException {
         long l = rs.getLong(pos);
-        return rs.wasNull() ? (Long)null : new Long(l);
+        return rs.wasNull() ? (Long) null : new Long(l);
     }
 
     /**
      * Retrieves a long value from the passed result set as a Long object.
      */
-    public static Long getLong(ResultSet rs, String column) throws SQLException
-    {
+    public static Long getLong(ResultSet rs, String column) throws SQLException {
         long l = rs.getLong(column);
-        return rs.wasNull() ? (Long)null : new Long(l);
+        return rs.wasNull() ? (Long) null : new Long(l);
     }
 
     /**
      * Set a Long object to the passed prepared statement as a long or as null.
      */
-    public static void  setLong(PreparedStatement ps, int pos, Long l) throws SQLException
-    {
-        if (l==null)
-        {
+    public static void setLong(PreparedStatement ps, int pos, Long l) throws SQLException {
+        if (l == null) {
             ps.setNull(pos, Types.BIGINT);
-        }
-        else
-        {
+        } else {
             ps.setLong(pos, l.longValue());
         }
     }
@@ -483,32 +420,27 @@ public final class Manager
     /**
      * Retrieves a boolean value from the passed result set as a Boolean object.
      */
-    public static Boolean getBoolean(ResultSet rs, int pos) throws SQLException
-    {
+    public static Boolean getBoolean(ResultSet rs, int pos) throws SQLException {
         boolean b = rs.getBoolean(pos);
-        return rs.wasNull() ? (Boolean)null : new Boolean(b);
+        return rs.wasNull() ? (Boolean) null : new Boolean(b);
     }
 
     /**
      * Retrieves a boolean value from the passed result set as a Boolean object.
      */
-    public static Boolean getBoolean(ResultSet rs, String column) throws SQLException
-    {
+    public static Boolean getBoolean(ResultSet rs, String column) throws SQLException {
         boolean b = rs.getBoolean(column);
-        return rs.wasNull() ? (Boolean)null : new Boolean(b);
+        return rs.wasNull() ? (Boolean) null : new Boolean(b);
     }
 
     /**
-     * Set a Boolean object to the passed prepared statement as a boolean or as null.
+     * Set a Boolean object to the passed prepared statement as a boolean or as
+     * null.
      */
-    public static void  setBoolean(PreparedStatement ps, int pos, Boolean b) throws SQLException
-    {
-        if (b==null)
-        {
+    public static void setBoolean(PreparedStatement ps, int pos, Boolean b) throws SQLException {
+        if (b == null) {
             ps.setNull(pos, Types.BOOLEAN);
-        }
-        else
-        {
+        } else {
             ps.setBoolean(pos, b.booleanValue());
         }
     }
@@ -516,8 +448,7 @@ public final class Manager
     /**
      * Retrieves a date value from the passed result set as a Calendar object.
      */
-    public static Calendar getCalendar(ResultSet rs, int pos) throws SQLException
-    {
+    public static Calendar getCalendar(ResultSet rs, int pos) throws SQLException {
         Calendar calendar = Calendar.getInstance();
         try {
             calendar.setTime(rs.getDate(pos));
@@ -533,8 +464,7 @@ public final class Manager
     /**
      * Retrieves a date value from the passed result set as a Calendar object.
      */
-    public static Calendar getCalendar(ResultSet rs, String column) throws SQLException
-    {
+    public static Calendar getCalendar(ResultSet rs, String column) throws SQLException {
         Calendar calendar = Calendar.getInstance();
         try {
             calendar.setTime(rs.getDate(column));
@@ -548,16 +478,13 @@ public final class Manager
     }
 
     /**
-     * Set a Calendar object to the passed prepared statement as a date or as null.
+     * Set a Calendar object to the passed prepared statement as a date or as
+     * null.
      */
-    public static void  setCalendar(PreparedStatement ps, int pos, Calendar calendar) throws SQLException
-    {
-        if ((calendar == null) || (isValueRepresentingNull(calendar)))
-        {
+    public static void setCalendar(PreparedStatement ps, int pos, Calendar calendar) throws SQLException {
+        if ((calendar == null) || (isValueRepresentingNull(calendar))) {
             ps.setNull(pos, Types.TIMESTAMP);
-        }
-        else
-        {
+        } else {
             ps.setDate(pos, new Date(calendar.getTimeInMillis()));
         }
     }
@@ -575,9 +502,9 @@ public final class Manager
     }
 
     public static boolean isValueRepresentingNull(Calendar calendar) {
-        return (calendar.get(Calendar.YEAR) == DATE_REPRESENTING_NULL_YEAR) &&
-                (calendar.get(Calendar.MONTH) == DATE_REPRESENTING_NULL_MONTH) &&
-                (calendar.get(Calendar.DATE) == DATE_REPRESENTING_NULL_DATE);
+        return (calendar.get(Calendar.YEAR) == DATE_REPRESENTING_NULL_YEAR)
+                && (calendar.get(Calendar.MONTH) == DATE_REPRESENTING_NULL_MONTH)
+                && (calendar.get(Calendar.DATE) == DATE_REPRESENTING_NULL_DATE);
     }
 
     private static final int DATE_REPRESENTING_NULL_YEAR = 1899;
@@ -587,176 +514,144 @@ public final class Manager
 ////////////////////////////////////////////////////
 // Date helper methods
 ////////////////////////////////////////////////////
-
     /**
      * pattern for received date processing.
      */
-    private static final String[] PATTERNS = new String[]
-            {
-                    "EEE, dd MMM yyyy HH:mm:ss '-'S '('z')'",
-                    "EEE, dd MMM yyyy HH:mm:ss '+'S '('z')'",
-                    "EEE, dd MMM yyyy HH:mm:ss '-'S",
-                    "EEE, dd MMM yyyy HH:mm:ss '+'S",
-                    "EEE, dd MMM yyyy HH:mm:ss z",
-                    "EEE, dd MMM yyyy HH:mm:ss Z",
-                    "EEE, dd MMM yyyy HH:mm:ss",
-                    "EEE, d MMM yyyy HH:mm:ss '-'S '('z')'",
-                    "EEE, d MMM yyyy HH:mm:ss '+'S '('z')'",
-                    "EEE, d MMM yyyy HH:mm:ss '-'S",
-                    "EEE, d MMM yyyy HH:mm:ss '+'S",
-                    "EEE, d MMM yyyy HH:mm:ss z",
-                    "EEE, d MMM yyyy HH:mm:ss Z",
-                    "EEE, d MMM yyyy HH:mm:ss",
+    private static final String[] PATTERNS = new String[]{
+        "EEE, dd MMM yyyy HH:mm:ss '-'S '('z')'",
+        "EEE, dd MMM yyyy HH:mm:ss '+'S '('z')'",
+        "EEE, dd MMM yyyy HH:mm:ss '-'S",
+        "EEE, dd MMM yyyy HH:mm:ss '+'S",
+        "EEE, dd MMM yyyy HH:mm:ss z",
+        "EEE, dd MMM yyyy HH:mm:ss Z",
+        "EEE, dd MMM yyyy HH:mm:ss",
+        "EEE, d MMM yyyy HH:mm:ss '-'S '('z')'",
+        "EEE, d MMM yyyy HH:mm:ss '+'S '('z')'",
+        "EEE, d MMM yyyy HH:mm:ss '-'S",
+        "EEE, d MMM yyyy HH:mm:ss '+'S",
+        "EEE, d MMM yyyy HH:mm:ss z",
+        "EEE, d MMM yyyy HH:mm:ss Z",
+        "EEE, d MMM yyyy HH:mm:ss",
+        "EEE, dd MMM yy HH:mm:ss '-'S '('z')'",
+        "EEE, dd MMM yy HH:mm:ss '+'S '('z')'",
+        "EEE, dd MMM yy HH:mm:ss '-'S",
+        "EEE, dd MMM yy HH:mm:ss '+'S",
+        "EEE, dd MMM yy HH:mm:ss z",
+        "EEE, dd MMM yy HH:mm:ss Z",
+        "EEE, dd MMM yy HH:mm:ss",
+        "EEE, d MMM yy HH:mm:ss '-'S '('z')'",
+        "EEE, d MMM yy HH:mm:ss '+'S '('z')'",
+        "EEE, d MMM yy HH:mm:ss '-'S",
+        "EEE, d MMM yy HH:mm:ss '+'S",
+        "EEE, d MMM yy HH:mm:ss z",
+        "EEE, d MMM yy HH:mm:ss Z",
+        "EEE, d MMM yy HH:mm:ss",
+        "dd MMM yyyy HH:mm:ss '-'S",
+        "dd MMM yyyy HH:mm:ss '+'S",
+        "dd MMM yyyy HH:mm:ss '-'S '('z')'",
+        "dd MMM yyyy HH:mm:ss '+'S '('z')'",
+        "dd MMM yyyy HH:mm:ss z",
+        "dd MMM yyyy HH:mm:ss Z",
+        "dd MMM yyyy HH:mm:ss",
+        "dd MMM yyy HH:mm:ss '-'S",
+        "dd MMM yyy HH:mm:ss '+'S",
+        "dd MMM yyy HH:mm:ss '-'S '('z')'",
+        "dd MMM yyy HH:mm:ss '+'S '('z')'",
+        "dd MMM yyy HH:mm:ss z",
+        "dd MMM yyy HH:mm:ss Z",
+        "dd MMM yyy HH:mm:ss",
+        "yyyy.MM.dd HH:mm:ss z",
+        "yyyy.MM.dd HH:mm:ss Z",
+        "yyyy.MM.d HH:mm:ss z",
+        "yyyy.MM.d HH:mm:ss Z",
+        "yyyy.MM.dd HH:mm:ss",
+        "yyyy.MM.d HH:mm:ss",
+        "yy.MM.dd HH:mm:ss z",
+        "yy.MM.dd HH:mm:ss Z",
+        "yy.MM.d HH:mm:ss z",
+        "yy.MM.d HH:mm:ss Z",
+        "yy.MM.dd HH:mm:ss",
+        "yy.MM.d HH:mm:ss",
+        "yyyy MM dd HH:mm:ss",
+        "yyyy MM d HH:mm:ss",
+        "yyyy MM dd HH:mm:ss z",
+        "yyyy MM dd HH:mm:ss Z",
+        "yyyy MM d HH:mm:ss z",
+        "yyyy MM d HH:mm:ss Z",
+        "yy MM dd HH:mm:ss",
+        "yy MM d HH:mm:ss",
+        "yy MM dd HH:mm:ss z",
+        "yy MM dd HH:mm:ss Z",
+        "yy MM d HH:mm:ss z",
+        "yy MM d HH:mm:ss Z",
+        "yyyy-MM-dd HH:mm:ss z",
+        "yyyy-MM-dd HH:mm:ss Z",
+        "yyyy-MM-d HH:mm:ss z",
+        "yyyy-MM-d HH:mm:ss Z",
+        "yyyy-MM-dd HH:mm:ss",
+        "yyyy-MM-d HH:mm:ss",
+        "yy-MM-dd HH:mm:ss z",
+        "yy-MM-dd HH:mm:ss Z",
+        "yy-MM-d HH:mm:ss z",
+        "yy-MM-d HH:mm:ss Z",
+        "yy-MM-dd HH:mm:ss",
+        "yy-MM-d HH:mm:ss",
+        "dd MMM yyyy",
+        "d MMM yyyy",
+        "dd.MMM.yyyy",
+        "d.MMM.yyyy",
+        "dd-MMM-yyyy",
+        "d-MMM-yyyy",
+        "dd MM yyyy",
+        "d MM yyyy",
+        "dd.MM.yyyy",
+        "d.MM.yyyy",
+        "dd-MM-yyyy",
+        "d-MM-yyyy",
+        "yyyy MM dd",
+        "yyyy MM d",
+        "yyyy.MM.dd",
+        "yyyy.MM.d",
+        "yyyy-MM-dd",
+        "yyyy-MM-d",
+        "dd MMM yy",
+        "d MMM yy",
+        "dd.MMM.yy",
+        "d.MMM.yy",
+        "dd-MMM-yy",
+        "d-MMM-yy",
+        "dd MM yy",
+        "d MM yy",
+        "dd.MM.yy",
+        "d.MM.yy",
+        "dd-MM-yy",
+        "d-MM-yy",
+        "yy MMM dd",
+        "yy MMM d",
+        "yy.MMM.dd",
+        "yy.MMM.d",
+        "yy-MMM-dd",
+        "yy-MMM-d",
+        "yy MMM dd",
+        "yy MMM d",
+        "yy.MMM.dd",
+        "yy.MMM.d",
+        "yy-MMM-dd",
+        "yy-MMM-d",
+        "EEE dd, MMM yyyy", // ex: Wed 19, Feb 2003
 
-                    "EEE, dd MMM yy HH:mm:ss '-'S '('z')'",
-                    "EEE, dd MMM yy HH:mm:ss '+'S '('z')'",
-                    "EEE, dd MMM yy HH:mm:ss '-'S",
-                    "EEE, dd MMM yy HH:mm:ss '+'S",
-                    "EEE, dd MMM yy HH:mm:ss z",
-                    "EEE, dd MMM yy HH:mm:ss Z",
-                    "EEE, dd MMM yy HH:mm:ss",
-                    "EEE, d MMM yy HH:mm:ss '-'S '('z')'",
-                    "EEE, d MMM yy HH:mm:ss '+'S '('z')'",
-                    "EEE, d MMM yy HH:mm:ss '-'S",
-                    "EEE, d MMM yy HH:mm:ss '+'S",
-                    "EEE, d MMM yy HH:mm:ss z",
-                    "EEE, d MMM yy HH:mm:ss Z",
-                    "EEE, d MMM yy HH:mm:ss",
-
-                    "dd MMM yyyy HH:mm:ss '-'S",
-                    "dd MMM yyyy HH:mm:ss '+'S",
-                    "dd MMM yyyy HH:mm:ss '-'S '('z')'",
-                    "dd MMM yyyy HH:mm:ss '+'S '('z')'",
-                    "dd MMM yyyy HH:mm:ss z",
-                    "dd MMM yyyy HH:mm:ss Z",
-                    "dd MMM yyyy HH:mm:ss",
-
-                    "dd MMM yyy HH:mm:ss '-'S",
-                    "dd MMM yyy HH:mm:ss '+'S",
-                    "dd MMM yyy HH:mm:ss '-'S '('z')'",
-                    "dd MMM yyy HH:mm:ss '+'S '('z')'",
-                    "dd MMM yyy HH:mm:ss z",
-                    "dd MMM yyy HH:mm:ss Z",
-                    "dd MMM yyy HH:mm:ss",
-
-                    "yyyy.MM.dd HH:mm:ss z",
-                    "yyyy.MM.dd HH:mm:ss Z",
-                    "yyyy.MM.d HH:mm:ss z",
-                    "yyyy.MM.d HH:mm:ss Z",
-                    "yyyy.MM.dd HH:mm:ss",
-                    "yyyy.MM.d HH:mm:ss",
-
-                    "yy.MM.dd HH:mm:ss z",
-                    "yy.MM.dd HH:mm:ss Z",
-                    "yy.MM.d HH:mm:ss z",
-                    "yy.MM.d HH:mm:ss Z",
-                    "yy.MM.dd HH:mm:ss",
-                    "yy.MM.d HH:mm:ss",
-
-                    "yyyy MM dd HH:mm:ss",
-                    "yyyy MM d HH:mm:ss",
-                    "yyyy MM dd HH:mm:ss z",
-                    "yyyy MM dd HH:mm:ss Z",
-                    "yyyy MM d HH:mm:ss z",
-                    "yyyy MM d HH:mm:ss Z",
-
-                    "yy MM dd HH:mm:ss",
-                    "yy MM d HH:mm:ss",
-                    "yy MM dd HH:mm:ss z",
-                    "yy MM dd HH:mm:ss Z",
-                    "yy MM d HH:mm:ss z",
-                    "yy MM d HH:mm:ss Z",
-
-                    "yyyy-MM-dd HH:mm:ss z",
-                    "yyyy-MM-dd HH:mm:ss Z",
-                    "yyyy-MM-d HH:mm:ss z",
-                    "yyyy-MM-d HH:mm:ss Z",
-                    "yyyy-MM-dd HH:mm:ss",
-                    "yyyy-MM-d HH:mm:ss",
-
-                    "yy-MM-dd HH:mm:ss z",
-                    "yy-MM-dd HH:mm:ss Z",
-                    "yy-MM-d HH:mm:ss z",
-                    "yy-MM-d HH:mm:ss Z",
-                    "yy-MM-dd HH:mm:ss",
-                    "yy-MM-d HH:mm:ss",
-
-                    "dd MMM yyyy",
-                    "d MMM yyyy",
-
-                    "dd.MMM.yyyy",
-                    "d.MMM.yyyy",
-
-                    "dd-MMM-yyyy",
-                    "d-MMM-yyyy",
-
-                    "dd MM yyyy",
-                    "d MM yyyy",
-
-                    "dd.MM.yyyy",
-                    "d.MM.yyyy",
-
-                    "dd-MM-yyyy",
-                    "d-MM-yyyy",
-
-                    "yyyy MM dd",
-                    "yyyy MM d",
-
-                    "yyyy.MM.dd",
-                    "yyyy.MM.d",
-
-                    "yyyy-MM-dd",
-                    "yyyy-MM-d",
-
-                    "dd MMM yy",
-                    "d MMM yy",
-
-                    "dd.MMM.yy",
-                    "d.MMM.yy",
-
-                    "dd-MMM-yy",
-                    "d-MMM-yy",
-
-                    "dd MM yy",
-                    "d MM yy",
-
-                    "dd.MM.yy",
-                    "d.MM.yy",
-
-                    "dd-MM-yy",
-                    "d-MM-yy",
-
-                    "yy MMM dd",
-                    "yy MMM d",
-
-                    "yy.MMM.dd",
-                    "yy.MMM.d",
-
-                    "yy-MMM-dd",
-                    "yy-MMM-d",
-
-                    "yy MMM dd",
-                    "yy MMM d",
-
-                    "yy.MMM.dd",
-                    "yy.MMM.d",
-
-                    "yy-MMM-dd",
-                    "yy-MMM-d",
-
-                    "EEE dd, MMM yyyy", // ex: Wed 19, Feb 2003
-
-                    "EEE dd, MMM yy" // ex: Wed 19, Feb 03
-            };
-
+        "EEE dd, MMM yy" // ex: Wed 19, Feb 03
+    };
 
     /**
-     * get a date from a date string representation in one of the registered formats
-     * @param strDate the date as string. If (null or empty) or correct pattern was not found
+     * get a date from a date string representation in one of the registered
+     * formats
+     *
+     * @param strDate the date as string. If (null or empty) or correct pattern
+     * was not found
      * @return Date object
      */
-    public static java.util.Date getDateFromString(String strDate)
-    {
+    public static java.util.Date getDateFromString(String strDate) {
         java.util.Date dReceivedDate = Calendar.getInstance().getTime();
         if (strDate == null) {
             return dReceivedDate;
@@ -765,22 +660,16 @@ public final class Manager
         }
 
         SimpleDateFormat pSimpleDateFormat = new SimpleDateFormat("");
-        if (!"".equals(strDate))
-        {
-            for (int i=0; i<PATTERNS.length; i++)
-            {
-                try
-                {
+        if (!"".equals(strDate)) {
+            for (int i = 0; i < PATTERNS.length; i++) {
+                try {
                     pSimpleDateFormat.applyPattern(PATTERNS[i]);
                     dReceivedDate = pSimpleDateFormat.parse(strDate);
-                    if (dReceivedDate == null)
-                    {
+                    if (dReceivedDate == null) {
                         continue;
                     }
                     return dReceivedDate;
-                }
-                catch (ParseException pe)
-                {
+                } catch (ParseException pe) {
                     ; // ignore this format try the next one
                 }
             }
@@ -789,12 +678,14 @@ public final class Manager
     }
 
     /**
-     * Verify that the string represantes the date with one of the registered formats
+     * Verify that the string represantes the date with one of the registered
+     * formats
+     *
      * @param strDate the date as string.
-     * @return boolean "true" if the string represantes the date in one of the registed formats.
+     * @return boolean "true" if the string represantes the date in one of the
+     * registed formats.
      */
-    public static boolean isDate(String strDate)
-    {
+    public static boolean isDate(String strDate) {
         if (strDate == null) {
             return false;
         } else {
@@ -802,21 +693,16 @@ public final class Manager
         }
 
         SimpleDateFormat pSimpleDateFormat = new SimpleDateFormat("");
-        if (!"".equals(strDate))
-        {
-            for (String pattern : PATTERNS)
-            {
-                try
-                {
+        if (!"".equals(strDate)) {
+            for (String pattern : PATTERNS) {
+                try {
                     pSimpleDateFormat.applyPattern(pattern);
                     java.util.Date dReceivedDate = pSimpleDateFormat.parse(strDate);
                     if (dReceivedDate == null) {
                         continue;
                     }
                     return true;
-                }
-                catch (ParseException pe)
-                {
+                } catch (ParseException pe) {
                     ; // ignore as it is reported below
                 }
             }
@@ -834,7 +720,7 @@ public final class Manager
             sb.append("?,");
         }
         if (paramCount > 0) {
-            sb.setLength(sb.length()-1);
+            sb.setLength(sb.length() - 1);
         }
         return sb.append(")}").toString();
     }

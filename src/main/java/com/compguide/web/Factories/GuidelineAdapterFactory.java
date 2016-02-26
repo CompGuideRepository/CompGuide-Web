@@ -26,7 +26,7 @@ import javax.inject.Inject;
 public class GuidelineAdapterFactory {
 
     private static GuidelineAdapterFactory instance;
-    
+
     @Inject
     private TemporalElementAdapter temporalElementAdapter;
 

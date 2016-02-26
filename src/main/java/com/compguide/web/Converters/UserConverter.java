@@ -21,8 +21,6 @@ import javax.faces.convert.FacesConverter;
  */
 @FacesConverter("userConverter")
 public class UserConverter implements Converter {
-    
-    
 
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String value) {

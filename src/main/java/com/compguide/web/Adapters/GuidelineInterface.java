@@ -12,7 +12,10 @@ import com.compguide.web.Execution.Entities.ClinicalTask;
  * @author António
  */
 public interface GuidelineInterface {
+
     public GuidelineInterface fetchTemporalPatternFromClinicaltask(ClinicalTask task);
+
     public Object getObject();
+
     public void passObject(Object object);
 }

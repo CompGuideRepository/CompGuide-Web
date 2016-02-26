@@ -15,5 +15,3 @@ import java.util.Map;
 public enum CalendarType {
     PERSONAL, GLOBAL, DURATION
 }
-
-

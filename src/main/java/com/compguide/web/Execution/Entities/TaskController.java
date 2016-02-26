@@ -6,50 +6,45 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 
 /**
- * Created with IntelliJ IDEA.
- * User: tiago
- * Date: 29-08-2013
- * Time: 11:58
- * To change this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. User: tiago Date: 29-08-2013 Time: 11:58 To
+ * change this template use File | Settings | File Templates.
  */
 public class TaskController {
+
     private ArrayDeque<String> syncTask;
     private ArrayDeque<String> pendingPlans;
     private ArrayList<String> alternativeTask;
     private ArrayList<TaskQuadruple> nextTask;
 
-
-
-
-    public TaskController(){
+    public TaskController() {
         syncTask = new ArrayDeque<String>();
         pendingPlans = new ArrayDeque<String>();
         nextTask = new ArrayList<TaskQuadruple>();
         alternativeTask = new ArrayList<String>();
     }
 
-    public String peekSyncTask(){
+    public String peekSyncTask() {
         return syncTask.peek();
     }
 
-    public String peekPendingPlan(){
+    public String peekPendingPlan() {
         return pendingPlans.peek();
     }
 
-    public String popSyncTask(){
+    public String popSyncTask() {
         return syncTask.pop();
     }
 
-    public String popPendingPlans(){
+    public String popPendingPlans() {
         return pendingPlans.pop();
     }
 
-
-    public String toJson(){
+    public String toJson() {
         Gson gson = new Gson();
         return gson.toJson(this);
     }
-    public static TaskController fromJson(String json){
+
+    public static TaskController fromJson(String json) {
         Gson gson = new Gson();
         return gson.fromJson(json, TaskController.class);
     }
@@ -58,9 +53,11 @@ public class TaskController {
         return nextTask;
     }
 
-    public Boolean contains(TaskQuadruple tp){
-        for(TaskQuadruple triple : nextTask){
-            if (triple.equals(tp)) return Boolean.TRUE;
+    public Boolean contains(TaskQuadruple tp) {
+        for (TaskQuadruple triple : nextTask) {
+            if (triple.equals(tp)) {
+                return Boolean.TRUE;
+            }
         }
         return Boolean.FALSE;
     }
@@ -85,50 +82,54 @@ public class TaskController {
         this.syncTask = syncTask;
     }
 
-    public void addTask(TaskQuadruple tp){
+    public void addTask(TaskQuadruple tp) {
         this.nextTask.add(tp);
     }
 
-    public void pushPlan(String task){
+    public void pushPlan(String task) {
         pendingPlans.push(task);
     }
-    public void pushSync(String task){
+
+    public void pushSync(String task) {
         syncTask.push(task);
     }
-    public void updateTask(TaskQuadruple tp,String task){
-        int i=0;
-        for(TaskQuadruple tpair : nextTask){
-            if(tpair.equals(tp)){
+
+    public void updateTask(TaskQuadruple tp, String task) {
+        int i = 0;
+        for (TaskQuadruple tpair : nextTask) {
+            if (tpair.equals(tp)) {
                 nextTask.remove(tpair);
                 tpair.setTask(task);
-                nextTask.add(tpair);return;
+                nextTask.add(tpair);
+                return;
             }
             i++;
         }
-        if(i == nextTask.size()-1){
+        if (i == nextTask.size() - 1) {
             tp.setTask(task);
             nextTask.add(tp);
         }
     }
 
-    public void updateParallelAlternate(TaskQuadruple tp,String task){
-
+    public void updateParallelAlternate(TaskQuadruple tp, String task) {
 
     }
 
-    public Boolean isSynced(String id){
-        for(TaskQuadruple tp : nextTask){
-            if(tp.getId().equals(id)){
-                if(!tp.isSync()) return Boolean.FALSE;
+    public Boolean isSynced(String id) {
+        for (TaskQuadruple tp : nextTask) {
+            if (tp.getId().equals(id)) {
+                if (!tp.isSync()) {
+                    return Boolean.FALSE;
+                }
             }
         }
         return Boolean.TRUE;
     }
 
-    public Boolean isSyncable(String id,String task){
-        for(TaskQuadruple tq : getNextTask()){
-            if(!tq.getTask().equals(task)&&tq.getId().equals(id)){
-                if(!isSynced(tq.getId())){
+    public Boolean isSyncable(String id, String task) {
+        for (TaskQuadruple tq : getNextTask()) {
+            if (!tq.getTask().equals(task) && tq.getId().equals(id)) {
+                if (!isSynced(tq.getId())) {
                     return Boolean.FALSE;
                 }
             }
@@ -137,46 +138,45 @@ public class TaskController {
 
     }
 
-
-    public Boolean isAlternativeTask(String task){
-        return(this.alternativeTask.contains(task));
+    public Boolean isAlternativeTask(String task) {
+        return (this.alternativeTask.contains(task));
     }
 
-    public void removeAlternativeTask(String id){
+    public void removeAlternativeTask(String id) {
 
         int i = 0;
-        ArrayList<TaskQuadruple> toremove= new ArrayList<TaskQuadruple>();
-        for(TaskQuadruple tp:this.getNextTask()){
-            if(tp.getId().equals(id)){
+        ArrayList<TaskQuadruple> toremove = new ArrayList<TaskQuadruple>();
+        for (TaskQuadruple tp : this.getNextTask()) {
+            if (tp.getId().equals(id)) {
                 toremove.add(tp);
             }
             i++;
         }
-        for(TaskQuadruple tp: toremove){
+        for (TaskQuadruple tp : toremove) {
             this.nextTask.remove(tp);
         }
 
         alternativeTask.remove(id);
     }
 
-    public void removeParallelTask(String id,String newid){
+    public void removeParallelTask(String id, String newid) {
 
         int i = 0;
-        ArrayList<TaskQuadruple> toremove= new ArrayList<TaskQuadruple>();
-        for(TaskQuadruple tp:this.getNextTask()){
-            if(tp.getId().equals(id)){
+        ArrayList<TaskQuadruple> toremove = new ArrayList<TaskQuadruple>();
+        for (TaskQuadruple tp : this.getNextTask()) {
+            if (tp.getId().equals(id)) {
                 toremove.add(tp);
             }
             i++;
         }
-        for(TaskQuadruple tp: toremove){
+        for (TaskQuadruple tp : toremove) {
             this.nextTask.remove(tp);
         }
-        if(syncTask.peek()!=null){
+        if (syncTask.peek() != null) {
             TaskQuadruple temp = toremove.get(0);
             temp.setId(syncTask.peek());
             this.nextTask.add(temp);
-        }else {
+        } else {
 
             TaskQuadruple temp = toremove.get(0);
             temp.setId(newid);
@@ -185,15 +185,14 @@ public class TaskController {
         syncTask.pop();
     }
 
-    public void addAlternativeTask(String id){
+    public void addAlternativeTask(String id) {
         this.alternativeTask.add(id);
     }
 
-
-    public Boolean removeTask(TaskQuadruple tp){
-        int i =0;
-        for(TaskQuadruple TaskQuadruple : nextTask){
-            if(TaskQuadruple.equals(tp)){
+    public Boolean removeTask(TaskQuadruple tp) {
+        int i = 0;
+        for (TaskQuadruple TaskQuadruple : nextTask) {
+            if (TaskQuadruple.equals(tp)) {
                 nextTask.remove(i);
                 return Boolean.TRUE;
             }
@@ -201,38 +200,34 @@ public class TaskController {
         }
         return Boolean.FALSE;
     }
-    public Boolean isAllowed(String id){
 
+    public Boolean isAllowed(String id) {
 
-        if(syncTask.peek()!=null){
-            return (isSynced(id)&& id.equals(this.syncTask.peek()));
-        }
-        else {
+        if (syncTask.peek() != null) {
+            return (isSynced(id) && id.equals(this.syncTask.peek()));
+        } else {
             return isSynced(id);
         }
     }
 
-    public Boolean isAllowable(String id,String task){
+    public Boolean isAllowable(String id, String task) {
 
-
-        if(syncTask.peek()!=null){
-            return (isSyncable(id, task)&& id.equals(this.syncTask.peek()));
-        }
-        else {
+        if (syncTask.peek() != null) {
+            return (isSyncable(id, task) && id.equals(this.syncTask.peek()));
+        } else {
             return isSyncable(id, task);
         }
     }
 
-    public Boolean isComplete(String id){
+    public Boolean isComplete(String id) {
 
-           for(TaskQuadruple tq : nextTask){
-               if(tq.getId().equals(id)&& !isAllowed(id)){
-                   return Boolean.FALSE;
-               }
-           }
-           return Boolean.TRUE;
+        for (TaskQuadruple tq : nextTask) {
+            if (tq.getId().equals(id) && !isAllowed(id)) {
+                return Boolean.FALSE;
+            }
+        }
+        return Boolean.TRUE;
     }
-
 
     public void pushSyncTask(String syncTask) {
         this.syncTask.push(syncTask);

@@ -27,10 +27,25 @@
             <version>2.2.12</version>
         </dependency>
         <dependency>
+            <groupId>com.sun.faces</groupId>
+            <artifactId>jsf-impl</artifactId>
+            <version>2.2.12</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.faces</groupId>
+            <artifactId>jsf-api</artifactId>
+            <version>2.2.12</version>
+        </dependency>
+        <!--        <dependency>
             <groupId>org.apache.myfaces.core</groupId>
             <artifactId>myfaces-api</artifactId>
             <version>2.2.9</version>
-        </dependency>
+        </dependency>-->
+        <!--        <dependency>
+            <groupId>org.apache.myfaces.core</groupId>
+            <artifactId>myfaces-impl</artifactId>
+            <version>2.2.9</version>
+        </dependency>-->
         <!-- Bootsfaces -->
         <dependency>
             <groupId>net.bootsfaces</groupId>
@@ -120,21 +135,22 @@
             <artifactId>cdi-api</artifactId>
             <version>2.0-EDR1</version>
         </dependency>       
-<!--        <dependency>
-            <groupId>javax.el</groupId>
-            <artifactId>el-api</artifactId>
-            <version>2.2</version>
-            <scope>compile</scope>
-        </dependency>
-
+        <!-- -->
         <dependency>
-            <groupId>org.glassfish.web</groupId>
-            <artifactId>el-impl</artifactId>
-            <version>2.2</version>
-            <scope>compile</scope>
-        </dependency>-->
-
-
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>2.4.2</version>            
+        </dependency>
+        <dependency>
+            <groupId>org.apache.openejb</groupId>
+            <artifactId>openejb-core-eclipselink</artifactId>
+            <version>4.7.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>commonj.sdo</artifactId>
+            <version>2.1.1</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

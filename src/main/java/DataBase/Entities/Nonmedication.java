@@ -3,13 +3,11 @@ package DataBase.Entities;
 import com.google.gson.Gson;
 
 /**
- * Created with IntelliJ IDEA.
- * User: tiago
- * Date: 31-07-2013
- * Time: 16:41
- * To change this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. User: tiago Date: 31-07-2013 Time: 16:41 To
+ * change this template use File | Settings | File Templates.
  */
 public class Nonmedication {
+
     private String idnonmedication;
     private String idguideexec;
     private String description;
@@ -18,20 +16,19 @@ public class Nonmedication {
     private String user;
     private String patient;
 
-
-    public void Nonmedication(){
+    public void Nonmedication() {
 
     }
-    public String toJson(){
+
+    public String toJson() {
         Gson gson = new Gson();
         return gson.toJson(this);
     }
-    public static Nonmedication fromJson(String json){
+
+    public static Nonmedication fromJson(String json) {
         Gson gson = new Gson();
         return gson.fromJson(json, Nonmedication.class);
     }
-
-
 
     //GETTERS & SETTERS
     public String getIdguideexec() {
@@ -41,8 +38,6 @@ public class Nonmedication {
     public void setIdguideexec(String idguideexec) {
         this.idguideexec = idguideexec;
     }
-
-
 
     public String getTime() {
         return time;

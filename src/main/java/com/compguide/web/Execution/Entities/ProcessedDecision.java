@@ -3,28 +3,27 @@ package com.compguide.web.Execution.Entities;
 import com.google.gson.Gson;
 
 /**
- * Created with IntelliJ IDEA.
- * User: tiago
- * Date: 15-09-2013
- * Time: 14:05
- * To change this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. User: tiago Date: 15-09-2013 Time: 14:05 To
+ * change this template use File | Settings | File Templates.
  */
 public class ProcessedDecision {
+
     private String optionParameter;
     private String value;
     private String parameterIdentifier;
     private String unit;
     private Boolean isNumeric;
 
-    public ProcessedDecision(){
+    public ProcessedDecision() {
 
     }
-    public static ProcessedDecision fromJson(String json){
+
+    public static ProcessedDecision fromJson(String json) {
         Gson gson = new Gson();
         return gson.fromJson(json, ProcessedDecision.class);
     }
 
-    public String toJson(){
+    public String toJson() {
         Gson gson = new Gson();
         return gson.toJson(this);
     }

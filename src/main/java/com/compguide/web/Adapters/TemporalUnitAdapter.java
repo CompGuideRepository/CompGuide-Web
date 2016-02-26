@@ -36,7 +36,7 @@ public class TemporalUnitAdapter implements GuidelineInterface {
         if (task.getTaskType().toLowerCase().equals("question")) {
             WaitingTime wtg = ((Question) task).getWaitingTime();
         }
-        if (task.getTaskType().toLowerCase().equals("decision")) {      
+        if (task.getTaskType().toLowerCase().equals("decision")) {
             WaitingTime wtg = ((Decision) task).getWaitingTime();
         }
         if (task.getTaskType().toLowerCase().equals("action")) {

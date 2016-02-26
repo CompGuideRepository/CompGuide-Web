@@ -21,7 +21,7 @@ import javax.faces.convert.FacesConverter;
  */
 @FacesConverter("guidelineConverter")
 public class GuidelineConverter implements Converter {
-    
+
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String value) {
         System.out.println("=====================CONVERTER======================");

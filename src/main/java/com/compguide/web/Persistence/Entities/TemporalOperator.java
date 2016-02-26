@@ -35,6 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "TemporalOperator.findByTemporalOperatorID", query = "SELECT t FROM TemporalOperator t WHERE t.temporalOperatorID = :temporalOperatorID"),
     @NamedQuery(name = "TemporalOperator.findByValue", query = "SELECT t FROM TemporalOperator t WHERE t.value = :value")})
 public class TemporalOperator implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -110,5 +111,5 @@ public class TemporalOperator implements Serializable {
     public String toString() {
         return "com.compguide.web.Persistence.Entities.TemporalOperator[ temporalOperatorID=" + temporalOperatorID + " ]";
     }
-    
+
 }

@@ -2,14 +2,11 @@ package DataBase.Entities;
 
 import com.google.gson.Gson;
 
-
 /**
- * Created by IntelliJ IDEA.
- * Observation: tiago
- * Date: 18/07/12
- * Time: 10:25 PM
+ * Created by IntelliJ IDEA. Observation: tiago Date: 18/07/12 Time: 10:25 PM
  */
 public class Observation {
+
     private String idobservation;
     private String parameter;
     private String unit;
@@ -27,28 +24,26 @@ public class Observation {
     public Observation() {
     }
 
-
-    public String toJson(){
+    public String toJson() {
         Gson gson = new Gson();
         return gson.toJson(this);
     }
 
-    public static Observation fromJson(String json){
+    public static Observation fromJson(String json) {
         Gson gson = new Gson();
         return gson.fromJson(json, Observation.class);
     }
 
-
-    public String toJsonListElement(){
+    public String toJsonListElement() {
         return "{\"idobservation\":\"" + idobservation + "\",\"parameter\":\"" + parameter + "\",\"parametervalue\":\"" + parametervalue + "\",\"idguideexec\":\"" + idguideexec + "\"}";
     }
 
     // getters and setters
-
-    public void setIdobservation(String idobservation){
-        this.idobservation=idobservation;
+    public void setIdobservation(String idobservation) {
+        this.idobservation = idobservation;
     }
-    public String getIdobservation(){
+
+    public String getIdobservation() {
         return this.idobservation;
     }
 
@@ -107,7 +102,6 @@ public class Observation {
     public void setTime(String time) {
         this.time = time;
     }
-
 
     public String getTask() {
         return task;

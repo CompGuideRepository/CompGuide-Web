@@ -38,6 +38,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Exam.findByTime", query = "SELECT e FROM Exam e WHERE e.time = :time"),
     @NamedQuery(name = "Exam.findByIdentifier", query = "SELECT e FROM Exam e WHERE e.identifier = :identifier")})
 public class Exam implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -140,5 +141,5 @@ public class Exam implements Serializable {
     public String toString() {
         return "com.compguide.web.Persistence.Entities.Exam[ idexam=" + idexam + " ]";
     }
-    
+
 }

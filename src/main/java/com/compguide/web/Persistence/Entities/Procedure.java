@@ -38,6 +38,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Procedure.findByTime", query = "SELECT p FROM Procedure p WHERE p.time = :time"),
     @NamedQuery(name = "Procedure.findByIdentifier", query = "SELECT p FROM Procedure p WHERE p.identifier = :identifier")})
 public class Procedure implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -140,5 +141,5 @@ public class Procedure implements Serializable {
     public String toString() {
         return "com.compguide.web.Persistence.Entities.Procedure[ idprocedure=" + idprocedure + " ]";
     }
-    
+
 }

@@ -68,9 +68,7 @@ function updateTable() {
 // This row is already open - close it
             row.child.hide();
             tr.removeClass('shown');
-        }
-
-        else {
+        } else {
             $.ajax({
                 url: webServicePath + 'com.compguide.web.persistence.entities.guideexec/' + tr.attr('id'),
                 type: 'GET',
@@ -107,9 +105,7 @@ function initTableAction() {
             // This row is already open - close it
             row.child.hide();
             tr.removeClass('shown');
-        }
-
-        else {
+        } else {
             var id = tr.attr('id');
             var dataaction = $('#actioncontent' + id).clone();
             dataaction.css('display', '');
@@ -131,9 +127,7 @@ $(document).ready(function () {
 // This row is already open - close it
             row.child.hide();
             tr.removeClass('shown');
-        }
-
-        else {
+        } else {
             $.ajax({
                 url: webServicePath + 'com.compguide.web.persistence.entities.guideexec/' + tr.attr('id'),
                 type: 'GET',

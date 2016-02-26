@@ -12,6 +12,8 @@ import com.compguide.web.Persistence.SessionBeans.OutcomeFacade;
 import com.compguide.web.TemporalPattern.TemporalPattern;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
@@ -42,47 +44,51 @@ public class OutcomeNotification {
         return ejbConditionFacade;
     }
 
-    @Schedule(hour = "*", minute = "*/1", second = "*/30", persistent = false)
+    @Schedule(hour = "*", minute = "*/5", second = "*/30", persistent = false)
     public synchronized void run() {
-        List<Outcome> outcomes = getOutcomeFacade().findAll();
+        try {
+            List<Outcome> outcomes = getOutcomeFacade().findAll();
 
-        if (!outcomes.isEmpty()) {
-            Date dateNow = new Date();
+            if (!outcomes.isEmpty()) {
+                Date dateNow = new Date();
 
-            for (Outcome outcome : outcomes) {
-                if (outcome.getScheduleTaskID().getCompleted() == true) {
+                for (Outcome outcome : outcomes) {
+                    if (outcome.getScheduleTaskID().getCompleted() == true) {
 
-                    List<Condition> conditions = getConditionFacade().findByConditionSetID(
-                            outcome.getConditionSetID()
-                    );
+                        List<Condition> conditions = getConditionFacade().findByConditionSetID(
+                                outcome.getConditionSetID()
+                        );
 
-                    for (Condition condition : conditions) {
-                        if (condition.getTemporalRestrictionID() != null) {
-                            long differenceTime = (dateNow.getTime() - outcome.getScheduleTaskID().getCompletedDate().getTime());
-                            long temporalRestrictionTime = TemporalPattern.temporalUnitToMilliseconds(
-                                    condition.getTemporalRestrictionID().getTemporalUnitID().getValue(),
-                                    condition.getTemporalRestrictionID().getTemporalRestrictionValue()
-                            );
-                            if (differenceTime >= temporalRestrictionTime
-                                    && condition.getCanAsk() == false && condition.getAsked() == false) {
+                        for (Condition condition : conditions) {
+                            if (condition.getTemporalRestrictionID() != null) {
+                                long differenceTime = (dateNow.getTime() - outcome.getScheduleTaskID().getCompletedDate().getTime());
+                                long temporalRestrictionTime = TemporalPattern.temporalUnitToMilliseconds(
+                                        condition.getTemporalRestrictionID().getTemporalUnitID().getValue(),
+                                        condition.getTemporalRestrictionID().getTemporalRestrictionValue()
+                                );
+                                if (differenceTime >= temporalRestrictionTime
+                                        && condition.getCanAsk() == false && condition.getAsked() == false) {
+                                    condition.setCanAsk(Boolean.TRUE);
+                                    getConditionFacade().edit(condition);
+
+                                    outcome.setCanAsk(Boolean.TRUE);
+                                    getOutcomeFacade().edit(outcome);
+                                }
+                            } else if (condition.getCanAsk() == false && condition.getAsked() == false) {
                                 condition.setCanAsk(Boolean.TRUE);
                                 getConditionFacade().edit(condition);
 
                                 outcome.setCanAsk(Boolean.TRUE);
                                 getOutcomeFacade().edit(outcome);
                             }
-                        } else if (condition.getCanAsk() == false && condition.getAsked() == false) {
-                            condition.setCanAsk(Boolean.TRUE);
-                            getConditionFacade().edit(condition);
-
-                            outcome.setCanAsk(Boolean.TRUE);
-                            getOutcomeFacade().edit(outcome);
                         }
+
                     }
-
                 }
-            }
 
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
 
     }

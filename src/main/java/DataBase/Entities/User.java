@@ -2,14 +2,11 @@ package DataBase.Entities;
 
 import com.google.gson.Gson;
 
-
 /**
- * Created by IntelliJ IDEA.
- * User: tiago
- * Date: 18/07/12
- * Time: 10:25 PM
+ * Created by IntelliJ IDEA. User: tiago Date: 18/07/12 Time: 10:25 PM
  */
 public class User {
+
     private String iduser;
     private String username;
     private String name;
@@ -26,23 +23,21 @@ public class User {
     public User() {
     }
 
-    public String toJson(){
+    public String toJson() {
         Gson gson = new Gson();
         return gson.toJson(this);
     }
 
-    public static User fromJson(String json){
+    public static User fromJson(String json) {
         Gson gson = new Gson();
         return gson.fromJson(json, User.class);
     }
 
-
-    public String toJsonListElement(){
+    public String toJsonListElement() {
         return "{\"iduser\":\"" + iduser + "\",\"username\":\"" + username + "\",\"name\":\"" + name + "\",\"type\":\"" + type + "\"}";
     }
 
     // getters and setters
-
     public String getUsername() {
         return username;
     }
@@ -51,10 +46,11 @@ public class User {
         this.username = username;
     }
 
-    public void setIduser(String iduser){
-        this.iduser=iduser;
+    public void setIduser(String iduser) {
+        this.iduser = iduser;
     }
-    public String getIduser(){
+
+    public String getIduser() {
         return this.iduser;
     }
 
@@ -122,7 +118,6 @@ public class User {
         this.birthdate = birthdate;
     }
 
-
     public String getPassword() {
         return password;
     }
@@ -130,7 +125,6 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
 
     public String getAddress() {
         return address;

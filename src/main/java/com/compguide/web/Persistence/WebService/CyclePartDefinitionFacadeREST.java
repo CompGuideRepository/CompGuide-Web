@@ -26,6 +26,7 @@ import javax.ws.rs.Produces;
 @Stateless
 @Path("com.compguide.web.persistence.entities.cyclepartdefinition")
 public class CyclePartDefinitionFacadeREST extends AbstractFacade<CyclePartDefinition> {
+
     @PersistenceContext(unitName = "com.compguide_CompGuide-Web_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -85,5 +86,5 @@ public class CyclePartDefinitionFacadeREST extends AbstractFacade<CyclePartDefin
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }

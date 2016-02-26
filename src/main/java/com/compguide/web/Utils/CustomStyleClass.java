@@ -32,7 +32,7 @@ public class CustomStyleClass {
         if (customStyleClass == null) {
             customStyleClass = new CustomStyleClass();
         }
-        
+
         return customStyleClass;
     }
 
@@ -40,7 +40,7 @@ public class CustomStyleClass {
         if (styleIndex > styleClass.size()) {
             styleIndex = 0;
         }
-        
+
         String response = styleClass.get(styleIndex);
         styleIndex++;
 

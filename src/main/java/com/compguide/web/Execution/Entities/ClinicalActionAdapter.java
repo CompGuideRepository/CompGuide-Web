@@ -8,20 +8,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * Created with IntelliJ IDEA.
- * User: tiago
- * Date: 30-08-2013
- * Time: 21:38
- * To change this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. User: tiago Date: 30-08-2013 Time: 21:38 To
+ * change this template use File | Settings | File Templates.
  */
-
-public  class ClinicalActionAdapter implements JsonSerializer<ClinicalAction>, JsonDeserializer<ClinicalAction> {
+public class ClinicalActionAdapter implements JsonSerializer<ClinicalAction>, JsonDeserializer<ClinicalAction> {
 
     public JsonElement serialize(ClinicalAction clinicalAction, Type typeOfSrc,
-                                 JsonSerializationContext context) {
+            JsonSerializationContext context) {
         JsonObject result = new JsonObject();
 
-        Type typeParameter = new TypeToken<Collection<Parameter>>(){}.getType();
+        Type typeParameter = new TypeToken<Collection<Parameter>>() {
+        }.getType();
         result.add("id", context.serialize(clinicalAction.getId(), String.class));
         result.add("name", context.serialize(clinicalAction.getName(), String.class));
         result.add("actionType", context.serialize(clinicalAction.getActionType(), String.class));
@@ -44,13 +41,12 @@ public  class ClinicalActionAdapter implements JsonSerializer<ClinicalAction>, J
     }
 
     public ClinicalAction deserialize(JsonElement json, Type typeOfT,
-                                    JsonDeserializationContext context) throws JsonParseException {
+            JsonDeserializationContext context) throws JsonParseException {
         JsonObject object = json.getAsJsonObject();
         ClinicalAction result = null;
 
-
-        Type typeParameter = new TypeToken<Collection<Parameter>>(){}.getType();
-
+        Type typeParameter = new TypeToken<Collection<Parameter>>() {
+        }.getType();
 
         // if the employee has an assistant, she must be the CEO
         JsonElement parameters = object.get("parameters");
@@ -62,7 +58,7 @@ public  class ClinicalActionAdapter implements JsonSerializer<ClinicalAction>, J
             ((Formula) result).setParameters((ArrayList<Parameter>) context.deserialize(parameters, typeParameter));
             ((Formula) result).setResult((Parameter) context.deserialize(resultParameter, Parameter.class));
             ((Formula) result).setMathematicalExpression((String) context.deserialize(mathematicalExpression, String.class));
-          }
+        }
 
         JsonElement activeIngredient = object.get("activeIngredient");
         JsonElement dosage = object.get("dosage");
@@ -76,15 +72,13 @@ public  class ClinicalActionAdapter implements JsonSerializer<ClinicalAction>, J
             ((MedicationRecommendation) result).setPosology((String) context.deserialize(posology, String.class));
         }
 
-
-
         if (result == null) {
             result = new ClinicalAction();
         }
-        result.setId((String)context.deserialize(object.get("id"), String.class));
-        result.setActionType((String)context.deserialize(object.get("actionType"), String.class));
-        result.setDescription((String)context.deserialize(object.get("description"), String.class));
-        result.setName((String)context.deserialize(object.get("name"), String.class));
+        result.setId((String) context.deserialize(object.get("id"), String.class));
+        result.setActionType((String) context.deserialize(object.get("actionType"), String.class));
+        result.setDescription((String) context.deserialize(object.get("description"), String.class));
+        result.setName((String) context.deserialize(object.get("name"), String.class));
         return result;
     }
 }

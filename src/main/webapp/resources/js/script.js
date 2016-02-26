@@ -310,7 +310,7 @@
             icons2 = ['fa fa-minus-square', 'fa fa-plus-square', 'fa fa-plus-square'];
 
     bindChangeIcon($collapse2, $heading2, icons2);
-    
+
     var $collapse3 = $('#accordion-work3'),
             $heading3 = $collapse3.find('.panel-heading'),
             icons3 = ['fa fa-minus-square', 'fa fa-plus-square', 'fa fa-plus-square'];

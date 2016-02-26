@@ -5,13 +5,11 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 
 /**
- * Created with IntelliJ IDEA.
- * User: tiago
- * Date: 20-08-2013
- * Time: 14:41
- * To change this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. User: tiago Date: 20-08-2013 Time: 14:41 To
+ * change this template use File | Settings | File Templates.
  */
 public class Scope {
+
     private String id;
     private ArrayList<String> diseaseOrCondition;
     private ArrayList<String> intendedUser;
@@ -20,7 +18,7 @@ public class Scope {
     private ArrayList<String> hasGuidelineCategory;
     private ArrayList<ConditionSet> conditionSet;
 
-    public Scope(){
+    public Scope() {
         this.diseaseOrCondition = new ArrayList<String>();
         this.intendedUser = new ArrayList<String>();
         this.targetPopulation = new ArrayList<String>();
@@ -28,33 +26,38 @@ public class Scope {
         this.hasGuidelineCategory = new ArrayList<String>();
         this.conditionSet = new ArrayList<ConditionSet>();
     }
-    public static Scope fromJson(String json){
+
+    public static Scope fromJson(String json) {
         Gson gson = new Gson();
         return gson.fromJson(json, Scope.class);
     }
 
-    public String toJson(){
+    public String toJson() {
         Gson gson = new Gson();
         return gson.toJson(this);
     }
 
-    public void addDiseageOrCondition(String str){
-       this.diseaseOrCondition.add(str);
+    public void addDiseageOrCondition(String str) {
+        this.diseaseOrCondition.add(str);
     }
-    public void addIntendedUser(String str){
+
+    public void addIntendedUser(String str) {
         this.intendedUser.add(str);
     }
 
-    public void addTargetPopulation(String str){
+    public void addTargetPopulation(String str) {
         this.targetPopulation.add(str);
     }
-    public void addClinicalSpecialty(String str){
+
+    public void addClinicalSpecialty(String str) {
         this.hasClinicalSpeciality.add(str);
     }
-    public void addGuidelineCategory(String str){
+
+    public void addGuidelineCategory(String str) {
         this.hasGuidelineCategory.add(str);
     }
-    public void addConditionSet(ConditionSet conditionset){
+
+    public void addConditionSet(ConditionSet conditionset) {
         this.conditionSet.add(conditionset);
     }
 

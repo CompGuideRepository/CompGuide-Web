@@ -4,13 +4,11 @@ import com.google.gson.Gson;
 import com.compguide.web.DataBase.Beans.GuideexecBean;
 
 /**
- * Created with IntelliJ IDEA.
- * User: tiago
- * Date: 31-07-2013
- * Time: 16:41
- * To change this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. User: tiago Date: 31-07-2013 Time: 16:41 To
+ * change this template use File | Settings | File Templates.
  */
 public class Guideexec {
+
     private String idguideline;
     private String idguideexec;
     private String iduser;
@@ -21,31 +19,33 @@ public class Guideexec {
     private String description;
     private Boolean completed;
 
-    public void Guideexec(){
+    public void Guideexec() {
 
     }
-    public String toJson(){
+
+    public String toJson() {
         Gson gson = new Gson();
         return gson.toJson(this);
     }
-    public static Guideexec fromJson(String json){
+
+    public static Guideexec fromJson(String json) {
         Gson gson = new Gson();
         return gson.fromJson(json, Guideexec.class);
     }
-    public static Guideexec fromBean(GuideexecBean bean){
+
+    public static Guideexec fromBean(GuideexecBean bean) {
         Guideexec guideexec = new Guideexec();
-        guideexec.idguideexec =String.valueOf(bean.getIdguideexec());
-        guideexec.iduser =String.valueOf(bean.getIduser());
-        guideexec.idpatient =String.valueOf(bean.getIdpatient());
-        guideexec.idguideline =String.valueOf(bean.getIdguideline());
+        guideexec.idguideexec = String.valueOf(bean.getIdguideexec());
+        guideexec.iduser = String.valueOf(bean.getIduser());
+        guideexec.idpatient = String.valueOf(bean.getIdpatient());
+        guideexec.idguideline = String.valueOf(bean.getIdguideline());
         guideexec.completed = bean.getCompleted();
         guideexec.nextTasks = bean.getNextTasks();
         guideexec.time = bean.getTime();
-        guideexec.description =bean.getDescription();
-        guideexec.start=bean.getStart();
+        guideexec.description = bean.getDescription();
+        guideexec.start = bean.getStart();
         return guideexec;
     }
-
 
     //GETTERS & SETTERS
     public String getIdguideexec() {
@@ -55,8 +55,6 @@ public class Guideexec {
     public void setIdguideexec(String idguideexec) {
         this.idguideexec = idguideexec;
     }
-
-
 
     public String getTime() {
         return time;

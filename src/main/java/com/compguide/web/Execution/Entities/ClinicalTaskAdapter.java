@@ -8,25 +8,28 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * Created with IntelliJ IDEA.
- * User: tiago
- * Date: 30-08-2013
- * Time: 21:38
- * To change this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. User: tiago Date: 30-08-2013 Time: 21:38 To
+ * change this template use File | Settings | File Templates.
  */
-
-public  class ClinicalTaskAdapter implements JsonSerializer<ClinicalTask>, JsonDeserializer<ClinicalTask> {
+public class ClinicalTaskAdapter implements JsonSerializer<ClinicalTask>, JsonDeserializer<ClinicalTask> {
 
     public JsonElement serialize(ClinicalTask clinicalTask, Type typeOfSrc,
-                                 JsonSerializationContext context) {
+            JsonSerializationContext context) {
         JsonObject result = new JsonObject();
-        Type typeString = new TypeToken<Collection<String>>(){}.getType();
-        Type typeParameter = new TypeToken<Collection<Parameter>>(){}.getType();
-        Type typeOptions = new TypeToken<Collection<Option>>(){}.getType();
-        Type typeClinicalAction = new TypeToken<Collection<ClinicalAction>>(){}.getType();
-        Type typeOutcome = new TypeToken<Collection<Outcome>>(){}.getType();
-        Type typeTriggerCondition = new TypeToken<Collection<TriggerCondition>>(){}.getType();
-        Type typePreCondition = new TypeToken<Collection<PreCondition>>(){}.getType();
+        Type typeString = new TypeToken<Collection<String>>() {
+        }.getType();
+        Type typeParameter = new TypeToken<Collection<Parameter>>() {
+        }.getType();
+        Type typeOptions = new TypeToken<Collection<Option>>() {
+        }.getType();
+        Type typeClinicalAction = new TypeToken<Collection<ClinicalAction>>() {
+        }.getType();
+        Type typeOutcome = new TypeToken<Collection<Outcome>>() {
+        }.getType();
+        Type typeTriggerCondition = new TypeToken<Collection<TriggerCondition>>() {
+        }.getType();
+        Type typePreCondition = new TypeToken<Collection<PreCondition>>() {
+        }.getType();
 
         result.add("id", context.serialize(clinicalTask.getId(), String.class));
         result.add("clinicalTasks", context.serialize(clinicalTask.getClinicalTasks(), typeString));
@@ -36,7 +39,6 @@ public  class ClinicalTaskAdapter implements JsonSerializer<ClinicalTask>, JsonD
         result.add("generalDescription", context.serialize(clinicalTask.getGeneralDescription(), String.class));
         result.add("triggerCondition", context.serialize(clinicalTask.getTriggerCondition(), typeTriggerCondition));
         result.add("preCondition", context.serialize(clinicalTask.getPreCondition(), typePreCondition));
-
 
         if (clinicalTask instanceof Question) {
             result.add("parameters", context.serialize(((Question) clinicalTask).getParameters(), typeParameter));
@@ -53,7 +55,6 @@ public  class ClinicalTaskAdapter implements JsonSerializer<ClinicalTask>, JsonD
             result.add("options", context.serialize(((Decision) clinicalTask).getOptions(), typeOptions));
         }
 
-
         if (clinicalTask instanceof Action) {
             result.add("clinicalActions", context.serialize(((Action) clinicalTask).getClinicalActions(), typeClinicalAction));
             result.add("outcome", context.serialize(((Action) clinicalTask).getOutcome(), Outcome.class));
@@ -65,20 +66,24 @@ public  class ClinicalTaskAdapter implements JsonSerializer<ClinicalTask>, JsonD
     }
 
     public ClinicalTask deserialize(JsonElement json, Type typeOfT,
-                                JsonDeserializationContext context) throws JsonParseException {
+            JsonDeserializationContext context) throws JsonParseException {
         JsonObject object = json.getAsJsonObject();
         ClinicalTask result = null;
 
-
-
-        Type typeString = new TypeToken<Collection<String>>(){}.getType();
-        Type typeParameter = new TypeToken<Collection<Parameter>>(){}.getType();
-        Type typeOptions = new TypeToken<Collection<Option>>(){}.getType();
-        Type typeClinicalAction = new TypeToken<Collection<ClinicalAction>>(){}.getType();
-        Type typeOutcome = new TypeToken<Collection<Outcome>>(){}.getType();
-        Type typeTriggerCondition = new TypeToken<Collection<TriggerCondition>>(){}.getType();
-        Type typePreCondition = new TypeToken<Collection<PreCondition>>(){}.getType();
-
+        Type typeString = new TypeToken<Collection<String>>() {
+        }.getType();
+        Type typeParameter = new TypeToken<Collection<Parameter>>() {
+        }.getType();
+        Type typeOptions = new TypeToken<Collection<Option>>() {
+        }.getType();
+        Type typeClinicalAction = new TypeToken<Collection<ClinicalAction>>() {
+        }.getType();
+        Type typeOutcome = new TypeToken<Collection<Outcome>>() {
+        }.getType();
+        Type typeTriggerCondition = new TypeToken<Collection<TriggerCondition>>() {
+        }.getType();
+        Type typePreCondition = new TypeToken<Collection<PreCondition>>() {
+        }.getType();
 
         // if the employee has an assistant, she must be the CEO
         JsonElement parameter = object.get("parameters");
@@ -86,12 +91,12 @@ public  class ClinicalTaskAdapter implements JsonSerializer<ClinicalTask>, JsonD
             result = new Question();
 
             ((Question) result).setParameters((ArrayList<Parameter>) context.deserialize(parameter, typeParameter));
-         }
+        }
 
         JsonElement option = object.get("options");
         if (option != null) {
             result = new Decision();
-            ((Decision) result).setOptions((ArrayList<Option>) context.deserialize(option,typeOptions));
+            ((Decision) result).setOptions((ArrayList<Option>) context.deserialize(option, typeOptions));
         }
 
         JsonElement firstClinicalTask = object.get("firstClinicalTask");
@@ -110,7 +115,7 @@ public  class ClinicalTaskAdapter implements JsonSerializer<ClinicalTask>, JsonD
         }
 
         JsonElement clinicalActions = object.get("clinicalActions");
-        outcome= object.get("outcome");
+        outcome = object.get("outcome");
         duration = object.get("duration");
         periodicity = object.get("periodicity");
         if (clinicalActions != null) {
@@ -124,7 +129,7 @@ public  class ClinicalTaskAdapter implements JsonSerializer<ClinicalTask>, JsonD
         if (result == null) {
             result = new ClinicalTask();
         }
-        result.setId((String)context.deserialize(object.get("id"), String.class));
+        result.setId((String) context.deserialize(object.get("id"), String.class));
         result.setClinicalTasks((ArrayList<String>) context.deserialize(object.get("clinicalTasks"), typeString));
         result.setTaskType((String) context.deserialize(object.get("taskType"), String.class));
         result.setTaskFormat((String) context.deserialize(object.get("taskFormat"), String.class));

@@ -3,24 +3,22 @@ package com.compguide.web.Execution.Entities;
 import com.google.gson.Gson;
 
 /**
- * Created with IntelliJ IDEA.
- * User: tiago
- * Date: 20-08-2013
- * Time: 23:26
- * To change this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. User: tiago Date: 20-08-2013 Time: 23:26 To
+ * change this template use File | Settings | File Templates.
  */
 public class ClinicalAction {
+
     private String actionType;
     private String id;
     private String name;
     private String description;
 
-    public static ClinicalAction fromJson(String json){
+    public static ClinicalAction fromJson(String json) {
         Gson gson = new Gson();
         return gson.fromJson(json, ClinicalAction.class);
     }
 
-    public String toJson(){
+    public String toJson() {
         Gson gson = new Gson();
         return gson.toJson(this);
     }

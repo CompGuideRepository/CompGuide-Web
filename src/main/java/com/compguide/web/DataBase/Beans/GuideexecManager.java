@@ -12,13 +12,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Created with IntelliJ IDEA.
- * User: tiago
- * Date: 31-07-2013
- * Idguideline: 13:41
+ * Created with IntelliJ IDEA. User: tiago Date: 31-07-2013 Idguideline: 13:41
  * To change this template use File | Settings | File Templates.
  */
 public class GuideexecManager {
+
     public static final String ALL_FIELDS = "time"
             + ",start"
             + ",completed"
@@ -38,47 +36,34 @@ public class GuideexecManager {
             + ",iduser"
             + ",idpatient";
 
-    public static final String[] ALL_FIELDS_ARRAY = { ",time="
-            , ",start="
-            , ",completed="
-            , ",nextTasks="
-            , ",description="
-            , ",idguideline="
-            , ",iduser="
-            , ",idpatient="
-            , "idguideexec="
+    public static final String[] ALL_FIELDS_ARRAY = {",time=", ",start=", ",completed=", ",nextTasks=", ",description=", ",idguideline=", ",iduser=", ",idpatient=", "idguideexec="
     };
-
-
 
     private static GuideexecManager singleton = new GuideexecManager();
 
-
-    public static GuideexecManager getInstance()
-    {
+    public static GuideexecManager getInstance() {
         return singleton;
     }
 
-    public GuideexecBean createGuideexecBean()
-    {
+    public GuideexecBean createGuideexecBean() {
         return new GuideexecBean();
     }
-    public GuideexecBean getGuideexecBeanByID(String id){
+
+    public GuideexecBean getGuideexecBeanByID(String id) {
         Connection c = null;
         PreparedStatement statement = null;
         StringBuilder sql = null;
-        GuideexecBean bean= GuideexecManager.getInstance().createGuideexecBean();
+        GuideexecBean bean = GuideexecManager.getInstance().createGuideexecBean();
         ResultSet rs = null;
-
 
         try {
             c = this.getConnection();
             sql = new StringBuilder();
             sql.append("SELECT * FROM guideexec WHERE idguideexec=");
             sql.append(id);
-            statement=c.prepareStatement(sql.toString());
+            statement = c.prepareStatement(sql.toString());
             rs = statement.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 bean.setTime(rs.getString("time"));
                 bean.setIdguideline(rs.getLong("idguideline"));
                 bean.setIdguideexec(rs.getLong("idguideexec"));
@@ -95,7 +80,7 @@ public class GuideexecManager {
         } catch (SQLException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-        if(c!=null) {
+        if (c != null) {
             this.getManager().close(rs);
             this.getManager().releaseConnection(c);
         }
@@ -107,7 +92,7 @@ public class GuideexecManager {
         PreparedStatement statement = null;
         StringBuilder sql = new StringBuilder();
         Connection con = null;
-        int result=0;
+        int result = 0;
 
         //registering the jdbc driver here, your string to use
         //here depends on what driver you are using.
@@ -115,14 +100,14 @@ public class GuideexecManager {
         try {
             sql.append("DELETE FROM guideexec WHERE idguideexec =");
             sql.append(id);
-            statement=con.prepareStatement(sql.toString());
-            result =statement.executeUpdate();
+            statement = con.prepareStatement(sql.toString());
+            result = statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
 
         }
 
-        if (statement !=null){
+        if (statement != null) {
             try {
                 statement.close();
             } catch (SQLException e) {
@@ -133,15 +118,13 @@ public class GuideexecManager {
         return result;
     }
 
-    public Integer insert(GuideexecBean bean) throws DAOException
-    {
+    public Integer insert(GuideexecBean bean) throws DAOException {
         Connection c = null;
         PreparedStatement ps = null;
         StringBuilder sql = new StringBuilder();
         Connection connection = null;
         Integer key = 0;
-        try
-        {
+        try {
             connection = this.getConnection();
             sql = new StringBuilder();
             ps = null;
@@ -164,38 +147,38 @@ public class GuideexecManager {
             sql.append("','");
             sql.append(bean.getIdpatient());
             sql.append("')");
-            ps=connection.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
+            ps = connection.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
-            while(rs.next()){
+            while (rs.next()) {
                 key = rs.getInt(1);
             }
         } catch (SQLException e1) {
             e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-        if(c!=null) {
+        if (c != null) {
             this.getManager().releaseConnection(c);
-            sql=null;
+            sql = null;
         }
 
         return key;
     }
 
-    public GuideexecList getGuidelineListActive(String user){
+    public GuideexecList getGuidelineListActive(String user) {
         Connection c = null;
         PreparedStatement statement;
         StringBuilder sql;
         GuideexecBean bean;
-        GuideexecList guidelineList=null;
+        GuideexecList guidelineList = null;
         ResultSet rs = null;
         try {
             c = this.getConnection();
             sql = new StringBuilder();
-            sql.append("SELECT * FROM guideexec WHERE completed="+Boolean.FALSE+" AND iduser="+user+" ORDER BY idguideexec DESC");
-            statement=c.prepareStatement(sql.toString());
+            sql.append("SELECT * FROM guideexec WHERE completed=" + Boolean.FALSE + " AND iduser=" + user + " ORDER BY idguideexec DESC");
+            statement = c.prepareStatement(sql.toString());
             rs = statement.executeQuery();
             guidelineList = GuideexecList.getInstance();
-            while(rs.next()){
+            while (rs.next()) {
                 bean = GuideexecManager.getInstance().createGuideexecBean();
                 bean.setIdguideexec(rs.getLong("idguideexec"));
                 bean.setIdguideline(rs.getLong("idguideline"));
@@ -214,7 +197,7 @@ public class GuideexecManager {
         } catch (SQLException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-        if(c!=null) {
+        if (c != null) {
             this.getManager().close(rs);
             this.getManager().releaseConnection(c);
         }
@@ -224,18 +207,14 @@ public class GuideexecManager {
 
     public GuideexecBean update(GuideexecBean bean) throws DAOException {
 
-
-
         Connection c = null;
         PreparedStatement ps = null;
         StringBuilder sql = new StringBuilder();
 
-        try
-        {
+        try {
             c = this.getConnection();
             // bean= UserManager.getInstance().getUserBeanByID(4L);
             //     ResultSet rs = statement.executeQuery(sql.toString());
-
 
             sql.append("UPDATE guideexec SET ");
             sql.append(ALL_FIELDS_ARRAY[8]);
@@ -269,35 +248,30 @@ public class GuideexecManager {
             sql.append(bean.getIdguideexec());
 
             System.out.println(sql.toString());
-            ps= c.prepareStatement(sql.toString());
+            ps = c.prepareStatement(sql.toString());
             ps.executeUpdate();
         } catch (SQLException e1) {
             e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-        if(c!=null) {
+        if (c != null) {
             this.getManager().releaseConnection(c);
-            sql=null;
+            sql = null;
         }
 
         return bean;
     }
 
-
-
-
     //_____________________________________________________________________
     //
     // UTILS
     //_____________________________________________________________________
-
     /**
      * Retrieves the manager object used to get connections.
      *
      * @return the manager used
      */
     //40
-    private Manager getManager()
-    {
+    private Manager getManager() {
         return Manager.getInstance();
     }
 
@@ -307,8 +281,7 @@ public class GuideexecManager {
      * @param c the connection to release
      */
     //41
-    private void freeConnection(Connection c)
-    {
+    private void freeConnection(Connection c) {
         this.getManager().releaseConnection(c); // back to pool
     }
 
@@ -316,14 +289,10 @@ public class GuideexecManager {
      * Gets the connection.
      */
     //42
-    private Connection getConnection() throws DAOException
-    {
-        try
-        {
+    private Connection getConnection() throws DAOException {
+        try {
             return this.getManager().getConnection();
-        }
-        catch(SQLException e)
-        {
+        } catch (SQLException e) {
             throw new DataAccessException(e);
         }
     }

@@ -16,6 +16,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class TemporalRestrictionFacade extends AbstractFacade<TemporalRestriction> {
+
     @PersistenceContext(unitName = "com.compguide_CompGuide-Web_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -27,5 +28,5 @@ public class TemporalRestrictionFacade extends AbstractFacade<TemporalRestrictio
     public TemporalRestrictionFacade() {
         super(TemporalRestriction.class);
     }
-    
+
 }

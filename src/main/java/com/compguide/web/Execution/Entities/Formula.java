@@ -5,31 +5,30 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 
 /**
- * Created with IntelliJ IDEA.
- * User: tiago
- * Date: 20-08-2013
- * Time: 23:34
- * To change this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. User: tiago Date: 20-08-2013 Time: 23:34 To
+ * change this template use File | Settings | File Templates.
  */
 public class Formula extends ClinicalAction {
+
     private ArrayList<Parameter> parameters;
     private Parameter result;
     private String mathematicalExpression;
 
-    public Formula(){
+    public Formula() {
         parameters = new ArrayList<Parameter>();
     }
 
-    public static Formula fromJson(String json){
+    public static Formula fromJson(String json) {
         Gson gson = new Gson();
         return gson.fromJson(json, Formula.class);
     }
 
-    public String toJson(){
+    public String toJson() {
         Gson gson = new Gson();
         return gson.toJson(this);
     }
-    public void addParameter(Parameter parameter){
+
+    public void addParameter(Parameter parameter) {
         this.parameters.add(parameter);
     }
 

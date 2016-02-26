@@ -16,6 +16,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class PatientFacade extends AbstractFacade<Patient> {
+
     @PersistenceContext(unitName = "com.compguide_CompGuide-Web_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -27,5 +28,5 @@ public class PatientFacade extends AbstractFacade<Patient> {
     public PatientFacade() {
         super(Patient.class);
     }
-    
+
 }

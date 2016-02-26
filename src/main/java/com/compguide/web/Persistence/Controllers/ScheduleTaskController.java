@@ -562,7 +562,6 @@ public class ScheduleTaskController implements Serializable {
         Calendar startDate = Calendar.getInstance();
         startDate.setTime(task.getStartDate());
 
-
         if (periodicity.isRepetition() // periodicidade da tarefa tem um numero de repeticoes
                 && periodicity.isExecutionTimeValid()) {
 

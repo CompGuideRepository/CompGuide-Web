@@ -25,9 +25,9 @@ public class StopConditionSetAdapter implements GuidelineInterface {
     public GuidelineInterface fetchTemporalPatternFromClinicaltask(ClinicalTask task) {
 
         if (task.getTaskType().toLowerCase().equals("plan")) {
-            Periodicity per = ((Plan) task).getPeriodicity();        
+            Periodicity per = ((Plan) task).getPeriodicity();
         }
-        
+
         if (task.getTaskType().toLowerCase().equals("action")) {
             Periodicity per = ((Action) task).getPeriodicity();
         }

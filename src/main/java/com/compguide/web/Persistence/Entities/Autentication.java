@@ -36,6 +36,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Autentication.findByDuracao", query = "SELECT a FROM Autentication a WHERE a.duracao = :duracao"),
     @NamedQuery(name = "Autentication.findByAuth", query = "SELECT a FROM Autentication a WHERE a.auth = :auth")})
 public class Autentication implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -115,5 +116,5 @@ public class Autentication implements Serializable {
     public String toString() {
         return "com.compguide.web.Persistence.Entities.Autentication[ id=" + id + " ]";
     }
-    
+
 }

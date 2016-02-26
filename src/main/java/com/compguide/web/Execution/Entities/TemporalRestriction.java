@@ -3,31 +3,31 @@ package com.compguide.web.Execution.Entities;
 import com.google.gson.Gson;
 
 /**
- * Created with IntelliJ IDEA.
- * User: tiago
- * Date: 20-08-2013
- * Time: 15:01
- * To change this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. User: tiago Date: 20-08-2013 Time: 15:01 To
+ * change this template use File | Settings | File Templates.
  */
 public class TemporalRestriction {
+
     private String id;
     private Double minRestrictionValue;
     private Double maxRestrictionValue;
     private String temporalUnit;
     private String temporalOperator;
 
-    public TemporalRestriction(){
+    public TemporalRestriction() {
 
     }
-    public static TemporalRestriction fromJson(String json){
+
+    public static TemporalRestriction fromJson(String json) {
         Gson gson = new Gson();
         return gson.fromJson(json, TemporalRestriction.class);
     }
 
-    public String toJson(){
+    public String toJson() {
         Gson gson = new Gson();
         return gson.toJson(this);
     }
+
     public String getTemporalOperator() {
         return temporalOperator;
     }
@@ -59,7 +59,8 @@ public class TemporalRestriction {
     public void setMaxRestrictionValue(double maxRestrictionValue) {
         this.maxRestrictionValue = maxRestrictionValue;
     }
-    public Boolean isSingleRestrictionValue(){
+
+    public Boolean isSingleRestrictionValue() {
         return maxRestrictionValue.equals(minRestrictionValue);
     }
 

@@ -16,6 +16,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class ProcedureFacade extends AbstractFacade<Procedure> {
+
     @PersistenceContext(unitName = "com.compguide_CompGuide-Web_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -27,5 +28,5 @@ public class ProcedureFacade extends AbstractFacade<Procedure> {
     public ProcedureFacade() {
         super(Procedure.class);
     }
-    
+
 }

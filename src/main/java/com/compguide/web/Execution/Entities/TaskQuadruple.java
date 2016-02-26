@@ -1,22 +1,21 @@
 package com.compguide.web.Execution.Entities;
 
 /**
- * Created with IntelliJ IDEA.
- * User: tiago
- * Date: 29-08-2013
- * Time: 12:00
- * To change this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. User: tiago Date: 29-08-2013 Time: 12:00 To
+ * change this template use File | Settings | File Templates.
  */
 public class TaskQuadruple {
+
     private String task;
     private String sync;
     private String id;
     private String plan;
 
-    public TaskQuadruple(){
+    public TaskQuadruple() {
 
     }
-    public TaskQuadruple(String task, String sync, String id,String plan){
+
+    public TaskQuadruple(String task, String sync, String id, String plan) {
         this.task = task;
         this.sync = sync;
         this.id = id;
@@ -38,10 +37,10 @@ public class TaskQuadruple {
     public void setTask(String task) {
         this.task = task;
     }
-    public Boolean equals(TaskQuadruple tp){
-        return ((this.getTask().equals(tp.getTask()) && this.getSync().equals(this.getSync()))&&this.getId().equals(tp.getId())&&this.getPlan().equals(tp.getPlan()));
-    }
 
+    public Boolean equals(TaskQuadruple tp) {
+        return ((this.getTask().equals(tp.getTask()) && this.getSync().equals(this.getSync())) && this.getId().equals(tp.getId()) && this.getPlan().equals(tp.getPlan()));
+    }
 
     public String getId() {
         return id;
@@ -50,12 +49,13 @@ public class TaskQuadruple {
     public void setId(String id) {
         this.id = id;
     }
-    public Boolean isSync(){
-        return(this.getTask().equals(this.getSync()));
+
+    public Boolean isSync() {
+        return (this.getTask().equals(this.getSync()));
     }
 
     public String toString() {
-        return "task="+task+"\nid="+id+"\nsync="+sync+"\nplan="+plan;
+        return "task=" + task + "\nid=" + id + "\nsync=" + sync + "\nplan=" + plan;
     }
 
     public String getPlan() {

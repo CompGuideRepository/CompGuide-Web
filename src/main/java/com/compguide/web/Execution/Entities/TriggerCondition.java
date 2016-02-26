@@ -5,31 +5,29 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 
 /**
- * Created with IntelliJ IDEA.
- * User: tiago
- * Date: 23-08-2013
- * Time: 23:52
- * To change this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. User: tiago Date: 23-08-2013 Time: 23:52 To
+ * change this template use File | Settings | File Templates.
  */
 public class TriggerCondition {
-    private  ArrayList<ConditionSet> triggerConditionSet;
 
-    public TriggerCondition(){
+    private ArrayList<ConditionSet> triggerConditionSet;
+
+    public TriggerCondition() {
         triggerConditionSet = new ArrayList<ConditionSet>();
 
     }
 
-    public static TriggerCondition fromJson(String json){
+    public static TriggerCondition fromJson(String json) {
         Gson gson = new Gson();
         return gson.fromJson(json, TriggerCondition.class);
     }
 
-    public String toJson(){
+    public String toJson() {
         Gson gson = new Gson();
         return gson.toJson(this);
     }
 
-    public void addTriggerCondition(ConditionSet conditionSet){
+    public void addTriggerCondition(ConditionSet conditionSet) {
         triggerConditionSet.add(conditionSet);
 
     }

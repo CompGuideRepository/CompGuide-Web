@@ -42,6 +42,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Observation.findByTime", query = "SELECT o FROM Observation o WHERE o.time = :time"),
     @NamedQuery(name = "Observation.findByIdentifier", query = "SELECT o FROM Observation o WHERE o.identifier = :identifier")})
 public class Observation implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -199,5 +200,5 @@ public class Observation implements Serializable {
     public String toString() {
         return "com.compguide.web.Persistence.Entities.Observation[ idobservation=" + idobservation + " ]";
     }
-    
+
 }

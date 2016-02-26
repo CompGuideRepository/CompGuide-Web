@@ -4,7 +4,7 @@
         <jta-data-source>jdbc/compguidedb</jta-data-source>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties/>
-<!--        <properties>
+        <!--        <properties>
             <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
         </properties>-->
     </persistence-unit>

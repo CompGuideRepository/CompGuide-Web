@@ -55,7 +55,6 @@ public class CyclePartPeriodicityComposite implements Serializable {
         this.cyclePartPeriodicity.setDurationID(duration);
     }
 
-
     public void setDuration(Duration duration) {
         this.duration = duration;
         this.cyclePartPeriodicity.setDurationID(duration);

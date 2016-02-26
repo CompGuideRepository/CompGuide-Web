@@ -2,14 +2,11 @@ package DataBase.Entities;
 
 import com.google.gson.Gson;
 
-
 /**
- * Created by IntelliJ IDEA.
- * Patient: tiago
- * Date: 18/07/12
- * Time: 10:25 PM
+ * Created by IntelliJ IDEA. Patient: tiago Date: 18/07/12 Time: 10:25 PM
  */
 public class Patient {
+
     private String idpatient;
     private String name;
     private String lastname;
@@ -24,28 +21,26 @@ public class Patient {
     public Patient() {
     }
 
-
-    public String toJson(){
+    public String toJson() {
         Gson gson = new Gson();
         return gson.toJson(this);
     }
 
-    public static Patient fromJson(String json){
+    public static Patient fromJson(String json) {
         Gson gson = new Gson();
         return gson.fromJson(json, Patient.class);
     }
 
-
-    public String toJsonListElement(){
+    public String toJsonListElement() {
         return "{\"idpatient\":\"" + idpatient + "\",\"name\":\"" + name + "\",\"name\":\"" + name + "\",\"type\":\"" + type + "\"}";
     }
 
     // getters and setters
-
-    public void setIdpatient(String idpatient){
-        this.idpatient=idpatient;
+    public void setIdpatient(String idpatient) {
+        this.idpatient = idpatient;
     }
-    public String getIdpatient(){
+
+    public String getIdpatient() {
         return this.idpatient;
     }
 
@@ -112,8 +107,6 @@ public class Patient {
     public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
     }
-
-
 
     public String getAddress() {
         return address;

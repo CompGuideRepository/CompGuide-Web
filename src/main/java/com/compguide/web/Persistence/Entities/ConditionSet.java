@@ -34,6 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "ConditionSet.findByIdentifier", query = "SELECT c FROM ConditionSet c WHERE c.identifier = :identifier"),
     @NamedQuery(name = "ConditionSet.findByConditionSetCounter", query = "SELECT c FROM ConditionSet c WHERE c.conditionSetCounter = :conditionSetCounter")})
 public class ConditionSet implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -123,5 +124,5 @@ public class ConditionSet implements Serializable {
     public String toString() {
         return "com.compguide.web.Persistence.Entities.ConditionSet[ idconditionset=" + idconditionset + " ]";
     }
-    
+
 }

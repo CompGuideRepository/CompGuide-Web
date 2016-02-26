@@ -16,7 +16,6 @@ import javax.inject.Named;
  *
  * @author António
  */
-
 @Named
 @SessionScoped
 public class TemporalUnitComposite implements Serializable {

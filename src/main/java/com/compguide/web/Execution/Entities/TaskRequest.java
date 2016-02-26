@@ -3,18 +3,16 @@ package com.compguide.web.Execution.Entities;
 import com.google.gson.Gson;
 
 /**
- * Created with IntelliJ IDEA.
- * User: tiago
- * Date: 28-08-2013
- * Time: 14:29
- * To change this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. User: tiago Date: 28-08-2013 Time: 14:29 To
+ * change this template use File | Settings | File Templates.
  */
 public class TaskRequest {
+
     private String guideexec;
     private ConditionSet conditionSet;
     private TaskQuadruple taskQuadruple;
 
-    public TaskRequest(){
+    public TaskRequest() {
         conditionSet = new ConditionSet();
     }
 
@@ -22,16 +20,17 @@ public class TaskRequest {
         return guideexec;
     }
 
-    public static TaskRequest fromJson(String json){
+    public static TaskRequest fromJson(String json) {
         Gson gson = new Gson();
         return gson.fromJson(json, TaskRequest.class);
     }
 
-    public String toJson(){
+    public String toJson() {
         Gson gson = new Gson();
         return gson.toJson(this);
     }
-    public void addCondition(Condition c){
+
+    public void addCondition(Condition c) {
         this.conditionSet.addCondition(c);
     }
 

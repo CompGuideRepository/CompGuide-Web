@@ -16,6 +16,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class GeneratedTaskFacade extends AbstractFacade<GeneratedTask> {
+
     @PersistenceContext(unitName = "com.compguide_CompGuide-Web_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -27,5 +28,5 @@ public class GeneratedTaskFacade extends AbstractFacade<GeneratedTask> {
     public GeneratedTaskFacade() {
         super(GeneratedTask.class);
     }
-    
+
 }

@@ -111,7 +111,7 @@ public class Plan extends ClinicalTask {
     public boolean isTemporalPattern() {
         if (isDuration() || isWaitingTime() || isPeriodicity()) {
             return true;
-    
+
         }
         return false;
     }

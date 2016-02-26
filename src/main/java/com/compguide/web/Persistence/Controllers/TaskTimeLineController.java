@@ -100,7 +100,7 @@ public class TaskTimeLineController implements Serializable {
                         false,
                         "Task " + event.getScheduleTaskID().getTaskIdentifier()
                 );
-                
+
                 timelineEvent.setStyleClass(CustomStyleClass.instance().getStyleClass());
 
                 model.add(timelineEvent);

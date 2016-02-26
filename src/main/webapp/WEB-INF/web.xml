@@ -46,12 +46,6 @@
         <param-name>net.bootsfaces.get_fontawesome_from_cdn</param-name>
         <param-value>true</param-value>
     </context-param>
-<!--    <context-param>
-        <param-name>net.bootsfaces.get_bootstrap_from_cdn</param-name>
-        <param-value>yes</param-value>
-    </context-param>-->
-    
-    <!-- Facelets pages will use the .xhtml extension -->
     <context-param>
         <param-name>javax.faces.FACELETS_VIEW_MAPPINGS</param-name>
         <param-value>*.xhtml</param-value>
@@ -60,4 +54,8 @@
         <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
         <param-value>.xhtml</param-value>
     </context-param>
+<!--    <context-param>
+        <param-name>javax.faces.CONFIG_FILES</param-name>
+        <param-value>/WEB-INF/faces-config.xml</param-value>
+    </context-param>-->
 </web-app>

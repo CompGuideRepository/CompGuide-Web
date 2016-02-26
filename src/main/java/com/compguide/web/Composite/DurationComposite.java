@@ -23,7 +23,7 @@ import javax.inject.Named;
 //@LocalBean
 @Named
 @SessionScoped
-public class DurationComposite implements Serializable{
+public class DurationComposite implements Serializable {
 
     private Duration duration;
     private TemporalUnit temporalUnit;
@@ -70,7 +70,7 @@ public class DurationComposite implements Serializable{
     }
 
     public DurationComposite checkDuration(com.compguide.web.Execution.Entities.Duration duration) {
-        
+
         this.setDuration(
                 duration.getMinDurationValue(),
                 duration.getMaxDurationValue(),

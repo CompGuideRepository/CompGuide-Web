@@ -55,8 +55,7 @@
 
                     if ($.isArray(button)) {
                         attach(container, button);
-                    }
-                    else {
+                    } else {
                         btnDisplay = '';
                         btnClass = '';
 
@@ -134,8 +133,7 @@
                 // accessibility. So we want to restore focus once the draw has
                 // completed
                 activeEl = $(host).find(document.activeElement).data('dt-idx');
-            }
-            catch (e) {
+            } catch (e) {
             }
 
             attach(
@@ -192,12 +190,10 @@
 // Define as an AMD module if possible
     if (typeof define === 'function' && define.amd) {
         define(['jquery', 'datatables'], factory);
-    }
-    else if (typeof exports === 'object') {
+    } else if (typeof exports === 'object') {
         // Node/CommonJS
         factory(require('jquery'), require('datatables'));
-    }
-    else if (jQuery) {
+    } else if (jQuery) {
         // Otherwise simply initialise as normal, stopping multiple evaluation
         factory(jQuery, jQuery.fn.dataTable);
     }

@@ -121,20 +121,18 @@ public class OutcomeAdapter implements GuidelineInterface, Serializable {
                                     condition.getComparisonOperator(), condition.getParameterIdentifier().get(0),
                                     condition.getConditionParameter(), Boolean.FALSE,
                                     Boolean.FALSE, condition.getUnit()));
+                        } else if (condition.getParameterIdentifier().size() > 0) {
+                            getConditionSetComposite().addCondition(new Condition(
+                                    null, condition.getValue(),
+                                    condition.getComparisonOperator(), condition.getParameterIdentifier().get(0),
+                                    condition.getConditionParameter(), Boolean.FALSE,
+                                    Boolean.FALSE, condition.getUnit()));
                         } else {
-                            if (condition.getParameterIdentifier().size() > 0) {
-                                getConditionSetComposite().addCondition(new Condition(
-                                        null, condition.getValue(),
-                                        condition.getComparisonOperator(), condition.getParameterIdentifier().get(0),
-                                        condition.getConditionParameter(), Boolean.FALSE,
-                                        Boolean.FALSE, condition.getUnit()));
-                            } else {
-                                       getConditionSetComposite().addCondition(new Condition(
-                                        null, condition.getValue(),
-                                        condition.getComparisonOperator(), "",
-                                        condition.getConditionParameter(), Boolean.FALSE,
-                                        Boolean.FALSE, condition.getUnit()));
-                            }
+                            getConditionSetComposite().addCondition(new Condition(
+                                    null, condition.getValue(),
+                                    condition.getComparisonOperator(), "",
+                                    condition.getConditionParameter(), Boolean.FALSE,
+                                    Boolean.FALSE, condition.getUnit()));
                         }
                     }
                 }

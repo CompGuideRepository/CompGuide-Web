@@ -5,13 +5,11 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 
 /**
- * Created with IntelliJ IDEA.
- * User: tiago
- * Date: 20-08-2013
- * Time: 22:44
- * To change this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. User: tiago Date: 20-08-2013 Time: 22:44 To
+ * change this template use File | Settings | File Templates.
  */
 public class Parameter {
+
     private String id;
     private ArrayList<String> possibleValue;
     private ArrayList<String> variableName;
@@ -21,28 +19,23 @@ public class Parameter {
     private String unit;
     private String parameterDescription;
 
-    public Parameter(){
+    public Parameter() {
         possibleValue = new ArrayList<String>();
         variableName = new ArrayList<String>();
     }
 
-
-    public void initParameter(){
+    public void initParameter() {
         possibleValue = new ArrayList<String>();
         variableName = new ArrayList<String>();
         numeric = null;
-        parameterIdentifier=null;
+        parameterIdentifier = null;
         questionParameter = null;
         unit = null;
         parameterDescription = null;
         id = null;
     }
 
-
-
-
-
-    public Parameter getInstance(){
+    public Parameter getInstance() {
         Parameter p = new Parameter();
         p.setNumeric(this.getNumeric());
         p.setVariableName(new ArrayList<String>(this.getVariableName()));
@@ -54,21 +47,21 @@ public class Parameter {
         return p;
     }
 
-    public static Parameter fromJson(String json){
+    public static Parameter fromJson(String json) {
         Gson gson = new Gson();
         return gson.fromJson(json, Parameter.class);
     }
 
-    public String toJson(){
+    public String toJson() {
         Gson gson = new Gson();
         return gson.toJson(this);
     }
 
-    public void addPossibleValue(String possibleValue){
+    public void addPossibleValue(String possibleValue) {
         this.possibleValue.add(possibleValue);
     }
 
-    public void addVariableName(String variableName){
+    public void addVariableName(String variableName) {
         this.variableName.add(variableName);
     }
 
