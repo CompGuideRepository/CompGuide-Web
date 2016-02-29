@@ -4,7 +4,8 @@
        xmlns:h="http://xmlns.jcp.org/jsf/html"
        xmlns:b="http://bootsfaces.net/ui"
        xmlns:f="http://java.sun.com/jsf/core"
-       xmlns:ui="http://xmlns.jcp.org/jsf/facelets" >
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"         
+       xmlns:p="http://primefaces.org/ui">
     <ui:composition template="/pagetemplate.xhtml">
         <ui:define name="title"> 
             <h:outputText value="Contact" /> 
@@ -115,6 +116,14 @@
                                     </b:column>
                                 </b:row>
                             </b:panelGrid>
+                            <b:row>
+                                <b:column  col-sm="8">
+                                    <div style="transform:scale(0.87) !important;-webkit-transform:scale(0.87) !important;transform-origin:0 0 !important;-webkit-transform-origin:0 0 !important;">
+                                        <p:captcha class="captcha" label="Captcha" 
+                                                   theme="clean" required="true"/>
+                                    </div>
+                                </b:column>
+                            </b:row>
                             <b:commandButton ajax="true" id="buttoncontact" update="@form" value="Send Message" 
                                              class="btn-color-border-solid"
                                              actionListener="#{contactController.send}"/>

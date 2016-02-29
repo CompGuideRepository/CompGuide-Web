@@ -54,8 +54,13 @@
         <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
         <param-value>.xhtml</param-value>
     </context-param>
-<!--    <context-param>
-        <param-name>javax.faces.CONFIG_FILES</param-name>
-        <param-value>/WEB-INF/faces-config.xml</param-value>
-    </context-param>-->
+    <context-param>
+        <param-name>primefaces.PUBLIC_CAPTCHA_KEY</param-name>
+        <param-value>6LfCkBkTAAAAAHHF1ex2Mwm80mpCZH6Ym6bNMPFi</param-value>
+    </context-param>
+    <context-param>
+        <param-name>primefaces.PRIVATE_CAPTCHA_KEY</param-name>
+        <param-value>6LfCkBkTAAAAACLHGKiXwF8Zt9yli9NgJdHBCgDf</param-value>
+    </context-param>
+    
 </web-app>

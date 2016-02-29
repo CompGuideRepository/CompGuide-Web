@@ -157,10 +157,13 @@
                             </b:row>
 
                             <b:row>
-                                <!--    <b:column  col-sm="6" >
-                                            <p:captcha label="Captcha" />
-                                        </b:column>-->
-                                <b:column id="panelbetakey" col-sm="6">
+                                <b:column  col-sm="8">
+                                    <div style="transform:scale(0.87) !important;-webkit-transform:scale(0.87) !important;transform-origin:0 0 !important;-webkit-transform-origin:0 0 !important;">
+                                        <p:captcha class="captcha" label="Captcha" 
+                                                   theme="clean" required="true"/>
+                                    </div>
+                                </b:column>
+                                <b:column id="panelbetakey" col-sm="4">
                                     <b:message for="betakey" />
                                     <div class="form-group">
                                         <i class="fa fa-lock">

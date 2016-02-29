@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.compguide</groupId>
-    <artifactId>CompGuide-Web</artifactId>
+    <artifactId>compguideweb</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
 
-    <name>CompGuide-Web</name>
+    <name>compguideweb</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -21,6 +21,7 @@
             <version>6.0</version>
             <scope>provided</scope>
         </dependency>
+        <!-- Mojarra instead of MyFaces -->
         <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>javax.faces</artifactId>
@@ -130,16 +131,17 @@
             <artifactId>javax.ejb-api</artifactId>
             <version>3.2</version>
         </dependency>
+        <!-- CDI -->
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
             <version>2.0-EDR1</version>
         </dependency>       
-        <!-- -->
+        <!-- Eclipslink -->
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>eclipselink</artifactId>
-            <version>2.4.2</version>            
+            <version>2.6.2</version>            
         </dependency>
         <dependency>
             <groupId>org.apache.openejb</groupId>

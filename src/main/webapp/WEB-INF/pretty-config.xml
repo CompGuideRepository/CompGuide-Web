@@ -8,31 +8,31 @@
         <view-id value="/faces/index.xhtml" />
     </url-mapping>
     <url-mapping id="contact">
-        <pattern value="/Contact" />
+        <pattern value="/contact" />
         <view-id value="/faces/contact.xhtml" />
     </url-mapping>   
     <url-mapping id="register">
-        <pattern value="/Register" />
+        <pattern value="/register" />
         <view-id value="/faces/account/register.xhtml" />
     </url-mapping>
     <url-mapping id="login">
-        <pattern value="/Sign-in" />
+        <pattern value="/sign-in" />
         <view-id value="/faces/account/login.xhtml" />
     </url-mapping>
     <url-mapping id="schedule">
-        <pattern value="/Clinical-Tasks" />
+        <pattern value="/clinical-tasks" />
         <view-id value="/faces/task/tasks.xhtml" />
     </url-mapping>
     <url-mapping id="executeguideline">
-        <pattern value="/Guidelines/Execute" />
+        <pattern value="/guidelines/execute" />
         <view-id value="/faces/guideExec/execute.xhtml" />
     </url-mapping>
     <url-mapping id="guideline">
-        <pattern value="/Guidelines" />
+        <pattern value="/guidelines" />
         <view-id value="/faces/guideline/List.xhtml" />
     </url-mapping>
     <url-mapping id="patient" >
-        <pattern value="/Patients" />
+        <pattern value="/patients" />
         <view-id value="/faces/patient/List.xhtml" />
     </url-mapping>
     <url-mapping id="user" >
@@ -40,11 +40,11 @@
         <view-id value="/faces/user/List.xhtml" />
     </url-mapping>
     ~<url-mapping id="infouser" >
-        <pattern value="/My-Info" />
+        <pattern value="/my-info" />
         <view-id value="/faces/account/info.xhtml" />
     </url-mapping>
     <url-mapping id="editinfo" >
-        <pattern value="/Edit-Info" />
+        <pattern value="/edit-info" />
         <view-id value="/faces/account/editinfo.xhtml" />
     </url-mapping>
     <lifecycle>
