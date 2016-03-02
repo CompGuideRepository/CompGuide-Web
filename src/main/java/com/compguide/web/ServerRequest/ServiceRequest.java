@@ -21,7 +21,7 @@ import org.apache.http.message.BasicNameValuePair;
  */
 public class ServiceRequest {
 
-    private static String servicePath = "http://localhost:8080/CompGuide-Core";
+    private static String servicePath = "http://ec2-52-58-45-184.eu-central-1.compute.amazonaws.com/";
 
     public static String requestCreateGuideExec(Header header, Guideline guideline, User user, Patient patient, String description) {
         ArrayList<BasicNameValuePair> valuePairGuideexec = new ArrayList<BasicNameValuePair>();

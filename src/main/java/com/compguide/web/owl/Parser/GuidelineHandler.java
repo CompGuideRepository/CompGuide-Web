@@ -59,7 +59,7 @@ public class GuidelineHandler {
     public GuidelineHandler() {
 
         this.baseURL = "http://www.semanticweb.org/ontologies/2012/3/CompGuide.owl";
-        this.filename = "file:///c://CompGuide.owl";
+        this.filename = "/owl/CompGuide.owl";
         renderer = null;
         manager = null;
         ontology = null;
@@ -87,9 +87,9 @@ public class GuidelineHandler {
 
         //prepare ontology and reasoner
         this.manager = OWLManager.createOWLOntologyManager();
-        //OWLOntology ontology = manager.loadOntologyFromOntologyDocument(IRI.create(BASE_URL));
         try {
-            this.ontology = manager.loadOntologyFromOntologyDocument(IRI.create(filename));
+            String file = "file:///" + GuidelineHandler.class.getResource(filename).getFile();
+            this.ontology = manager.loadOntologyFromOntologyDocument(IRI.create(file));
         } catch (OWLOntologyCreationException e) {
             return false;
         }

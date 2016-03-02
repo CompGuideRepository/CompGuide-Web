@@ -55,7 +55,7 @@ public class HttpManager {
 
     public HttpManager() {
 //           this.URL = "http://localhost:8080/CGuide/";
-        this.URL = "http://localhost:8080/CompGuide-Core/";
+        this.URL = "http://ec2-52-58-45-184.eu-central-1.compute.amazonaws.com/";
         cookieLogin = null;
         cookieValidade = null;
         HttpCode = -1;
