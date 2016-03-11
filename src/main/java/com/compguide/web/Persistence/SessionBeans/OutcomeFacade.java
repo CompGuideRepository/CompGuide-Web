@@ -39,9 +39,7 @@ public class OutcomeFacade extends AbstractFacade<Outcome> {
             query.setParameter("scheduleTaskID", scheduleTaskID);
 
             return (Outcome) query.getSingleResult();
-        } catch (javax.ejb.EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        } catch (javax.persistence.NoResultException ex) {
+        } catch (javax.ejb.EJBException | javax.persistence.NoResultException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
         return null;

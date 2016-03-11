@@ -42,9 +42,7 @@ public class CyclePartDefinitionFacade extends AbstractFacade<CyclePartDefinitio
 
         try {
             cyclePartDefinition = (CyclePartDefinition) query.getSingleResult();
-        } catch (javax.ejb.EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        } catch (javax.persistence.NoResultException ex) {
+        } catch (javax.ejb.EJBException | javax.persistence.NoResultException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
         return cyclePartDefinition;
@@ -58,9 +56,7 @@ public class CyclePartDefinitionFacade extends AbstractFacade<CyclePartDefinitio
 
         try {
             cyclePartDefinition = (CyclePartDefinition) query.getSingleResult();
-        } catch (javax.ejb.EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        } catch (javax.persistence.NoResultException ex) {
+        } catch (javax.ejb.EJBException | javax.persistence.NoResultException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
         return cyclePartDefinition;

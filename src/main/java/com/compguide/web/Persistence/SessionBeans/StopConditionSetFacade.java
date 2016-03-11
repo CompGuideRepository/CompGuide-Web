@@ -39,9 +39,7 @@ public class StopConditionSetFacade extends AbstractFacade<StopConditionSet> {
             query.setParameter("identifier", identifier);
 
             return (StopConditionSet) query.getSingleResult();
-        } catch (javax.ejb.EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        } catch (javax.persistence.NoResultException ex) {
+        } catch (javax.ejb.EJBException | javax.persistence.NoResultException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
         return null;
@@ -53,9 +51,7 @@ public class StopConditionSetFacade extends AbstractFacade<StopConditionSet> {
             query.setParameter("periodicityID", periodicityID);
 
             return (StopConditionSet) query.getSingleResult();
-        } catch (javax.ejb.EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        } catch (javax.persistence.NoResultException ex) {
+        } catch (javax.ejb.EJBException | javax.persistence.NoResultException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
         return null;

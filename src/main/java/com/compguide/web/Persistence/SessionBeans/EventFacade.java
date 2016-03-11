@@ -43,9 +43,7 @@ public class EventFacade extends AbstractFacade<Event> {
             Query query = em.createNamedQuery("Event.findByTaskID", Event.class);
             query.setParameter("taskID", taskID);
             events = query.getResultList();
-        } catch (javax.ejb.EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        } catch (javax.persistence.NoResultException ex) {
+        } catch (javax.ejb.EJBException | javax.persistence.NoResultException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -53,15 +51,13 @@ public class EventFacade extends AbstractFacade<Event> {
     }
 
     public List<Event> findByScheduleTaskID(ScheduleTask scheduleTaskID) {
-        List<Event> events = new ArrayList<Event>();
+        List<Event> events = new ArrayList<>();
 
         try {
             Query query = em.createNamedQuery("Event.findByScheduleTaskID", Event.class);
             query.setParameter("scheduleTaskID", scheduleTaskID);
             events = query.getResultList();
-        } catch (javax.ejb.EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        } catch (javax.persistence.NoResultException ex) {
+        } catch (javax.ejb.EJBException | javax.persistence.NoResultException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
 

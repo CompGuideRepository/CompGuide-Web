@@ -264,7 +264,7 @@ public class TaskTimeLineController implements Serializable {
     }
 
     public void checkTask() {
-        List<TimelineEvent> timelineEvents = new ArrayList<TimelineEvent>();
+        List<TimelineEvent> timelineEvents = new ArrayList<>();
 
         for (TimelineEvent timelineEvent : timelineEvents) {
             if (Objects.equals(
@@ -536,7 +536,7 @@ public class TaskTimeLineController implements Serializable {
 
     public List<ScheduleTask> storeProcessedTask(GuideExec guideExec, ProcessedTask processedTask) {
         List<ScheduleTask> tasks = Utils.processedTaskToScheduleTaskList(guideExec, processedTask);
-        List<ScheduleTask> scheduleTasks = new ArrayList<ScheduleTask>();
+        List<ScheduleTask> scheduleTasks = new ArrayList<>();
 
         for (int i = 0; i < tasks.size(); i++) {
             ScheduleTask scheduleTask = new ScheduleTask(tasks.get(i).getTaskType(),

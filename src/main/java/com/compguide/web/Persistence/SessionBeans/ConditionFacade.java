@@ -37,28 +37,24 @@ public class ConditionFacade extends AbstractFacade<Condition> {
     }
 
     public List<Condition> findByConditionSetID(ConditionSet conditionSetID) {
-        List<Condition> conditions = new ArrayList<Condition>();
+        List<Condition> conditions = new ArrayList<>();
         try {
             Query query = em.createNamedQuery("Condition.findByConditionSetID", Condition.class);
             query.setParameter("conditionSetID", conditionSetID);
             conditions = query.getResultList();
-        } catch (javax.ejb.EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        } catch (javax.persistence.NoResultException ex) {
+        } catch (javax.ejb.EJBException | javax.persistence.NoResultException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
         return conditions;
     }
 
     public List<Condition> findByTemporalRestriction(TemporalRestriction temporalRestrictionID) {
-        List<Condition> conditions = new ArrayList<Condition>();
+        List<Condition> conditions = new ArrayList<>();
         try {
             Query query = em.createNamedQuery("Condition.findByTemporalRestrictionID", Condition.class);
             query.setParameter("temporalRestrictionID", temporalRestrictionID);
             conditions = query.getResultList();
-        } catch (javax.ejb.EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        } catch (javax.persistence.NoResultException ex) {
+        } catch (javax.ejb.EJBException | javax.persistence.NoResultException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
         return conditions;
@@ -74,9 +70,7 @@ public class ConditionFacade extends AbstractFacade<Condition> {
             query.setParameter("conditionParameter", condition.getConditionParameter());
 
             return (Condition) query.getSingleResult();
-        } catch (javax.ejb.EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        } catch (javax.persistence.NoResultException ex) {
+        } catch (javax.ejb.EJBException | javax.persistence.NoResultException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
         return null;
@@ -93,9 +87,7 @@ public class ConditionFacade extends AbstractFacade<Condition> {
             query.setParameter("temporalRestrictionID", temporalRestrictionID);
 
             return (Condition) query.getSingleResult();
-        } catch (javax.ejb.EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        } catch (javax.persistence.NoResultException ex) {
+        } catch (javax.ejb.EJBException | javax.persistence.NoResultException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
         return null;

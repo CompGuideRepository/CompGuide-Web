@@ -67,7 +67,7 @@ public class Utils {
         GuideexecBean guideexecBean = GuideexecManager.getInstance().getGuideexecBeanByID(guideExec.getIdguideexec().toString());
         TaskController taskController = gson.fromJson(guideexecBean.getNextTasks(), TaskController.class);
 
-        List<Task> tasks = new ArrayList<Task>();
+        List<Task> tasks = new ArrayList<>();
 
         for (ClinicalTask clinicalTask : processedTask.getTasks()) {
             Task task = new Task(new Date(), clinicalTask.getTaskType(),
@@ -86,7 +86,7 @@ public class Utils {
         GuideexecBean guideexecBean = GuideexecManager.getInstance().getGuideexecBeanByID(guideExec.getIdguideexec().toString());
         TaskController taskController = gson.fromJson(guideexecBean.getNextTasks(), TaskController.class);
 
-        List<ScheduleTask> tasks = new ArrayList<ScheduleTask>();
+        List<ScheduleTask> tasks = new ArrayList<>();
 
         for (ClinicalTask clinicalTask : processedTask.getTasks()) {
             ScheduleTask task = new ScheduleTask(clinicalTask.getTaskType(),

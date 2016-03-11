@@ -42,9 +42,7 @@ public class GuideExecFacade extends AbstractFacade<GuideExec> {
             query.setParameter("iduser", userID);
             query.setParameter("completed", completed);
             guideExecs = query.getResultList();
-        } catch (javax.ejb.EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        } catch (javax.persistence.NoResultException ex) {
+        } catch (javax.ejb.EJBException | javax.persistence.NoResultException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
 

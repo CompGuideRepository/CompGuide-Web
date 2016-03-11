@@ -42,9 +42,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -92,8 +90,8 @@ public class ScheduleTaskController implements Serializable {
     @Inject
     private OutcomeAdapter outcomeAdapter;
 
-    private List<ScheduleTask> items = new ArrayList<ScheduleTask>();
-    private List<Condition> conditions = new ArrayList<Condition>();
+    private List<ScheduleTask> items = new ArrayList<>();
+    private List<Condition> conditions = new ArrayList<>();
 
     private ScheduleTask selected;
     private Event selectedEvent;
@@ -139,7 +137,7 @@ public class ScheduleTaskController implements Serializable {
 
         List<Notification> notifications = getNotificationFacade().findAll();
 
-        List<DefaultScheduleEvent> eventsSchedule = new ArrayList<DefaultScheduleEvent>();
+        List<DefaultScheduleEvent> eventsSchedule = new ArrayList<>();
         //percorre a lista de tasks e cria o calendario
         for (ScheduleTask task : items) {
             if (task.getCompleted() == false) {
@@ -340,7 +338,7 @@ public class ScheduleTaskController implements Serializable {
 
     public List<ScheduleTask> getTasks() {
         if (items == null) {
-            items = new ArrayList<ScheduleTask>();
+            items = new ArrayList<>();
         }
         return items;
     }
@@ -402,7 +400,7 @@ public class ScheduleTaskController implements Serializable {
     }
 
     private static List<DefaultScheduleEvent> clone(List<DefaultScheduleEvent> listToClone) {
-        List<DefaultScheduleEvent> aux = new ArrayList<DefaultScheduleEvent>();
+        List<DefaultScheduleEvent> aux = new ArrayList<>();
         for (DefaultScheduleEvent event : listToClone) {
             DefaultScheduleEvent e = new DefaultScheduleEvent(
                     event.getTitle(), event.getStartDate(),
@@ -432,7 +430,7 @@ public class ScheduleTaskController implements Serializable {
     }
 
     private List<DefaultScheduleEvent> processGuidelineTemporalPattern(ScheduleTask task, TemporalElement temporalElement) {
-        List<DefaultScheduleEvent> eventList = new ArrayList<DefaultScheduleEvent>();
+        List<DefaultScheduleEvent> eventList = new ArrayList<>();
 
         if (temporalElement != null) {
             if (temporalElement.isDuration()) {
@@ -480,7 +478,7 @@ public class ScheduleTaskController implements Serializable {
             Date toEndDate,
             ScheduleTask task, Duration duration) {
 //  Notificar o utilizador quando se alcanÃ§ar os tempos mÃ­nimo e mÃ¡ximo de duraÃ§Ã£o 
-        List<DefaultScheduleEvent> eventList = new ArrayList<DefaultScheduleEvent>();
+        List<DefaultScheduleEvent> eventList = new ArrayList<>();
 
         Calendar date = Calendar.getInstance();
         if (fromStartDate == null) {
@@ -557,7 +555,7 @@ public class ScheduleTaskController implements Serializable {
     private List<DefaultScheduleEvent> processGuidelinePeriodicity(ScheduleTask task, Periodicity periodicity) {
 //  Notificar quantas vezes a tarefa deve repetir-se e quantas vezes foi repetida (quantas repetiÃ§Ãµes faltam). 
 
-        List<DefaultScheduleEvent> eventList = new ArrayList<DefaultScheduleEvent>();
+        List<DefaultScheduleEvent> eventList = new ArrayList<>();
 
         Calendar startDate = Calendar.getInstance();
         startDate.setTime(task.getStartDate());
@@ -679,7 +677,7 @@ public class ScheduleTaskController implements Serializable {
     }
 
     private List<DefaultScheduleEvent> processGuidelineCyclePart(Date fromStartDate, ScheduleTask task, Periodicity periodicity) {
-        List<DefaultScheduleEvent> events = new ArrayList<DefaultScheduleEvent>();
+        List<DefaultScheduleEvent> events = new ArrayList<>();
 
         Calendar startDate = Calendar.getInstance();
 
@@ -730,7 +728,7 @@ public class ScheduleTaskController implements Serializable {
     }
 
     private List<DefaultScheduleEvent> processGuidelineCyclePartPeriodicity(Date fromStartDate, Date toEndDate, ScheduleTask task, CyclePartPeriodicity cyclePartPeriodicity) {
-        List<DefaultScheduleEvent> eventList = new ArrayList<DefaultScheduleEvent>();
+        List<DefaultScheduleEvent> eventList = new ArrayList<>();
         Calendar startDate = Calendar.getInstance();
 
         if (fromStartDate == null) {
@@ -1001,7 +999,7 @@ public class ScheduleTaskController implements Serializable {
 
     public List<ScheduleTask> storeProcessedTask(GuideExec guideExec, ProcessedTask processedTask) {
         List<ScheduleTask> tasks = Utils.processedTaskToScheduleTaskList(guideExec, processedTask);
-        List<ScheduleTask> scheduleTasks = new ArrayList<ScheduleTask>();
+        List<ScheduleTask> scheduleTasks = new ArrayList<>();
 
         for (int i = 0; i < tasks.size(); i++) {
             selected = new ScheduleTask(tasks.get(i).getTaskType(),

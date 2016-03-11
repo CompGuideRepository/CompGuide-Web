@@ -30,6 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Condition.findAll", query = "SELECT c FROM Condition c"),
     @NamedQuery(name = "Condition.findByConditionID", query = "SELECT c FROM Condition c WHERE c.conditionID = :conditionID"),
+    @NamedQuery(name = "Condition.findByConditionSetID", query = "SELECT c FROM Condition c WHERE c.conditionSetID = :conditionSetID"),
     @NamedQuery(name = "Condition.findByNumericalValue", query = "SELECT c FROM Condition c WHERE c.numericalValue = :numericalValue"),
     @NamedQuery(name = "Condition.findByQualitativeValue", query = "SELECT c FROM Condition c WHERE c.qualitativeValue = :qualitativeValue"),
     @NamedQuery(name = "Condition.findByComparisonOperator", query = "SELECT c FROM Condition c WHERE c.comparisonOperator = :comparisonOperator"),

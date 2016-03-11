@@ -42,9 +42,7 @@ public class DurationFacade extends AbstractFacade<Duration> {
 
         try {
             duration = (Duration) query.getSingleResult();
-        } catch (javax.ejb.EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        } catch (javax.persistence.NoResultException ex) {
+        } catch (javax.ejb.EJBException | javax.persistence.NoResultException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
         return duration;
@@ -61,9 +59,7 @@ public class DurationFacade extends AbstractFacade<Duration> {
         System.out.println(query);
         try {
             duration = (Duration) query.getSingleResult();
-        } catch (javax.ejb.EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        } catch (javax.persistence.NoResultException ex) {
+        } catch (javax.ejb.EJBException | javax.persistence.NoResultException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
         return duration;

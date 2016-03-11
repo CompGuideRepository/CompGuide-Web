@@ -44,9 +44,7 @@ public class TemporalElementFacade extends AbstractFacade<TemporalElement> {
         query.setParameter("scheduleTaskID", scheduleTaskID);
         try {
             temporalElement = (TemporalElement) query.getSingleResult();
-        } catch (javax.ejb.EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        } catch (javax.persistence.NoResultException ex) {
+        } catch (javax.ejb.EJBException | javax.persistence.NoResultException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
         return temporalElement;
@@ -59,9 +57,7 @@ public class TemporalElementFacade extends AbstractFacade<TemporalElement> {
         query.setParameter("taskID", taskID);
         try {
             temporalElement = (TemporalElement) query.getSingleResult();
-        } catch (javax.ejb.EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        } catch (javax.persistence.NoResultException ex) {
+        } catch (javax.ejb.EJBException | javax.persistence.NoResultException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
         return temporalElement;
@@ -74,9 +70,7 @@ public class TemporalElementFacade extends AbstractFacade<TemporalElement> {
         query.setParameter("waitingTimeID", waitingTimeID);
         try {
             temporalElement = (TemporalElement) query.getSingleResult();
-        } catch (javax.ejb.EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        } catch (javax.persistence.NoResultException ex) {
+        } catch (javax.ejb.EJBException | javax.persistence.NoResultException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
         return temporalElement;
@@ -89,9 +83,7 @@ public class TemporalElementFacade extends AbstractFacade<TemporalElement> {
         query.setParameter("durationID", durationID);
         try {
             temporalElement = (TemporalElement) query.getSingleResult();
-        } catch (javax.ejb.EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        } catch (javax.persistence.NoResultException ex) {
+        } catch (javax.ejb.EJBException | javax.persistence.NoResultException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
         return temporalElement;
@@ -104,9 +96,7 @@ public class TemporalElementFacade extends AbstractFacade<TemporalElement> {
         query.setParameter("periodicityID", periodicityID);
         try {
             temporalElement = (TemporalElement) query.getSingleResult();
-        } catch (javax.ejb.EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        } catch (javax.persistence.NoResultException ex) {
+        } catch (javax.ejb.EJBException | javax.persistence.NoResultException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
         return temporalElement;
@@ -121,9 +111,7 @@ public class TemporalElementFacade extends AbstractFacade<TemporalElement> {
 
         try {
             temporalElement = (TemporalElement) query.getSingleResult();
-        } catch (javax.ejb.EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        } catch (javax.persistence.NoResultException ex) {
+        } catch (javax.ejb.EJBException | javax.persistence.NoResultException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
         return temporalElement;
@@ -138,9 +126,7 @@ public class TemporalElementFacade extends AbstractFacade<TemporalElement> {
 
         try {
             temporalElement = (TemporalElement) query.getSingleResult();
-        } catch (javax.ejb.EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        } catch (javax.persistence.NoResultException ex) {
+        } catch (javax.ejb.EJBException | javax.persistence.NoResultException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
         return temporalElement;

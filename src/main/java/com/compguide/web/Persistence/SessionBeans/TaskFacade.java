@@ -36,14 +36,12 @@ public class TaskFacade extends AbstractFacade<Task> {
     }
 
     public List<Task> findByGuideExec(GuideExec guideExecID) {
-        List<Task> tasks = new ArrayList<Task>();
+        List<Task> tasks = new ArrayList<>();
         try {
             Query query = em.createNamedQuery("Task.findByIdguideexec", Task.class);
             query.setParameter("idguideexec", guideExecID);
             tasks = query.getResultList();
-        } catch (javax.ejb.EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        } catch (javax.persistence.NoResultException ex) {
+        } catch (javax.ejb.EJBException | javax.persistence.NoResultException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
 

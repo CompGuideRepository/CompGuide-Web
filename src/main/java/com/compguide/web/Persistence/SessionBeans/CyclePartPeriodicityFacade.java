@@ -44,9 +44,7 @@ public class CyclePartPeriodicityFacade extends AbstractFacade<CyclePartPeriodic
         query.setParameter("durationID", durationID);
         try {
             cyclePartPeriodicity = query.getResultList();
-        } catch (javax.ejb.EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        } catch (javax.persistence.NoResultException ex) {
+        } catch (javax.ejb.EJBException | javax.persistence.NoResultException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
         return cyclePartPeriodicity;
@@ -59,9 +57,7 @@ public class CyclePartPeriodicityFacade extends AbstractFacade<CyclePartPeriodic
         query.setParameter("repetitionValue", repetitionValue);
         try {
             cyclePartPeriodicity = query.getResultList();
-        } catch (javax.ejb.EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        } catch (javax.persistence.NoResultException ex) {
+        } catch (javax.ejb.EJBException | javax.persistence.NoResultException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -75,9 +71,7 @@ public class CyclePartPeriodicityFacade extends AbstractFacade<CyclePartPeriodic
         query.setParameter("taskID", taskID);
         try {
             cyclePartPeriodicity = (CyclePartPeriodicity) query.getSingleResult();
-        } catch (javax.ejb.EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        } catch (javax.persistence.NoResultException ex) {
+        } catch (javax.ejb.EJBException | javax.persistence.NoResultException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
         return cyclePartPeriodicity;
@@ -93,9 +87,7 @@ public class CyclePartPeriodicityFacade extends AbstractFacade<CyclePartPeriodic
 
         try {
             cyclePartPeriodicity = (CyclePartPeriodicity) query.getSingleResult();
-        } catch (javax.ejb.EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        } catch (javax.persistence.NoResultException ex) {
+        } catch (javax.ejb.EJBException | javax.persistence.NoResultException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
         return cyclePartPeriodicity;
@@ -111,9 +103,7 @@ public class CyclePartPeriodicityFacade extends AbstractFacade<CyclePartPeriodic
 
         try {
             cyclePartPeriodicity = (CyclePartPeriodicity) query.getSingleResult();
-        } catch (javax.ejb.EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        } catch (javax.persistence.NoResultException ex) {
+        } catch (javax.ejb.EJBException | javax.persistence.NoResultException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
         return cyclePartPeriodicity;

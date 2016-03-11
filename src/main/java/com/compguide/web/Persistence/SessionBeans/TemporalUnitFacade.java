@@ -39,9 +39,7 @@ public class TemporalUnitFacade extends AbstractFacade<TemporalUnit> {
             query.setParameter("value", value);
 
             temporalUnit = (TemporalUnit) query.getSingleResult();
-        } catch (javax.ejb.EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        } catch (javax.persistence.NoResultException ex) {
+        } catch (javax.ejb.EJBException | javax.persistence.NoResultException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
 
