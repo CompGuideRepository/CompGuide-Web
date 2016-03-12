@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var webServicePath = "http://localhost:8080/CompGuide/webresources/";
+var webServicePath = "http://compguide.net/webresources/";
 var messages;
 var index = 11;
 var numberNotificationsRequested = 0;

@@ -298,7 +298,7 @@ public class UserController implements Serializable {
 
             if (!result.isEmpty()) {
                 FacesContext.getCurrentInstance().getExternalContext().redirect(
-                        FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Clinical-Tasks");
+                        FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/clinical-tasks");
             } else {
                 cookieHelper.addCookie("keepLoggedIn", "", 0);
                 cookieHelper.addCookie("username", "", 0);
