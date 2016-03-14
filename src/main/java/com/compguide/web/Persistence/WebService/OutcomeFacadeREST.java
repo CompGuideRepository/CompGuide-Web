@@ -93,7 +93,7 @@ public class OutcomeFacadeREST extends AbstractFacade<Outcome> {
                 return true;
             }
         }
-        return null;
+        return false;
     }
 
     @Override
