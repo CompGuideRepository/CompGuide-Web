@@ -74,6 +74,8 @@
                         </b:column>
                         <p/>
                         <p/>
+                        <p/>
+                        <p/>
                         <b:column col-sm="12">
                             <div class="tag-text">
                                 <h4>Clinical Tasks</h4>
@@ -93,8 +95,16 @@
                                 </p>
                             </div>
                         </b:column>
+                        <b:column col-sm="12">
+                            <b:column span="9" />
+                            <b:column span="3">
+                                <b:commandButton iconAwesome="calendar-plus-o" 
+                                                 class="btn btn-small btn-color-shadow"
+                                                 value="Export to Google Calendar"
+                                                 action="#{googleCalendarController.exportCalendar}" />
+                            </b:column>
+                        </b:column>
                     </b:row>
-
                 </h:form>
 
             </b:row>
