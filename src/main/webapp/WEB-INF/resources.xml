@@ -2,8 +2,8 @@
 <resources>
     <Resource id="jdbc/compguidedb" type="javax.sql.DataSource">#Tue Feb 23 21:38:25 GMT 2016
         jdbcDriver=com.mysql.jdbc.Driver
-        password=1Oa1eFEfUUuUX5ZXTcpjbL36WIxOeZ9mgkajRHHYO
-        userName=s3dMjbpxP0RunOj7
+        password=YEMpGc5eDM7ApxQIKiHxMyBJrTanVeglpKUzQ2TPK
+        userName=PAm6IBWxt12k2dnx
         jdbcUrl=jdbc\:mysql\://boxdb-antoniosilva9116-prod-compguideweb.cm8ujxf8qvtj.eu-central-1.rds.amazonaws.com\:3306/compguideweb
         
     </Resource>
