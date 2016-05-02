@@ -229,3 +229,5 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+/src/main/webapp/WEB-INF/resources.xml
+/src/main/webapp/task/tasks.xhtml
