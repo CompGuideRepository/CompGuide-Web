@@ -22,12 +22,12 @@ function pushNotifications() {
         cache: false,
         success: function (data) {
             for (var i = 0; i < data.length; i++) {
-                if (data[i].message === null) {
+                if (data[i].message === null || data[i].message === undefined) {
                     PF('pushNotifications').renderMessage({"summary": "Task to Check",
                         "detail": "You must check the Task " +
                                 data[i].eventID.scheduleTaskID.taskIdentifier +
-                                " which started at " + new Date(data[i].eventID.startDate).toDateString() +
-                                " at " + new Date(data[i].eventID.startDate).toTimeString(),
+                                " which started at " + new Date((data[i].eventID.startDate).split("+")[0]).toDateString() +
+                                " at " + new Date((data[i].eventID.startDate).split("+")[0]).toTimeString(),
                         "severity": "info"});
                 }
             }
@@ -221,7 +221,7 @@ $(document).ready(function ()
 
         if ($('#notifications').scrollTop() + $('#notifications').height() >= (totalHeight) &&
                 currentNumberNotifications < totalNotifications &&
-                loading == false) {
+                loading === false) {
             var from = numberNotificationsRequested;
             var to = numberNotificationsRequested + index;
             loading = true;
@@ -267,7 +267,7 @@ $(document).ready(function ()
                 to = totalNotifications;
             }
 
-            if (a == 0)
+            if (a === 0)
             {
                 $.ajax({
                     type: "GET",
@@ -296,7 +296,7 @@ $(document).ready(function ()
     });
     $(".noti_stbody").mouseup(function ()
     {
-        return false
+        return false;
     });
     var from = 0;
     var to = index;
@@ -321,7 +321,7 @@ function deleteNotification(obj)
     jConfirm("Sure you want to check the task?", '',
             function (r)
             {
-                if (r == true)
+                if (r === true)
                 {
                     $.ajax({
                         type: "DELETE",
@@ -347,7 +347,7 @@ function popupNotification(obj)
     jConfirm("Sure you want to check the task?", '',
             function (r)
             {
-                if (r == true)
+                if (r === true)
                 {
                     $.ajax({
                         type: "DELETE",
@@ -398,7 +398,7 @@ function htmlNotificationContainer(json)
     var notificationContainer = '';
     numberNotificationsRequested += json.length;
     for (var i = 0; i < json.length; i++) {
-        if (json[i].message === null && json[i].eventID.checked === false) {
+        if ((json[i].message === null || json[i].message === undefined) && json[i].eventID.checked === false) {
             messages[i][0] = json[i].notificationID;
             messages[i][1] = json[i].viewed;
             messages[i][2] = json[i].eventID.eventID;
@@ -406,7 +406,7 @@ function htmlNotificationContainer(json)
             currentNumberNotifications++;
             var onclick = (json[i].eventID.canCheck === true) ? false : true;
             var text = '';
-            if (onclick == false) {
+            if (onclick === false) {
                 text = 'onclick="popupNotification(' + json[i].notificationID + ');"';
             } else {
                 text = 'style="display:none"';
@@ -425,7 +425,7 @@ function htmlNotificationContainer(json)
                     '<div class="noti_sttext">' +
                     '<b>' + json[i].eventID.scheduleTaskID.taskIdentifier + '</b>' + ' must be finished' +
                     '<div class="noti_sttime">' +
-                    '<span class="timeago" title=' + new Date(json[i].eventID.endDate).toISOString() + '> </span>' +
+                    '<span class="timeago" title=' + new Date((json[i].eventID.endDate).split("+")[0]).toISOString() + '> </span>' +
                     '</div>' +
                     '</div>' +
                     '</div>' +
