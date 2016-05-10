@@ -38,7 +38,7 @@ public class GoogleCalendarController implements Serializable {
             // Build a new authorized API client service.
             // Note: Do not confuse this class with the
             //   com.google.api.services.calendar.model.Calendar class.
-            com.google.api.services.calendar.Calendar service
+            service
                     = getCalendarService();
 
             user = (User) FacesContext.getCurrentInstance().
