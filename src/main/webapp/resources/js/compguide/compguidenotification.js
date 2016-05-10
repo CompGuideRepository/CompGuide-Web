@@ -27,7 +27,7 @@ function pushNotifications() {
                         "detail": "You must check the Task " +
                                 data[i].eventID.scheduleTaskID.taskIdentifier +
                                 " which started at " + new Date((data[i].eventID.startDate).split("+")[0]).toDateString() +
-                                " at " + new Date((data[i].eventID.startDate).split("+")[0]).toTimeString(),
+                                " at " + new Date(new Number((data[i].eventID.startDate).split("+")[0])).toTimeString(),
                         "severity": "info"});
                 }
             }
@@ -425,7 +425,7 @@ function htmlNotificationContainer(json)
                     '<div class="noti_sttext">' +
                     '<b>' + json[i].eventID.scheduleTaskID.taskIdentifier + '</b>' + ' must be finished' +
                     '<div class="noti_sttime">' +
-                    '<span class="timeago" title=' + new Date((json[i].eventID.endDate).split("+")[0]).toISOString() + '> </span>' +
+                    '<span class="timeago" title=' + new Date(new Number((json[i].eventID.endDate).split("+")[0])).toISOString() + '> </span>' +
                     '</div>' +
                     '</div>' +
                     '</div>' +
