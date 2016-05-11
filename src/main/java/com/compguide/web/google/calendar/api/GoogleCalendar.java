@@ -5,6 +5,7 @@
  */
 package com.compguide.web.google.calendar.api;
 
+import com.google.api.client.auth.oauth2.AuthorizationCodeRequestUrl;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
@@ -21,6 +22,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -40,6 +42,7 @@ public class GoogleCalendar {
     private static final java.io.File DATA_STORE_DIR = new java.io.File(
             System.getProperty("user.home"), ".credentials/client_secret.json");
 
+    private static String RedirectURI = "http://localhost:8080/CompGuide/clinical-tasks";
     /**
      * Global instance of the {@link FileDataStoreFactory}.
      */
@@ -93,8 +96,15 @@ public class GoogleCalendar {
                 = new GoogleAuthorizationCodeFlow.Builder(
                         HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)
                 .setDataStoreFactory(DATA_STORE_FACTORY)
-                .setAccessType("offline")
+                .setAccessType("online")
                 .build();
+
+        AuthorizationCodeRequestUrl authorizationUrl = flow.newAuthorizationUrl().
+                setRedirectUri(RedirectURI);
+
+        FacesContext.getCurrentInstance().getExternalContext().redirect(
+                authorizationUrl.build()
+        );
         Credential credential = new AuthorizationCodeInstalledApp(
                 flow, new LocalServerReceiver()).authorize("user");
         System.out.println(
