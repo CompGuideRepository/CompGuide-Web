@@ -40,6 +40,7 @@
                 <f:event type="preRenderView" listener="#{userController.sessionValidate}" />
                 <f:event type="preRenderView" listener="#{scheduleTaskController.refresh}" />
                 <f:event type="preRenderView" listener="#{taskTimeLineController.refresh}" />
+                <f:event type="preRenderView" listener="#{googleCalendarController.fetchCode}" />
             </f:metadata>
         </ui:define>
         <ui:define name="content">

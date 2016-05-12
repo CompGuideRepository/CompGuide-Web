@@ -47,7 +47,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByHomephone", query = "SELECT u FROM User u WHERE u.homephone = :homephone"),
     @NamedQuery(name = "User.findByPhoto", query = "SELECT u FROM User u WHERE u.photo = :photo"),
     @NamedQuery(name = "User.findByType", query = "SELECT u FROM User u WHERE u.type = :type"),
-    @NamedQuery(name = "User.findByActivationkey", query = "SELECT u FROM User u WHERE u.activationkey = :activationkey"),
+    @NamedQuery(name = "User.findByGoogleCalendarToken", query = "SELECT u FROM User u WHERE u.googleCalendarToken = :googleCalendarToken"),
     @NamedQuery(name = "User.findByReg", query = "SELECT u FROM User u WHERE u.reg = :reg"),
     @NamedQuery(name = "User.findByActive", query = "SELECT u FROM User u WHERE u.active = :active")})
 public class User implements Serializable {
@@ -95,9 +95,6 @@ public class User implements Serializable {
     @Size(max = 45)
     @Column(name = "type")
     private String type;
-    @Size(max = 45)
-    @Column(name = "activationkey")
-    private String activationkey;
     @Column(name = "reg")
     @Temporal(TemporalType.TIMESTAMP)
     private Date reg;
@@ -107,6 +104,9 @@ public class User implements Serializable {
     private List<GuideExec> guideExecList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "utilizadorId")
     private List<Autentication> autenticationList;
+    @Size(max = 255)
+    @Column(name = "GoogleCalendarToken")
+    private String googleCalendarToken;
 
     public User() {
     }
@@ -211,14 +211,6 @@ public class User implements Serializable {
         this.type = type;
     }
 
-    public String getActivationkey() {
-        return activationkey;
-    }
-
-    public void setActivationkey(String activationkey) {
-        this.activationkey = activationkey;
-    }
-
     public Date getReg() {
         return reg;
     }
@@ -233,6 +225,13 @@ public class User implements Serializable {
 
     public void setActive(Short active) {
         this.active = active;
+    }
+
+    public boolean hasGoogleCalendarToken() {
+        if (googleCalendarToken == null) {
+            return false;
+        }
+        return true;
     }
 
     @XmlTransient
@@ -251,6 +250,14 @@ public class User implements Serializable {
 
     public void setAutenticationList(List<Autentication> autenticationList) {
         this.autenticationList = autenticationList;
+    }
+
+    public String getGoogleCalendarToken() {
+        return googleCalendarToken;
+    }
+
+    public void setGoogleCalendarToken(String googleCalendarToken) {
+        this.googleCalendarToken = googleCalendarToken;
     }
 
     @Override
