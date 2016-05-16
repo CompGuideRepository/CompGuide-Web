@@ -228,7 +228,7 @@ public class User implements Serializable {
     }
 
     public boolean hasGoogleCalendarToken() {
-        if (googleCalendarToken == null) {
+        if (googleCalendarToken == null || googleCalendarToken.isEmpty()) {
             return false;
         }
         return true;

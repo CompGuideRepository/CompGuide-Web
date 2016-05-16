@@ -8,6 +8,7 @@ package com.compguide.web.google.calendar.controllers;
 import com.compguide.web.Persistence.Entities.User;
 import com.compguide.web.Persistence.SessionBeans.UserFacade;
 import static com.compguide.web.google.calendar.api.GoogleCalendar.getCalendarService;
+import static com.compguide.web.google.calendar.api.GoogleCalendar.loadCredentialFromAccessToken;
 import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.Events;
@@ -54,27 +55,6 @@ public class GoogleCalendarController implements Serializable {
             service
                     = getCalendarService(user);
 
-            // List the next 10 events from the primary calendar.
-            DateTime now = new DateTime(System.currentTimeMillis());
-            Events events = service.events().list("primary")
-                    .setMaxResults(10)
-                    .setTimeMin(now)
-                    .setOrderBy("startTime")
-                    .setSingleEvents(true)
-                    .execute();
-            List<Event> items = events.getItems();
-            if (items.size() == 0) {
-                System.out.println("No upcoming events found.");
-            } else {
-                System.out.println("Upcoming events");
-                for (Event event : items) {
-                    DateTime start = event.getStart().getDateTime();
-                    if (start == null) {
-                        start = event.getStart().getDate();
-                    }
-                    System.out.printf("%s (%s)\n", event.getSummary(), start);
-                }
-            }
         } catch (IOException ex) {
             Logger.getLogger(GoogleCalendarController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -84,18 +64,52 @@ public class GoogleCalendarController implements Serializable {
         String code = ((Map<String, String>) FacesContext.getCurrentInstance().getExternalContext()
                 .getRequestParameterMap()).get("code");
 
-        if (code != null) {
+        if (code != null && hasCode == false) {
             hasCode = true;
 
-            user.setGoogleCalendarToken(code);
-            getUserFacade().edit(user);
-
             try {
+                FacesContext.getCurrentInstance().getExternalContext().
+                        getSessionMap().put("code", code);
+
                 service
                         = getCalendarService(user);
+
+                user = (User) FacesContext.getCurrentInstance().
+                        getExternalContext().getSessionMap().get("userPersistence");
+
+                user.setGoogleCalendarToken(loadCredentialFromAccessToken(user).getAccessToken());
+                getUserFacade().edit(user);
+
             } catch (IOException ex) {
                 Logger.getLogger(GoogleCalendarController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    public void exportEventsToCalendar() throws IOException {
+
+        // List the next 10 events from the primary calendar.
+        DateTime now = new DateTime(System.currentTimeMillis());
+        Events events = service.events().list("primary")
+                .setMaxResults(10)
+                .setTimeMin(now)
+                .setOrderBy("startTime")
+                .setSingleEvents(true)
+                .execute();
+        List<Event> items = events.getItems();
+        if (items.size() == 0) {
+            System.out.println("No upcoming events found.");
+        } else {
+            System.out.println("Upcoming events");
+            for (Event event : items) {
+                DateTime start = event.getStart().getDateTime();
+                if (start == null) {
+                    start = event.getStart().getDate();
+                }
+                System.out.printf("%s (%s)\n", event.getSummary(), start);
+            }
+        }
+        
+
     }
 }

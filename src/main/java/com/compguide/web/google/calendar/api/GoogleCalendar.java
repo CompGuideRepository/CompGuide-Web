@@ -23,6 +23,7 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
+import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.CalendarScopes;
 import java.io.IOException;
 import java.io.InputStream;
@@ -93,7 +94,7 @@ public class GoogleCalendar {
      * @return an GoogleAuthorizationCodeFlow object.
      * @throws IOException
      */
-    public static GoogleAuthorizationCodeFlow authorizationCodeFlow() throws IOException {
+    public static GoogleAuthorizationCodeFlow authorizationCodeFlow(String accessType) throws IOException {
         // Load client secrets.
         InputStream in
                 = GoogleCalendar.class.getResourceAsStream("/client_id.json");
@@ -105,7 +106,7 @@ public class GoogleCalendar {
                 = new GoogleAuthorizationCodeFlow.Builder(
                         HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)
                 .setDataStoreFactory(DATA_STORE_FACTORY)
-                .setAccessType("online")
+                .setAccessType(accessType)
                 .build();
 
         return flow;
@@ -121,7 +122,7 @@ public class GoogleCalendar {
 
         // Build flow and trigger user authorization request.
         GoogleAuthorizationCodeFlow flow
-                = authorizationCodeFlow();
+                = authorizationCodeFlow("online");
 
         AuthorizationCodeRequestUrl authorizationUrl = flow.newAuthorizationUrl().
                 setRedirectUri(RedirectURI);
@@ -145,7 +146,7 @@ public class GoogleCalendar {
 
         // Build flow and trigger user authorization request.
         GoogleAuthorizationCodeFlow flow
-                = authorizationCodeFlow();
+                = authorizationCodeFlow("online");
 
         AuthorizationCodeRequestUrl authorizationUrl = flow.newAuthorizationUrl().
                 setRedirectUri(RedirectURI);
@@ -158,16 +159,27 @@ public class GoogleCalendar {
      *
      * @throws IOException
      */
-    static void requestAccessToken(String code) throws IOException {
+    static Credential requestAccessToken(String code, User user) throws IOException {
+
+        Credential credential = null;
 
         // Build flow and trigger user authorization request.
         GoogleAuthorizationCodeFlow flow
-                = authorizationCodeFlow();
+                = authorizationCodeFlow("online");
+
+        AuthorizationCodeTokenRequest tokenRequest = flow.newTokenRequest(code);
+        tokenRequest.setRedirectUri(RedirectURI);
 
         try {
-            TokenResponse response
-                    = flow.newTokenRequest(code).execute();
-            System.out.println("Access token: " + response.getAccessToken());
+//            TokenResponse response
+//                    = flow.newTokenRequest(code).execute();
+            TokenResponse tokenResponse = tokenRequest.execute();
+
+            System.out.println("Access token: " + tokenResponse.getAccessToken());
+
+            //Now, with the token and user id, we have credentials
+            credential = flow.createAndStoreCredential(tokenResponse, user.getIduser().toString());
+
         } catch (TokenResponseException e) {
             if (e.getDetails() != null) {
                 System.err.println("Error: " + e.getDetails().getError());
@@ -181,6 +193,8 @@ public class GoogleCalendar {
                 System.err.println(e.getMessage());
             }
         }
+
+        return credential;
     }
 
     /**
@@ -189,19 +203,48 @@ public class GoogleCalendar {
      * @return an authorized Calendar client service
      * @throws IOException
      */
-    public static com.google.api.services.calendar.Calendar
+    public static Calendar
             getCalendarService(User user) throws IOException {
-        if (!user.hasGoogleCalendarToken()) {
+        String code = (String) FacesContext.getCurrentInstance().
+                getExternalContext().getSessionMap().get("code");
+
+        Credential credential = null;
+
+        if (code == null || code.isEmpty()) {
             String redirect = authorizationRequest();
 
             FacesContext.getCurrentInstance().
                     getExternalContext().redirect(redirect);
+        } else if (user.hasGoogleCalendarToken()) {
+            credential = loadCredentialFromAccessToken(user);
+        } else {
+            credential = requestAccessToken(code, user);
         }
 
         return new com.google.api.services.calendar.Calendar.Builder(
                 HTTP_TRANSPORT, JSON_FACTORY, credential)
                 .setApplicationName(APPLICATION_NAME)
                 .build();
+    }
+
+    /**
+     * Build and return an Credential.
+     *
+     * @return an Credential
+     * @throws IOException
+     */
+    public static Credential loadCredentialFromAccessToken(User user) throws IOException {
+
+        Credential credential = null;
+
+        // Build flow and trigger user authorization request.
+        GoogleAuthorizationCodeFlow flow
+                = authorizationCodeFlow("online");
+
+        //Now, with the token and user id, we have credentials
+        credential = flow.loadCredential(user.getIduser().toString());
+
+        return credential;
     }
 
 }
