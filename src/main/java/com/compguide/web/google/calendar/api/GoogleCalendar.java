@@ -6,6 +6,7 @@
 package com.compguide.web.google.calendar.api;
 
 import com.compguide.web.Persistence.Entities.User;
+import com.compguide.web.google.calendar.controllers.GoogleCalendarController;
 import com.google.api.client.auth.oauth2.AuthorizationCodeRequestUrl;
 import com.google.api.client.auth.oauth2.AuthorizationCodeTokenRequest;
 import com.google.api.client.auth.oauth2.Credential;
@@ -15,6 +16,7 @@ import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInsta
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
+import com.google.api.client.googleapis.auth.oauth2.GoogleRefreshTokenRequest;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.BasicAuthentication;
 import com.google.api.client.http.GenericUrl;
@@ -30,6 +32,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static javafx.scene.input.KeyCode.F;
 import javax.faces.context.FacesContext;
 
@@ -182,15 +186,17 @@ public class GoogleCalendar {
 
         } catch (TokenResponseException e) {
             if (e.getDetails() != null) {
-                System.err.println("Error: " + e.getDetails().getError());
+                Logger.getLogger(GoogleCalendarController.class.getName()).log(Level.SEVERE, e.getDetails().getError(), e);
+
                 if (e.getDetails().getErrorDescription() != null) {
-                    System.err.println(e.getDetails().getErrorDescription());
+                    Logger.getLogger(GoogleCalendarController.class.getName()).log(Level.SEVERE, e.getDetails().getErrorDescription(), e);
                 }
                 if (e.getDetails().getErrorUri() != null) {
-                    System.err.println(e.getDetails().getErrorUri());
+                    Logger.getLogger(GoogleCalendarController.class.getName()).log(Level.SEVERE, e.getDetails().getErrorUri(), e);
                 }
             } else {
-                System.err.println(e.getMessage());
+                Logger.getLogger(GoogleCalendarController.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+
             }
         }
 
@@ -210,7 +216,7 @@ public class GoogleCalendar {
 
         Credential credential = null;
 
-        if (code == null || code.isEmpty()) {
+        if ((code == null || code.isEmpty()) && !user.hasGoogleCalendarToken()) {
             String redirect = authorizationRequest();
 
             FacesContext.getCurrentInstance().
@@ -244,7 +250,34 @@ public class GoogleCalendar {
         //Now, with the token and user id, we have credentials
         credential = flow.loadCredential(user.getIduser().toString());
 
+        if (credential.getExpiresInSeconds() < 0) {
+            refreshToken(user, credential);
+        }
         return credential;
     }
 
+    public static Credential refreshToken(User user, Credential oldCredential) throws IOException {
+
+        InputStream in
+                = GoogleCalendar.class.getResourceAsStream("/client_id.json");
+        GoogleClientSecrets clientSecrets
+                = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
+
+        TokenResponse response
+                = new GoogleRefreshTokenRequest(
+                        HTTP_TRANSPORT, JSON_FACTORY,
+                        oldCredential.getRefreshToken(), clientSecrets.getDetails().getClientId(),
+                        clientSecrets.getDetails().getClientSecret())
+                .execute();
+
+        // Build flow and trigger user authorization request.
+        GoogleAuthorizationCodeFlow flow
+                = authorizationCodeFlow("online");
+
+        //Now, with the token and user id, we have credentials
+        Credential credential = flow.createAndStoreCredential(response, user.getIduser().toString());
+
+        return credential;
+
+    }
 }
