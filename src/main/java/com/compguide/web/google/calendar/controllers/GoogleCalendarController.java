@@ -88,7 +88,9 @@ public class GoogleCalendarController implements Serializable {
                 getUserFacade().edit(user);
             }
 
-            exportEventsToCalendar();
+            if (accessToken != null && !accessToken.isEmpty()) {
+                exportEventsToCalendar();
+            }
 
         } catch (IOException ex) {
             Logger.getLogger(GoogleCalendarController.class.getName()).log(Level.SEVERE, null, ex);

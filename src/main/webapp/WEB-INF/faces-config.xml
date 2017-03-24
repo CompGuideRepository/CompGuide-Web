@@ -86,6 +86,36 @@
                 <from-action>login</from-action>
                 <to-view-id>/account/login.xhtml</to-view-id>
             </navigation-case>
+            <navigation-case>
+                <from-action>register</from-action>
+                <to-view-id>/account/register.xhtml</to-view-id>
+            </navigation-case>
+        </navigation-rule>
+        <!-- Register -->
+        <navigation-rule>
+            <from-view-id>/account/register.xhtml</from-view-id>
+            <navigation-case>
+                <from-outcome>schedule</from-outcome>
+                <from-action>#{userController.createUser}</from-action>
+                <to-view-id>/task/tasks.xhtml</to-view-id>
+                <redirect />
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>schedule</from-outcome>
+                <to-view-id>/task/tasks.xhtml</to-view-id>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>home</from-outcome>
+                <to-view-id>/index.xhtml</to-view-id>
+            </navigation-case>
+            <navigation-case>
+                <from-action>login</from-action>
+                <to-view-id>/account/login.xhtml</to-view-id>
+            </navigation-case>
+            <navigation-case>
+                <from-action>register</from-action>
+                <to-view-id>/account/register.xhtml</to-view-id>
+            </navigation-case>
         </navigation-rule>
         <!-- SCHEDULE -->
         <navigation-rule>

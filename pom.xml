@@ -51,7 +51,7 @@
         <dependency>
             <groupId>net.bootsfaces</groupId>
             <artifactId>bootsfaces</artifactId>
-            <version>0.8.2</version>
+            <version>0.9.1</version>
             <scope>compile</scope>
         </dependency>
         <!-- Primefaces -->

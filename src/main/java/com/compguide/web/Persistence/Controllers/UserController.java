@@ -134,6 +134,28 @@ public class UserController implements Serializable {
         return selected;
     }
 
+    public String createUser() {
+
+        selected.setUsername(selected.getName().toLowerCase() + selected.getLastname().toLowerCase());
+
+        create();
+
+        cookieHelper.addCookie("keepLoggedIn", "", 0);
+        cookieHelper.addCookie("username", "", 0);
+        cookieHelper.addCookie("password", "", 0);
+        cookieHelper.addCookie("firstLogIn", "true", 999999999);
+
+        firstLogIn = true;
+
+        String outcome = requestSignIn();
+
+        if (outcome.isEmpty()) {
+            JsfUtil.addErrorMessage(ResourceBundle.getBundle("/resources/Bundle").getString("IncorrectCredentials"));
+        }
+
+        return outcome;
+    }
+
     public void create() {
         selected.setPassword(PasswordService.getInstance().encrypt(password));
         persist(PersistAction.CREATE, ResourceBundle.getBundle("resources/Bundle").getString("UserCreated"));
@@ -249,7 +271,9 @@ public class UserController implements Serializable {
                     getUser(user, header, selected.getUsername());
             System.out.println("==================================================================");
 
-            selected = getFacade().find(Integer.parseInt(user.getIduser()));
+            if (selected.getIduser() == null && user != null) {
+                selected = getFacade().find(Integer.parseInt(user.getIduser()));
+            }
 
             FacesContext.getCurrentInstance().
                     getExternalContext().getSessionMap().put("user", user);
@@ -259,6 +283,8 @@ public class UserController implements Serializable {
                     getExternalContext().getSessionMap().put("refreshModel", false);
             FacesContext.getCurrentInstance().
                     getExternalContext().getSessionMap().put("refreshTimeline", false);
+            FacesContext.getCurrentInstance().
+                    getExternalContext().getSessionMap().put("header", header);
 
             if (keepLoggedIn == true && firstLogIn == true && httpManager.getHttpCode() == 200) {
                 cookieHelper.addCookie("keepLoggedIn", "true", 999999999);
@@ -318,26 +344,34 @@ public class UserController implements Serializable {
         if (user == null) {
             selected = null;
             FacesContext.getCurrentInstance().getExternalContext().redirect(
-                    FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Sign-in");
+                    FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/sign-in");
 
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance().
                     getExternalContext().getSession(false);
             if (session != null) {
                 session.invalidate();
             }
+
+            cookieHelper.addCookie("keepLoggedIn", "", 0);
+            cookieHelper.addCookie("username", "", 0);
+            cookieHelper.addCookie("password", "", 0);
+            cookieHelper.addCookie("firstLogIn", "true", 0);
         }
     }
 
     public String login() {
 
+        firstLogIn = (Objects.equals(cookieHelper.getCookie("firstLogIn"), "true"));
         String outcome = requestSignIn();
+
 
         if (outcome.isEmpty()) {
             JsfUtil.addErrorMessage(ResourceBundle.getBundle("/resources/Bundle").getString("IncorrectCredentials"));
             cookieHelper.addCookie("keepLoggedIn", "", 0);
             cookieHelper.addCookie("username", "", 0);
             cookieHelper.addCookie("password", "", 0);
-            cookieHelper.addCookie("firstLogIn", "true", 0);
+            cookieHelper.addCookie("firstLogIn", "true", 999999999);
+
             return "";
         }
         return outcome;
@@ -351,7 +385,16 @@ public class UserController implements Serializable {
                 getExternalContext().getSession(false);
         if (session != null) {
             session.invalidate();
+
         }
+
+        cookieHelper.addCookie("keepLoggedIn", "", 0);
+        cookieHelper.addCookie("username", "", 0);
+        cookieHelper.addCookie("password", "", 0);
+        cookieHelper.addCookie("firstLogIn", "true", 0);
+
+        cookieHelper.addCookie("firstLogIn", "true", 999999999);
+        firstLogIn = true;
 
         user = null;
         selected = null;

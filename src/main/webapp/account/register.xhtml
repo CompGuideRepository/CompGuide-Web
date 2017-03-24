@@ -40,7 +40,7 @@
                                         <i class="fa fa-user">
                                             <b:inputText id="username" placeholder="User Name"
                                                          class="form-control"
-                                                         value="#{userController.selected.username}" 
+                                                         value="#{userController.selected.name}" 
                                                          tooltip="Enter the user name"
                                                          tooltip-position="top"
                                                          required="true" requiredMessage=" Fill the user name field"
@@ -57,7 +57,7 @@
                                         <i class="fa fa-user">
                                             <b:inputText id="name" class="form-control" 
                                                          placeholder="Name and Lastname"
-                                                         value="#{userController.selected.name}"
+                                                         value="#{userController.selected.lastname}"
                                                          tooltip="Enter your first and last name"
                                                          tooltip-position="top"
                                                          required="true" requiredMessage=" Fill the name and lastname field"
@@ -157,12 +157,12 @@
                             </b:row>
 
                             <b:row>
-                                <b:column  col-sm="8">
+<!--                                <b:column  col-sm="8">
                                     <div style="transform:scale(0.87) !important;-webkit-transform:scale(0.87) !important;transform-origin:0 0 !important;-webkit-transform-origin:0 0 !important;">
                                         <p:captcha class="captcha" label="Captcha" 
                                                    theme="clean" required="true"/>
                                     </div>
-                                </b:column>
+                                </b:column>-->
                                 <b:column id="panelbetakey" col-sm="4">
                                     <b:message for="betakey" />
                                     <div class="form-group">
@@ -191,7 +191,7 @@
 
                             <b:commandButton ajax="true" id="buttonregister" update="@form" value="Register" 
                                              class="btn-color-border-solid"
-                                             actionListener="#{userController.create}">
+                                             action="#{userController.createUser}">
                                 <f:event listener="#{userController.validatePassword}" type="postValidate" />  
                             </b:commandButton>
                             <b:commandButton id="buttonusername" value="Submit first name" ajax="true" 

@@ -173,7 +173,7 @@ $(document).ready(function ()
         $("#notification-counter").fadeOut("slow");
         $("#notification_li").toggleClass("open");
         $.ajax({
-            url: webServicePath + "com.compguide.web.persistence.entities.notification/list/" + true,
+            url: webServicePath + "com.compguide.web.persistence.entities.notificationread/read/" + true,
             type: 'PUT',
             contentType: 'application/json; charset=utf-8',
             success: function () {

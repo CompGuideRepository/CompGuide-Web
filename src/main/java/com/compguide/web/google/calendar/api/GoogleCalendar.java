@@ -55,7 +55,7 @@ public class GoogleCalendar {
     private static final java.io.File DATA_STORE_DIR = new java.io.File(
             System.getProperty("user.home"), ".credentials/client_secret.json");
 
-    private static String RedirectURI = "http://localhost:8080/CompGuide/clinical-tasks";
+    private static String RedirectURI = "http://compguide.net/clinical-tasks";
     /**
      * Global instance of the {@link FileDataStoreFactory}.
      */

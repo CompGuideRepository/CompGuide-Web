@@ -100,13 +100,16 @@ public class User implements Serializable {
     private Date reg;
     @Column(name = "active")
     private Short active;
+    @Size(max = 45)
+    @Column(name = "activationkey")
+    private String activationkey;
+    @Size(max = 255)
+    @Column(name = "GoogleCalendarToken")
+    private String googleCalendarToken;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
     private List<GuideExec> guideExecList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "utilizadorId")
     private List<Autentication> autenticationList;
-    @Size(max = 255)
-    @Column(name = "GoogleCalendarToken")
-    private String googleCalendarToken;
 
     public User() {
     }
@@ -225,6 +228,14 @@ public class User implements Serializable {
 
     public void setActive(Short active) {
         this.active = active;
+    }
+
+    public String getActivationkey() {
+        return activationkey;
+    }
+
+    public void setActivationkey(String activationkey) {
+        this.activationkey = activationkey;
     }
 
     public boolean hasGoogleCalendarToken() {
