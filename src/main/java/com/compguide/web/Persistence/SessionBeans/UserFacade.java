@@ -6,9 +6,12 @@
 package com.compguide.web.Persistence.SessionBeans;
 
 import com.compguide.web.Persistence.Entities.User;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +30,20 @@ public class UserFacade extends AbstractFacade<User> {
 
     public UserFacade() {
         super(User.class);
+    }
+
+    public User findByUserName(String userName) {
+        User user = null;
+        try {
+            Query query = em.createNamedQuery("User.findByUsername", User.class);
+            query.setParameter("username", userName);
+
+            user = (User) query.getSingleResult();
+        } catch (javax.ejb.EJBException | javax.persistence.NoResultException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return user;
     }
 
 }

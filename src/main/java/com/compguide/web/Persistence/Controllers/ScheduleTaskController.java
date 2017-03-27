@@ -263,8 +263,15 @@ public class ScheduleTaskController implements Serializable {
 
     public void refresh() {
         System.out.println("====================REFRESH MODEL========================");
-        boolean refresh = (Boolean) FacesContext.getCurrentInstance().
-                getExternalContext().getSessionMap().get("refreshModel");
+
+        boolean refresh = false;
+
+        try {
+            refresh = (Boolean) FacesContext.getCurrentInstance().
+                    getExternalContext().getSessionMap().get("refreshModel");
+        } catch (Exception e) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
+        }
 
         if (refresh) {
             System.out.println("================REFRESH COMPLETED===========================");

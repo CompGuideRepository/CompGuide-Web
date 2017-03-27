@@ -265,26 +265,25 @@ public class UserController implements Serializable {
             System.out.println("==================================================================");
             header = httpManager.getCookieLogin();
 
-            httpManager = new HttpManager();
-
-            user = (DataBase.Entities.User) httpManager.
-                    getUser(user, header, selected.getUsername());
             System.out.println("==================================================================");
 
-            if (selected.getIduser() == null && user != null) {
-                selected = getFacade().find(Integer.parseInt(user.getIduser()));
+            if (selected.getIduser() == null) {
+                selected = getFacade().findByUserName(selected.getUsername());
             }
 
-            FacesContext.getCurrentInstance().
-                    getExternalContext().getSessionMap().put("user", user);
+//            session.setAttribute("userDB", user);
             FacesContext.getCurrentInstance().
                     getExternalContext().getSessionMap().put("userPersistence", selected);
+//            session.setAttribute("userPersistence", selected);
             FacesContext.getCurrentInstance().
                     getExternalContext().getSessionMap().put("refreshModel", false);
+//            session.setAttribute("refreshModel", false);
             FacesContext.getCurrentInstance().
                     getExternalContext().getSessionMap().put("refreshTimeline", false);
+//            session.setAttribute("refreshTimeline", false);
             FacesContext.getCurrentInstance().
                     getExternalContext().getSessionMap().put("header", header);
+//            session.setAttribute("header", header);
 
             if (keepLoggedIn == true && firstLogIn == true && httpManager.getHttpCode() == 200) {
                 cookieHelper.addCookie("keepLoggedIn", "true", 999999999);
@@ -340,7 +339,8 @@ public class UserController implements Serializable {
 
     public void sessionValidate(ComponentSystemEvent event) throws IOException {
 
-        DataBase.Entities.User user = (DataBase.Entities.User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+        User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userPersistence");
+
         if (user == null) {
             selected = null;
             FacesContext.getCurrentInstance().getExternalContext().redirect(
@@ -348,6 +348,7 @@ public class UserController implements Serializable {
 
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance().
                     getExternalContext().getSession(false);
+
             if (session != null) {
                 session.invalidate();
             }
@@ -363,7 +364,6 @@ public class UserController implements Serializable {
 
         firstLogIn = (Objects.equals(cookieHelper.getCookie("firstLogIn"), "true"));
         String outcome = requestSignIn();
-
 
         if (outcome.isEmpty()) {
             JsfUtil.addErrorMessage(ResourceBundle.getBundle("/resources/Bundle").getString("IncorrectCredentials"));
@@ -405,12 +405,12 @@ public class UserController implements Serializable {
     }
 
     public boolean isAdmin() {
-        DataBase.Entities.User user
-                = (DataBase.Entities.User) FacesContext.getCurrentInstance().
-                getExternalContext().getSessionMap().get("user");
+        User user
+                = (User) FacesContext.getCurrentInstance().
+                getExternalContext().getSessionMap().get("userPersistence");
 
         if (user != null) {
-            if (user.getType().equals("admin")) {
+            if (Objects.equals(user.getType(), "admin")) {
                 return true;
             }
         }
@@ -418,7 +418,7 @@ public class UserController implements Serializable {
     }
 
     public String getUserName() {
-        DataBase.Entities.User user = (DataBase.Entities.User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+        User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userPersistence");
 
         if (user != null) {
             return user.getName();

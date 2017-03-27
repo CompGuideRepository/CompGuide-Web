@@ -33,10 +33,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -109,8 +112,16 @@ public class TaskTimeLineController implements Serializable {
 
     public void refresh() {
         System.out.println("====================REFRESH MODEL========================");
-        boolean refresh = (Boolean) FacesContext.getCurrentInstance().
-                getExternalContext().getSessionMap().get("refreshTimeline");
+        
+        boolean refresh = false;
+
+        try {
+            refresh = (Boolean) FacesContext.getCurrentInstance().
+                    getExternalContext().getSessionMap().get("refreshTimeline");
+        } catch (Exception e) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
+
+        }
 
         if (refresh) {
             System.out.println("================REFRESH COMPLETED===========================");

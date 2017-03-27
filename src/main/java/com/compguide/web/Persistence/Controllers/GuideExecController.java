@@ -74,7 +74,7 @@ public class GuideExecController implements Serializable {
 
     public List<GuideExec> getList() {
         if (items == null) {
-            DataBase.Entities.User user = (DataBase.Entities.User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+            DataBase.Entities.User user = (DataBase.Entities.User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userDB");
 
             items = getFacade().findByUserActiveGuidelines(
                     getUserFacade().find(Integer.parseInt(user.getIduser())),
