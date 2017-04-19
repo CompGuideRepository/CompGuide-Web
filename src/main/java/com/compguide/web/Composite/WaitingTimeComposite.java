@@ -15,15 +15,16 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  *
  * @author António
  */
-@Singleton
-@Startup
-@LocalBean
+@Named
+@SessionScoped
 public class WaitingTimeComposite implements Serializable {
 
     private WaitingTime waitingTime;
