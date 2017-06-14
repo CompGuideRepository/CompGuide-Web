@@ -6,10 +6,13 @@
 package com.compguide.web.Persistence.WebService;
 
 import com.compguide.web.Persistence.Entities.GuideExec;
+import com.compguide.web.Persistence.Entities.User;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -59,6 +62,23 @@ public class GuideExecFacadeREST extends AbstractFacade<GuideExec> {
     @Produces({"application/xml", "application/json"})
     public GuideExec find(@PathParam("id") Integer id) {
         return super.find(id);
+    }
+    
+    
+    @GET
+    @Path("/user/{id}")
+    @Produces({"application/xml", "application/json"})
+    public List<GuideExec> findByUser(@PathParam("id") Integer id) {
+        User user = getEntityManager().find(User.class, id);
+        List<GuideExec> guideExecs = new ArrayList<GuideExec>();
+        
+        Query query = em.createNamedQuery("GuideExec.findByUserCompletedGuidelines", GuideExec.class);
+        
+        query.setParameter("iduser", user);
+        query.setParameter("completed", false);
+        guideExecs = query.getResultList();
+            
+        return guideExecs;
     }
 
     @GET
