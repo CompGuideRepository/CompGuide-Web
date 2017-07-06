@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TaskEditDlg" widgetVar="TaskEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTaskTitle}">
+            <h:form id="TaskEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{taskController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTaskLabel_idtask}" for="idtask" />
+                        <p:inputText id="idtask" value="#{taskController.selected.idtask}" title="#{bundle.EditTaskTitle_idtask}" required="true" requiredMessage="#{bundle.EditTaskRequiredMessage_idtask}"/>
+                        <p:outputLabel value="#{bundle.EditTaskLabel_time}" for="time" />
+                        <p:calendar id="time" pattern="MM/dd/yyyy HH:mm:ss" value="#{taskController.selected.time}" title="#{bundle.EditTaskTitle_time}" required="true" requiredMessage="#{bundle.EditTaskRequiredMessage_time}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditTaskLabel_taskType}" for="taskType" />
+                        <p:inputText id="taskType" value="#{taskController.selected.taskType}" title="#{bundle.EditTaskTitle_taskType}" />
+                        <p:outputLabel value="#{bundle.EditTaskLabel_taskFormat}" for="taskFormat" />
+                        <p:inputText id="taskFormat" value="#{taskController.selected.taskFormat}" title="#{bundle.EditTaskTitle_taskFormat}" />
+                        <p:outputLabel value="#{bundle.EditTaskLabel_taskDescription}" for="taskDescription" />
+                        <p:inputTextarea rows="4" cols="30" id="taskDescription" value="#{taskController.selected.taskDescription}" title="#{bundle.EditTaskTitle_taskDescription}" />
+                        <p:outputLabel value="#{bundle.EditTaskLabel_taskIdentifier}" for="taskIdentifier" />
+                        <p:inputText id="taskIdentifier" value="#{taskController.selected.taskIdentifier}" title="#{bundle.EditTaskTitle_taskIdentifier}" />
+                        <p:outputLabel value="#{bundle.EditTaskLabel_taskPlan}" for="taskPlan" />
+                        <p:inputText id="taskPlan" value="#{taskController.selected.taskPlan}" title="#{bundle.EditTaskTitle_taskPlan}" />
+                        <p:outputLabel value="#{bundle.EditTaskLabel_nextTask}" for="nextTask" />
+                        <p:inputTextarea rows="4" cols="30" id="nextTask" value="#{taskController.selected.nextTask}" title="#{bundle.EditTaskTitle_nextTask}" />
+                        <p:outputLabel value="#{bundle.EditTaskLabel_completed}" for="completed" />
+                        <p:selectBooleanCheckbox id="completed" value="#{taskController.selected.completed}" />
+                        <p:outputLabel value="#{bundle.EditTaskLabel_repetitionValue}" for="repetitionValue" />
+                        <p:inputText id="repetitionValue" value="#{taskController.selected.repetitionValue}" title="#{bundle.EditTaskTitle_repetitionValue}" />
+                        <p:outputLabel value="#{bundle.EditTaskLabel_idguideexec}" for="idguideexec" />
+                        <p:selectOneMenu id="idguideexec" value="#{taskController.selected.idguideexec}" required="true" requiredMessage="#{bundle.EditTaskRequiredMessage_idguideexec}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{guideExecController.itemsAvailableSelectOne}"
+                                           var="idguideexecItem"
+                                           itemValue="#{idguideexecItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{taskController.update}" value="#{bundle.Save}" update="display,:TaskListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TaskEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TaskEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions">
+    <ui:composition template="/profiletemplate.xhtml">
+        <ui:define name="title"> 
+            <h:outputText value="Clinical Tasks" /> 
+        </ui:define>
+        <ui:define name="resourcefiles">
+            <link type="text/css" rel="stylesheet" href="#{request.contextPath}/javax.faces.resource/theme.css.xhtml?ln=primefaces-bootstrap"/>
+
+            <h:outputScript name="js/bootstrap/bootstrap.min.js" />
+            <h:outputScript name="js/jquery/jquery.slimscroll.min.js"/>
+            <h:outputScript name="js/compguide/compguide.alert.js"/>
+            <h:outputScript name="js/jquery/jquery.timeago.js"/>
+            <h:outputScript name="js/jquery/jquery.livequery.js"/>
+            <h:outputScript name="js/jquery/jquery.countdown.js"/>
+            <h:outputScript name="js/jquery/jquery.tipsy.js"/>
+            <script>
+                $(document).ready(function ()
+                {
+                    $('.dropdown').unbind('click');
+                    $('.dropdown-toggle').dropdown();
+                });
+            </script>
+            <h:outputScript name="js/jquery/jquery.dataTables.js"/>
+            <h:outputScript name="js/datatables/dataTables.responsive.js"/>
+            <h:outputScript name="js/compguide/guidelinetabledetails.js" />
+            <h:outputScript name="js/datatables/dataTables.bootstrap.js" />
+            <h:outputScript name="js/compguide/compguidenotification.js"/>
+
+        </ui:define>
+        <ui:define name="events">
+            <f:metadata>
+                <f:event type="preRenderView" listener="#{userController.sessionValidate}" />
+                <f:event type="preRenderView" listener="#{scheduleTaskController.refresh}" />
+                <f:event type="preRenderView" listener="#{taskTimeLineController.refresh}" />
+                <f:event type="preRenderView" listener="#{googleCalendarController.fetchCode}" />
+            </f:metadata>
+        </ui:define>
+        <ui:define name="content">
+
+            <b:row>
+                <h:form id="schedule">
+                    <b:row>
+                        <b:column col-sm="12">
+                            <div class="tag-text">
+                                <h4>Timeline</h4>
+                                <span>Timeline Clinical Task</span>
+                                <p>
+                                    <pe:timeline value="#{taskTimeLineController.model}"
+                                                 zoomable="true"  
+                                                 moveable="true"  
+                                                 stackEvents="false"  
+                                                 axisOnTop="true"               
+                                                 eventStyle="box"  
+                                                 minHeight="200"
+                                                 widgetVar="timeLineTaskEvents"
+                                                 showCurrentTime="true"
+                                                 showNavigation="true">
+                                        <p:ajax event="select" listener="#{taskTimeLineController.onSelect}"
+                                                update=":timelinecontent :buttonstimeline"
+                                                oncomplete="$('.modalPseudoClass1').modal('show');change();startCountDown('timeline');"/>
+                                        <!-- update=":timelinecontent :buttonstimeline" -->
+                                    </pe:timeline>
+                                </p>
+                            </div>
+
+                        </b:column>
+                        <p/>
+                        <p/>
+                        <p/>
+                        <p/>
+                        <b:column col-sm="12">
+                            <div class="tag-text">
+                                <h4>Clinical Tasks</h4>
+                                <span>Clinical Task</span>
+                                <p>
+                                    <p:schedule widgetVar="meucalendario" rendered="true"
+                                                value="#{scheduleTaskController.eventModel}" draggable="false"
+                                                timeZone="GMT+2">
+                                        <!-- eventos -->
+                                        <p:ajax event="eventSelect" 
+                                                listener="#{scheduleTaskController.showTask}"
+                                                update=':content :buttonschedule'
+                                                oncomplete="$('.modalPseudoClass').modal('show').fadeIn('slow');change();startCountDown('schedule');initTableAction();" /> 
+                                        <!--update=":taskDetails:content"--> 
+
+                                    </p:schedule>
+                                </p>
+                            </div>
+                        </b:column>
+                        <b:column col-sm="12">
+                            <b:column span="9" />
+                            <b:column span="3">
+                                <b:commandButton iconAwesome="calendar-plus-o" 
+                                                 class="btn btn-small btn-color-shadow"
+                                                 value="Export to Google Calendar"
+                                                 action="#{googleCalendarController.exportCalendar}" />
+                            </b:column>
+                        </b:column>
+                    </b:row>
+                </h:form>
+
+            </b:row>
+
+        </ui:define>
+        <ui:define name="beforebody">
+            <ui:include src="/modal/modalschedule.xhtml" />
+            <ui:include src="/modal/modaltimeline.xhtml" />
+        </ui:define>
+    </ui:composition>
+</html>
+

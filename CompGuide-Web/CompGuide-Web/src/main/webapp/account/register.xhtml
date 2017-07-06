@@ -1,0 +1,248 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/pagetemplate.xhtml">
+        <ui:define name="title"> 
+            <h:outputText value="Register in CompGuide" /> 
+        </ui:define>
+        <ui:define name="resourcefiles">
+            <h:outputScript name="js/compguide/compguideclient.js" />
+            <link type="text/css" rel="stylesheet" href="#{request.contextPath}/javax.faces.resource/theme.css.xhtml?ln=primefaces-bootstrap"/>
+        </ui:define>
+        <ui:define name="navbar">
+            <ui:include src="/navbar/homenavbar.xhtml" />
+        </ui:define>
+        <ui:define name="pageheader">
+            <ui:include src="/header/homeheader.xhtml" />
+        </ui:define>
+        <ui:define name="content">
+            <b:row>
+                <b:column col-md="5">
+                    <div class="ct-form clearfix">
+                        <h6>Complete the form</h6>
+                        <p>Please use the form bellow to register in CompGuide.</p>
+                        <h:form id="register">
+                            <b:row>
+                                <b:column>
+                                    <p:messages showDetail="true" autoUpdate="true" />
+                                </b:column>
+                            </b:row>
+                            <b:row>
+                                <!--<p:outputPanel id="panelusername" autoUpdate="true">-->
+                                <b:column id="panelusername" col-sm="6">
+                                    <b:message for="username" />
+                                    <div class="form-group">
+                                        <i class="fa fa-user">
+                                            <b:inputText id="username" placeholder="User Name"
+                                                         class="form-control"
+                                                         value="#{userController.selected.name}" 
+                                                         tooltip="Enter the user name"
+                                                         tooltip-position="top"
+                                                         required="true" requiredMessage=" Fill the user name field"
+                                                         onfocus="lastFocus(this.id);"
+                                                         onblur="$('#register\\:buttonusername').click();"/>
+                                        </i>
+                                    </div>
+                                </b:column>
+                                <!--</p:outputPanel>-->
+                                <!--<p:outputPanel id="panelname" autoUpdate="true">-->
+                                <b:column id="panelname" col-sm="6">
+                                    <b:message for="name" />
+                                    <div class="form-group">
+                                        <i class="fa fa-user">
+                                            <b:inputText id="name" class="form-control" 
+                                                         placeholder="Name and Lastname"
+                                                         value="#{userController.selected.lastname}"
+                                                         tooltip="Enter your first and last name"
+                                                         tooltip-position="top"
+                                                         required="true" requiredMessage=" Fill the name and lastname field"
+                                                         onfocus="lastFocus(this.id);"
+                                                         onblur="$('#register\\:buttonname').click();"/>
+                                        </i>
+                                    </div>
+                                </b:column>
+                                <!--</p:outputPanel>-->
+                            </b:row>
+                            <b:row>
+                                <b:column id="panelemail" col-sm="12">
+                                    <b:message for="email" />
+                                    <div class="form-group">
+                                        <label for="message" class="sr-only">Message</label>
+                                        <i class="glyphicon glyphicon-envelope">
+                                            <b:inputText id="email" class="form-control" 
+                                                         placeholder="Email" value="#{userController.selected.email}"
+                                                         required="true" requiredMessage=" Fill email field"
+                                                         onfocus="lastFocus(this.id);" 
+                                                         tooltip="Enter your email address"
+                                                         tooltip-position="top"
+                                                         onblur="$('#register\\:buttonemail').click();"/>
+                                        </i>
+                                    </div>
+                                </b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column id="paneladdress" col-sm="12">
+                                    <b:message for="address" />
+                                    <div class="form-group">
+                                        <label for="message" class="sr-only">Message</label>
+                                        <i class="fa fa-map--marker">
+                                            <b:inputText id="address" class="form-control" 
+                                                         placeholder="Address" value="#{userController.selected.address}"
+                                                         required="true" requiredMessage=" Fill address field"
+                                                         onfocus="lastFocus(this.id);" 
+                                                         tooltip="Enter your address"
+                                                         tooltip-position="top"
+                                                         onblur="$('#register\\:buttonaddress').click();"/>
+                                        </i>
+                                    </div>
+                                </b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column id="panelbirthday" col-sm="12">
+                                    <div class="form-group">
+                                        <i class="fa fa-calendar-o">
+                                            <b:datepicker id="birthday" mode="popup" placeholder="Birthday"
+                                                          showWeek="true" tooltip="Select your birth date"
+                                                          changeMonth="true" changeYear="true"
+                                                          tooltip-position="top"
+                                                          value="#{userController.selected.birthdate}"/>
+                                        </i>
+                                    </div>
+                                </b:column>
+                            </b:row>
+                            <b:row>
+                                <!--<p:outputPanel id="panelusername" autoUpdate="true">-->
+                                <b:column id="panelpassword" col-sm="6">
+                                    <b:message for="password" />
+                                    <div class="form-group">
+                                        <i class="fa fa fa-key">
+                                            <b:inputSecret id="password" placeholder="Password"
+                                                           class="form-control"
+                                                           value="#{userController.password}" 
+                                                           required="true" requiredMessage=" Fill the password field"
+                                                           tooltip="Enter the password"
+                                                           tooltip-position="top" 
+                                                           onfocus="lastFocus(this.id);"
+                                                           onblur="$('#register\\:buttonpassword').click();
+                                                           ">
+                                            </b:inputSecret>                                                
+                                        </i>
+                                    </div>
+                                </b:column>
+                                <!--</p:outputPanel>-->
+                                <!--<p:outputPanel id="panelname" autoUpdate="true">-->
+                                <b:column id="panelconfirmpassword" col-sm="6">
+                                    <b:message for="confirmpassword" />
+                                    <div class="form-group">
+                                        <i class="fa fa-key">
+                                            <b:inputSecret id="confirmpassword" class="form-control" 
+                                                           placeholder="Confirm Password"
+                                                           value="#{userController.confirmPassword}" 
+                                                           required="true" requiredMessage=" Confirm the password"
+                                                           tooltip="Confirm the password"
+                                                           tooltip-position="top"
+                                                           onfocus="lastFocus(this.id);"
+                                                           onblur="$('#register\\:buttonconfirmpassword').click();">
+                                            </b:inputSecret>
+                                        </i>
+                                    </div>
+                                </b:column>
+
+                                <!--</p:outputPanel>-->
+                            </b:row>
+
+                            <b:row>
+<!--                                <b:column  col-sm="8">
+                                    <div style="transform:scale(0.87) !important;-webkit-transform:scale(0.87) !important;transform-origin:0 0 !important;-webkit-transform-origin:0 0 !important;">
+                                        <p:captcha class="captcha" label="Captcha" 
+                                                   theme="clean" required="true"/>
+                                    </div>
+                                </b:column>-->
+                                <b:column id="panelbetakey" col-sm="4">
+                                    <b:message for="betakey" />
+                                    <div class="form-group">
+                                        <i class="fa fa-lock">
+                                            <b:inputSecret id="betakey" class="form-control" 
+                                                           placeholder="Beta key"
+                                                           value="#{userController.betaKey}" 
+                                                           required="true" requiredMessage="Enter the beta key"
+                                                           tooltip="Beta key"
+                                                           tooltip-position="top"
+                                                           onfocus="lastFocus(this.id);"
+                                                           onblur="$('#register\\:buttonbetakey').click();">
+                                            </b:inputSecret>
+                                        </i>
+                                    </div>
+                                </b:column>
+                            </b:row>
+
+                            <b:row>
+                                <b:column  col-sm="12" >
+                                    <b:selectBooleanCheckbox  value="#{userController.keepLoggedIn}" caption="keep me logged in"/>
+                                </b:column>
+                            </b:row>
+
+
+
+                            <b:commandButton ajax="true" id="buttonregister" update="@form" value="Register" 
+                                             class="btn-color-border-solid"
+                                             action="#{userController.createUser}">
+                                <f:event listener="#{userController.validatePassword}" type="postValidate" />  
+                            </b:commandButton>
+                            <b:commandButton id="buttonusername" value="Submit first name" ajax="true" 
+                                             update="@form:panelusername" process="@form:username" 
+                                             style="display: none;" oncomplete="clickButton();
+                                             if(!$('#input_register\\:username').hasClass('bf-error'))
+                                             $('#input_register\\:username').switchClass('bf-no-message', 'bf-info');"/>
+                            <b:commandButton id="buttonname" value="Submit first name" ajax="true" 
+                                             update="@form:panelname" process="@form:name" 
+                                             style="display: none;" oncomplete="clickButton();
+                                             if(!$('#input_register\\:name').hasClass('bf-error'))
+                                             $('#input_register\\:name').switchClass('bf-no-message', 'bf-info');"/>
+                            <b:commandButton id="buttonemail" value="Submit first name" ajax="true" 
+                                             update="@form:panelemail" process="@form:email" 
+                                             style="display: none;" oncomplete="clickButton();
+                                             if(!$('#input_register\\:email').hasClass('bf-error'))
+                                             $('#input_register\\:email').switchClass('bf-no-message', 'bf-info');"/>
+                            <b:commandButton id="buttonaddress" value="Submit first name" ajax="true" 
+                                             update="@form:paneladdress" process="@form:address" 
+                                             style="display: none;" oncomplete="clickButton();
+                                             if(!$('#input_register\\:address').hasClass('bf-error'))
+                                             $('#input_register\\:address').switchClass('bf-no-message', 'bf-info');"/>
+                            <b:commandButton id="buttonpassword" value="Submit first name" ajax="true" 
+                                             update="@form:panelpassword" process="@form:password" 
+                                             style="display: none;" oncomplete="clickButton();
+                                             if(!$('#input_register\\:password').hasClass('bf-error'))
+                                             $('#input_register\\:password').switchClass('bf-no-message', 'bf-info');"/>                            
+                            <b:commandButton id="buttonconfirmpassword" value="Submit first name" ajax="true" 
+                                             update="@form:panelconfirmpassword @form:panelpassword" process="@form:confirmpassword @form:password" 
+                                             style="display: none;" oncomplete="clickButton();">
+                                <f:event listener="#{userController.validatePassword}" type="postValidate" />  
+                            </b:commandButton>
+                            <b:commandButton id="buttonbetakey" value="Submit first name" ajax="true" 
+                                             update="@form:panelbetakey" process="@form:betakey" 
+                                             style="display: none;" oncomplete="clickButton();
+                                             if(!$('#input_register\\:betakey').hasClass('bf-error'))
+                                             $('#input_register\\:betakey').switchClass('bf-no-message', 'bf-info');"/>
+
+                        </h:form>
+                    </div>
+                </b:column>
+                <div class="col-sm-7 hidden-xs">
+                    <figure class="animated fadeInUpBig" data-animation="fadeInUpBig" data-animation-delay="400">
+                        <img src="resources/images/person.png" alt="//"/>
+                    </figure>
+                </div>
+            </b:row>
+        </ui:define>
+        <ui:define name="footer">
+            <ui:include src="/footer/footer.xhtml" />
+        </ui:define>
+    </ui:composition>
+</html>
+

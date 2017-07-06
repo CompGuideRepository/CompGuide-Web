@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ObservationCreateDlg" widgetVar="ObservationCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateObservationTitle}">
+            <h:form id="ObservationCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{observationController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateObservationLabel_idobservation}" for="idobservation" />
+                        <p:inputText id="idobservation" value="#{observationController.selected.idobservation}" title="#{bundle.CreateObservationTitle_idobservation}" required="true" requiredMessage="#{bundle.CreateObservationRequiredMessage_idobservation}"/>
+                        <p:outputLabel value="#{bundle.CreateObservationLabel_parameter}" for="parameter" />
+                        <p:inputTextarea rows="4" cols="30" id="parameter" value="#{observationController.selected.parameter}" title="#{bundle.CreateObservationTitle_parameter}" />
+                        <p:outputLabel value="#{bundle.CreateObservationLabel_unit}" for="unit" />
+                        <p:inputText id="unit" value="#{observationController.selected.unit}" title="#{bundle.CreateObservationTitle_unit}" />
+                        <p:outputLabel value="#{bundle.CreateObservationLabel_isnumeric}" for="isnumeric" />
+                        <p:inputText id="isnumeric" value="#{observationController.selected.isnumeric}" title="#{bundle.CreateObservationTitle_isnumeric}" />
+                        <p:outputLabel value="#{bundle.CreateObservationLabel_parameterIdentifier}" for="parameterIdentifier" />
+                        <p:inputText id="parameterIdentifier" value="#{observationController.selected.parameterIdentifier}" title="#{bundle.CreateObservationTitle_parameterIdentifier}" />
+                        <p:outputLabel value="#{bundle.CreateObservationLabel_variableName}" for="variableName" />
+                        <p:inputText id="variableName" value="#{observationController.selected.variableName}" title="#{bundle.CreateObservationTitle_variableName}" />
+                        <p:outputLabel value="#{bundle.CreateObservationLabel_parameterValue}" for="parameterValue" />
+                        <p:inputTextarea rows="4" cols="30" id="parameterValue" value="#{observationController.selected.parameterValue}" title="#{bundle.CreateObservationTitle_parameterValue}" />
+                        <p:outputLabel value="#{bundle.CreateObservationLabel_task}" for="task" />
+                        <p:inputText id="task" value="#{observationController.selected.task}" title="#{bundle.CreateObservationTitle_task}" />
+                        <p:outputLabel value="#{bundle.CreateObservationLabel_time}" for="time" />
+                        <p:calendar id="time" pattern="MM/dd/yyyy HH:mm:ss" value="#{observationController.selected.time}" title="#{bundle.EditObservationTitle_time}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateObservationLabel_identifier}" for="identifier" />
+                        <p:inputText id="identifier" value="#{observationController.selected.identifier}" title="#{bundle.CreateObservationTitle_identifier}" />
+                        <p:outputLabel value="#{bundle.CreateObservationLabel_idtask}" for="idtask" />
+                        <p:selectOneMenu id="idtask" value="#{observationController.selected.idtask}" required="true" requiredMessage="#{bundle.EditObservationRequiredMessage_idtask}">
+                            <f:selectItems value="#{taskController.itemsAvailableSelectOne}"
+                                           var="idtaskItem"
+                                           itemValue="#{idtaskItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{observationController.create}" value="#{bundle.Save}" update="display,:ObservationListForm:datalist,:growl" oncomplete="handleSubmit(args,'ObservationCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ObservationCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

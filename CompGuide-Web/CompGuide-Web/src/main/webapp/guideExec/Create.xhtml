@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="GuideExecCreateDlg" widgetVar="GuideExecCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateGuideExecTitle}">
+            <h:form id="GuideExecCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{guideExecController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateGuideExecLabel_idguideexec}" for="idguideexec" />
+                        <p:inputText id="idguideexec" value="#{guideExecController.selected.idguideexec}" title="#{bundle.CreateGuideExecTitle_idguideexec}" required="true" requiredMessage="#{bundle.CreateGuideExecRequiredMessage_idguideexec}"/>
+                        <p:outputLabel value="#{bundle.CreateGuideExecLabel_start}" for="start" />
+                        <p:calendar id="start" pattern="MM/dd/yyyy HH:mm:ss" value="#{guideExecController.selected.start}" title="#{bundle.EditGuideExecTitle_start}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateGuideExecLabel_time}" for="time" />
+                        <p:calendar id="time" pattern="MM/dd/yyyy HH:mm:ss" value="#{guideExecController.selected.time}" title="#{bundle.EditGuideExecTitle_time}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateGuideExecLabel_description}" for="description" />
+                        <p:inputTextarea rows="4" cols="30" id="description" value="#{guideExecController.selected.description}" title="#{bundle.CreateGuideExecTitle_description}" />
+                        <p:outputLabel value="#{bundle.CreateGuideExecLabel_completed}" for="completed" />
+                        <p:inputText id="completed" value="#{guideExecController.selected.completed}" title="#{bundle.CreateGuideExecTitle_completed}" />
+                        <p:outputLabel value="#{bundle.CreateGuideExecLabel_nextTasks}" for="nextTasks" />
+                        <p:inputTextarea rows="4" cols="30" id="nextTasks" value="#{guideExecController.selected.nextTasks}" title="#{bundle.CreateGuideExecTitle_nextTasks}" />
+                        <p:outputLabel value="#{bundle.CreateGuideExecLabel_pendingTasks}" for="pendingTasks" />
+                        <p:inputTextarea rows="4" cols="30" id="pendingTasks" value="#{guideExecController.selected.pendingTasks}" title="#{bundle.CreateGuideExecTitle_pendingTasks}" />
+                        <p:outputLabel value="#{bundle.CreateGuideExecLabel_idguideline}" for="idguideline" />
+                        <p:selectOneMenu id="idguideline" value="#{guideExecController.selected.idguideline}" required="true" requiredMessage="#{bundle.EditGuideExecRequiredMessage_idguideline}">
+                            <f:selectItems value="#{guidelineController.itemsAvailableSelectOne}"
+                                           var="idguidelineItem"
+                                           itemValue="#{idguidelineItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateGuideExecLabel_idpatient}" for="idpatient" />
+                        <p:selectOneMenu id="idpatient" value="#{guideExecController.selected.idpatient}" required="true" requiredMessage="#{bundle.EditGuideExecRequiredMessage_idpatient}">
+                            <f:selectItems value="#{patientController.itemsAvailableSelectOne}"
+                                           var="idpatientItem"
+                                           itemValue="#{idpatientItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateGuideExecLabel_iduser}" for="iduser" />
+                        <p:selectOneMenu id="iduser" value="#{guideExecController.selected.iduser}" required="true" requiredMessage="#{bundle.EditGuideExecRequiredMessage_iduser}">
+                            <f:selectItems value="#{userController.itemsAvailableSelectOne}"
+                                           var="iduserItem"
+                                           itemValue="#{iduserItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{guideExecController.create}" value="#{bundle.Save}" update="display,:GuideExecListForm:datalist,:growl" oncomplete="handleSubmit(args,'GuideExecCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="GuideExecCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

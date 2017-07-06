@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TemporalElementCreateDlg" widgetVar="TemporalElementCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTemporalElementTitle}">
+            <h:form id="TemporalElementCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{temporalElementController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTemporalElementLabel_temporalElementID}" for="temporalElementID" />
+                        <p:inputText id="temporalElementID" value="#{temporalElementController.selected.temporalElementID}" title="#{bundle.CreateTemporalElementTitle_temporalElementID}" required="true" requiredMessage="#{bundle.CreateTemporalElementRequiredMessage_temporalElementID}"/>
+                        <p:outputLabel value="#{bundle.CreateTemporalElementLabel_durationID}" for="durationID" />
+                        <p:selectOneMenu id="durationID" value="#{temporalElementController.selected.durationID}" >
+                            <f:selectItems value="#{durationController.itemsAvailableSelectOne}"
+                                           var="durationIDItem"
+                                           itemValue="#{durationIDItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateTemporalElementLabel_waitingTimeID}" for="waitingTimeID" />
+                        <p:selectOneMenu id="waitingTimeID" value="#{temporalElementController.selected.waitingTimeID}" >
+                            <f:selectItems value="#{waitingTimeController.itemsAvailableSelectOne}"
+                                           var="waitingTimeIDItem"
+                                           itemValue="#{waitingTimeIDItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateTemporalElementLabel_taskID}" for="taskID" />
+                        <p:selectOneMenu id="taskID" value="#{temporalElementController.selected.taskID}" >
+                            <f:selectItems value="#{taskController.itemsAvailableSelectOne}"
+                                           var="taskIDItem"
+                                           itemValue="#{taskIDItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateTemporalElementLabel_periodicityID}" for="periodicityID" />
+                        <p:selectOneMenu id="periodicityID" value="#{temporalElementController.selected.periodicityID}" >
+                            <f:selectItems value="#{periodicityController.itemsAvailableSelectOne}"
+                                           var="periodicityIDItem"
+                                           itemValue="#{periodicityIDItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateTemporalElementLabel_scheduleTaskID}" for="scheduleTaskID" />
+                        <p:selectOneMenu id="scheduleTaskID" value="#{temporalElementController.selected.scheduleTaskID}" >
+                            <f:selectItems value="#{scheduleTaskController.itemsAvailableSelectOne}"
+                                           var="scheduleTaskIDItem"
+                                           itemValue="#{scheduleTaskIDItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{temporalElementController.create}" value="#{bundle.Save}" update="display,:TemporalElementListForm:datalist,:growl" oncomplete="handleSubmit(args,'TemporalElementCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TemporalElementCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

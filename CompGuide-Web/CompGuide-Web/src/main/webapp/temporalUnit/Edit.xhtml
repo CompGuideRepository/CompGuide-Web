@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TemporalUnitEditDlg" widgetVar="TemporalUnitEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTemporalUnitTitle}">
+            <h:form id="TemporalUnitEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{temporalUnitController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTemporalUnitLabel_temporalUnitID}" for="temporalUnitID" />
+                        <p:inputText id="temporalUnitID" value="#{temporalUnitController.selected.temporalUnitID}" title="#{bundle.EditTemporalUnitTitle_temporalUnitID}" required="true" requiredMessage="#{bundle.EditTemporalUnitRequiredMessage_temporalUnitID}"/>
+                        <p:outputLabel value="#{bundle.EditTemporalUnitLabel_value}" for="value" />
+                        <p:inputText id="value" value="#{temporalUnitController.selected.value}" title="#{bundle.EditTemporalUnitTitle_value}" required="true" requiredMessage="#{bundle.EditTemporalUnitRequiredMessage_value}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{temporalUnitController.update}" value="#{bundle.Save}" update="display,:TemporalUnitListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TemporalUnitEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TemporalUnitEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

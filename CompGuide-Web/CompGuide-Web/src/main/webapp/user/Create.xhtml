@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UserCreateDlg" widgetVar="UserCreateDialog" modal="true" resizable="false" width="860" appendTo="@(body)" header="#{bundle.CreateUserTitle}">
+            <h:form id="UserCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="3" rendered="#{userController.selected != null}">
+                        <b:inputText id="username" value="#{userController.selected.username}" title="#{bundle.CreateUserTitle_username}" 
+                                     label="#{bundle.CreateUserLabel_username}" renderLabel="true" />
+                        <b:inputSecret id="password" value="#{userController.selected.password}" placeholder="#{bundle.CreateUserTitle_password}" 
+                                       label="#{bundle.CreateUserLabel_password}" renderLabel="true"  />
+                        <b:inputText id="name" value="#{userController.selected.name}" title="#{bundle.CreateUserTitle_name}" 
+                                     label="#{bundle.CreateUserLabel_name}" renderLabel="true"  />
+                        <b:inputText id="lastname" value="#{userController.selected.lastname}" title="#{bundle.CreateUserTitle_lastname}" 
+                                     label="#{bundle.CreateUserLabel_lastname}" renderLabel="true" />
+                        <b:row>
+                            <b:column col-sm="12">
+                                <div class="form-group">
+                                    <i class="fa fa-calendar-o">
+                                        <b:datepicker id="birthdate" mode="popup"
+                                                      changeMonth="true" changeYear="true"
+                                                      value="#{userController.selected.birthdate}" 
+                                                      placeholder="#{bundle.EditUserTitle_birthdate}"/>
+                                    </i>
+                                </div>
+
+                            </b:column>
+                        </b:row>
+                        <b:inputText id="phone" value="#{userController.selected.phone}" title="#{bundle.CreateUserTitle_phone}" 
+                                     label="#{bundle.CreateUserLabel_phone}" renderLabel="true"/>
+                        <b:inputText id="email" value="#{userController.selected.email}" title="#{bundle.CreateUserTitle_email}" 
+                                     label="#{bundle.CreateUserLabel_email}" renderLabel="true"/>
+                        <b:inputText id="address" value="#{userController.selected.address}" title="#{bundle.CreateUserTitle_address}" 
+                                     label="#{bundle.CreateUserLabel_address}" renderLabel="true"/>
+                        <b:inputText id="homephone" value="#{userController.selected.homephone}" title="#{bundle.CreateUserTitle_homephone}" 
+                                     label="#{bundle.CreateUserLabel_homephone}" renderLabel="true"/>
+                        <b:inputText id="photo" value="#{userController.selected.photo}" title="#{bundle.CreateUserTitle_photo}"
+                                     label="#{bundle.CreateUserLabel_photo}" renderLabel="true"/>
+                        <b:inputText id="type" value="#{userController.selected.type}" title="#{bundle.CreateUserTitle_type}" 
+                                     label="#{bundle.CreateUserLabel_type}" renderLabel="true"/>
+                        <b:inputText id="googleCalendarToken" value="#{userController.selected.googleCalendarToken}" title="#{bundle.CreateUserTitle_googleCalendarToken}" 
+                                     label="#{bundle.CreateUserLabel_googleCalendarToken}" renderLabel="true"/>
+
+                        <b:row>
+                            <b:column id="panelbirthday" col-sm="12">
+                                <div class="form-group">
+                                    <i class="fa fa-calendar-o">
+                                        <b:datepicker id="reg" 
+                                                      changeMonth="true" changeYear="true"
+                                                      mode="popup"
+                                                      value="#{userController.selected.reg}" placeholder="#{bundle.EditUserTitle_reg}"/>
+                                    </i>
+                                </div>
+                            </b:column>
+                        </b:row>
+                        <b:inputText id="active" value="#{userController.selected.active}" title="#{bundle.CreateUserTitle_active}" 
+                                     label="#{bundle.CreateUserLabel_active}" renderLabel="true"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{userController.create}" value="#{bundle.Save}" update="display,:UserListForm:datalist,:growl" oncomplete="handleSubmit(args,'UserCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" ajax="true" onclick="PF('UserCreateDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

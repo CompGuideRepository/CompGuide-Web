@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ObservationViewDlg" widgetVar="ObservationViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewObservationTitle}">
+            <h:form id="ObservationViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{observationController.selected != null}">
+                        <h:outputText value="#{bundle.ViewObservationLabel_idobservation}"/>
+                        <h:outputText value="#{observationController.selected.idobservation}" title="#{bundle.ViewObservationTitle_idobservation}"/>
+                        <h:outputText value="#{bundle.ViewObservationLabel_parameter}"/>
+                        <h:outputText value="#{observationController.selected.parameter}" title="#{bundle.ViewObservationTitle_parameter}"/>
+                        <h:outputText value="#{bundle.ViewObservationLabel_unit}"/>
+                        <h:outputText value="#{observationController.selected.unit}" title="#{bundle.ViewObservationTitle_unit}"/>
+                        <h:outputText value="#{bundle.ViewObservationLabel_isnumeric}"/>
+                        <h:outputText value="#{observationController.selected.isnumeric}" title="#{bundle.ViewObservationTitle_isnumeric}"/>
+                        <h:outputText value="#{bundle.ViewObservationLabel_parameterIdentifier}"/>
+                        <h:outputText value="#{observationController.selected.parameterIdentifier}" title="#{bundle.ViewObservationTitle_parameterIdentifier}"/>
+                        <h:outputText value="#{bundle.ViewObservationLabel_variableName}"/>
+                        <h:outputText value="#{observationController.selected.variableName}" title="#{bundle.ViewObservationTitle_variableName}"/>
+                        <h:outputText value="#{bundle.ViewObservationLabel_parameterValue}"/>
+                        <h:outputText value="#{observationController.selected.parameterValue}" title="#{bundle.ViewObservationTitle_parameterValue}"/>
+                        <h:outputText value="#{bundle.ViewObservationLabel_task}"/>
+                        <h:outputText value="#{observationController.selected.task}" title="#{bundle.ViewObservationTitle_task}"/>
+                        <h:outputText value="#{bundle.ViewObservationLabel_time}"/>
+                        <h:outputText value="#{observationController.selected.time}" title="#{bundle.ViewObservationTitle_time}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewObservationLabel_identifier}"/>
+                        <h:outputText value="#{observationController.selected.identifier}" title="#{bundle.ViewObservationTitle_identifier}"/>
+                        <h:outputText value="#{bundle.ViewObservationLabel_idtask}"/>
+                        <h:outputText value="#{observationController.selected.idtask}" title="#{bundle.ViewObservationTitle_idtask}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ObservationViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

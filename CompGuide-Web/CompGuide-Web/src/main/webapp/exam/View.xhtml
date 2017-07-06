@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ExamViewDlg" widgetVar="ExamViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewExamTitle}">
+            <h:form id="ExamViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{examController.selected != null}">
+                        <h:outputText value="#{bundle.ViewExamLabel_idexam}"/>
+                        <h:outputText value="#{examController.selected.idexam}" title="#{bundle.ViewExamTitle_idexam}"/>
+                        <h:outputText value="#{bundle.ViewExamLabel_name}"/>
+                        <h:outputText value="#{examController.selected.name}" title="#{bundle.ViewExamTitle_name}"/>
+                        <h:outputText value="#{bundle.ViewExamLabel_description}"/>
+                        <h:outputText value="#{examController.selected.description}" title="#{bundle.ViewExamTitle_description}"/>
+                        <h:outputText value="#{bundle.ViewExamLabel_time}"/>
+                        <h:outputText value="#{examController.selected.time}" title="#{bundle.ViewExamTitle_time}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewExamLabel_identifier}"/>
+                        <h:outputText value="#{examController.selected.identifier}" title="#{bundle.ViewExamTitle_identifier}"/>
+                        <h:outputText value="#{bundle.ViewExamLabel_idtask}"/>
+                        <h:outputText value="#{examController.selected.idtask}" title="#{bundle.ViewExamTitle_idtask}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ExamViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

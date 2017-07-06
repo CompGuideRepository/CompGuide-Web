@@ -1,0 +1,188 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/profiletemplate.xhtml">
+        <ui:define name="title"> 
+            <h:outputText value="My Info" /> 
+        </ui:define>
+        <ui:define name="resourcefiles">
+            <link type="text/css" rel="stylesheet" href="#{request.contextPath}/javax.faces.resource/theme.css.xhtml?ln=primefaces-bootstrap"/>
+
+            <h:outputScript name="js/bootstrap/bootstrap.min.js" />
+            <h:outputScript name="js/jquery/jquery.slimscroll.min.js"/>
+            <h:outputScript name="js/compguide/compguide.alert.js"/>
+            <h:outputScript name="js/jquery/jquery.timeago.js"/>
+            <h:outputScript name="js/jquery/jquery.livequery.js"/>
+            <h:outputScript name="js/jquery/jquery.countdown.js"/>
+            <h:outputScript name="js/jquery/jquery.tipsy.js"/>
+            <script>
+                $(document).ready(function ()
+                {
+                    $('.dropdown').unbind('click');
+                    $('.dropdown-toggle').dropdown();
+                });
+            </script>
+
+            <h:outputScript name="js/jquery/jquery.dataTables.js"/>
+            <h:outputScript name="js/datatables/dataTables.responsive.js"/>
+            <h:outputScript name="js/compguide/guidelinetabledetails.js" />
+            <h:outputScript name="js/datatables/dataTables.bootstrap.js" />
+            <h:outputScript name="js/compguide/compguidenotification.js"/>
+        </ui:define>
+        <ui:define name="navbar">
+            <ui:include src="/navbar/profilenavbar.xhtml" />
+        </ui:define>
+        <ui:define name="pageheader">
+            <ui:include src="/header/homeheader.xhtml" />
+        </ui:define>
+        <ui:define name="content">
+            <b:row>
+                <b:column col-md="5">
+                    <div class="ct-form clearfix">
+                        <h6>Complete the form</h6>
+                        <p>Please use the form bellow to see your info.</p>
+                        <h:form id="info">
+                            <b:row>
+                                <b:column>
+                                    <p:messages showDetail="true" autoUpdate="true" />
+                                </b:column>
+                            </b:row>
+                            <b:row>
+                                <!--<p:outputPanel id="panelusername" autoUpdate="true">-->
+                                <b:column id="panelusername" col-sm="6">
+                                    <b:message for="username" />
+                                    <div class="form-group">
+                                        <i class="fa fa-user">
+                                            <b:inputText id="username" disabled="true" placeholder="User Name"
+                                                         class="form-control"
+                                                         value="#{userController.selected.username}" 
+                                                         tooltip="Enter the user name"
+                                                         tooltip-position="top"
+                                                         required="true" requiredMessage=" Fill the user name field"/>
+                                        </i>
+                                    </div>
+                                </b:column>
+                                <!--</p:outputPanel>-->
+                                <!--<p:outputPanel id="panelname" autoUpdate="true">-->
+                                <b:column id="panelname" col-sm="6">
+                                    <b:message for="name" />
+                                    <div class="form-group">
+                                        <i class="fa fa-user">
+                                            <b:inputText id="name" disabled="true"  class="form-control" 
+                                                         placeholder="Name and Lastname"
+                                                         value="#{userController.selected.name}"
+                                                         tooltip="Enter your first and last name"
+                                                         tooltip-position="top"
+                                                         required="true" requiredMessage=" Fill the name and lastname field"/>
+                                        </i>
+                                    </div>
+                                </b:column>
+                                <!--</p:outputPanel>-->
+                            </b:row>
+                            <b:row>
+                                <b:column id="panelemail" col-sm="12">
+                                    <b:message for="email" />
+                                    <div class="form-group">
+                                        <label for="message" class="sr-only">Message</label>
+                                        <i class="glyphicon glyphicon-envelope">
+                                            <b:inputText id="email" disabled="true" class="form-control" 
+                                                         placeholder="Email" value="#{userController.selected.email}"
+                                                         required="true" requiredMessage=" Fill email field"
+                                                         onfocus="lastFocus(this.id);" 
+                                                         tooltip="Enter your email address"
+                                                         tooltip-position="top"/>
+                                        </i>
+                                    </div>
+                                </b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column id="paneladdress" col-sm="12">
+                                    <b:message for="address" />
+                                    <div class="form-group">
+                                        <label for="message" class="sr-only">Message</label>
+                                        <i class="fa fa-map--marker">
+                                            <b:inputText id="address" disabled="true" class="form-control" 
+                                                         placeholder="Address" value="#{userController.selected.address}"
+                                                         required="true" requiredMessage=" Fill address field"
+                                                         onfocus="lastFocus(this.id);" 
+                                                         tooltip="Enter your address"
+                                                         tooltip-position="top"/>
+                                        </i>
+                                    </div>
+                                </b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column id="panelbirthday" col-sm="12">
+                                    <div class="form-group">
+                                        <i class="fa fa-calendar-o">
+                                            <b:datepicker id="birthday" mode="popup" placeholder="Birthday"
+                                                          showWeek="true" tooltip="Select your birth date"
+                                                          changeMonth="true" changeYear="true" 
+                                                          tooltip-position="top"
+                                                          value="#{userController.selected.birthdate}"/>
+                                        </i>
+                                    </div>
+                                </b:column>
+                            </b:row>
+                            <b:row>
+                                <!--<p:outputPanel id="panelusername" autoUpdate="true">-->
+                                <b:column id="panelpassword" col-sm="6">
+                                    <b:message for="password" />
+                                    <div class="form-group">
+                                        <i class="fa fa fa-key">
+                                            <b:inputSecret id="password" disabled="true" placeholder="Password"
+                                                           class="form-control"
+                                                           value="#{userController.password}" 
+                                                           required="true" requiredMessage=" Fill the password field"
+                                                           tooltip="Enter the password"
+                                                           tooltip-position="top">
+                                            </b:inputSecret>                                                
+                                        </i>
+                                    </div>
+                                </b:column>
+                                <!--</p:outputPanel>-->
+                                <!--<p:outputPanel id="panelname" autoUpdate="true">-->
+                                <b:column id="panelconfirmpassword" col-sm="6">
+                                    <b:message for="confirmpassword" />
+                                    <div class="form-group">
+                                        <i class="fa fa-key">
+                                            <b:inputSecret id="confirmpassword" disabled="true" class="form-control" 
+                                                           placeholder="Confirm Password"
+                                                           value="#{userController.confirmPassword}" 
+                                                           required="true" requiredMessage=" Confirm the password"
+                                                           tooltip="Confirm the password"
+                                                           tooltip-position="top">
+                                            </b:inputSecret>
+                                        </i>
+                                    </div>
+                                </b:column>
+
+                                <!--</p:outputPanel>-->
+                            </b:row>
+
+                            <b:row>
+                                <!--    <b:column  col-sm="6" >
+                                            <p:captcha label="Captcha" />
+                                        </b:column>-->
+
+                            </b:row>
+                        </h:form>
+                    </div>
+                </b:column>
+                <div class="col-sm-7 hidden-xs">
+                    <figure class="animated fadeInUpBig" data-animation="fadeInUpBig" data-animation-delay="400">
+                        <img src="resources/images/person.png" alt="//"/>
+                    </figure>
+                </div>
+            </b:row>
+        </ui:define>
+        <ui:define name="footer">
+            <ui:include src="/footer/footer.xhtml" />
+        </ui:define>
+    </ui:composition>
+</html>

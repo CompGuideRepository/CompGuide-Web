@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DurationCreateDlg" widgetVar="DurationCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateDurationTitle}">
+            <h:form id="DurationCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{durationController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateDurationLabel_durationID}" for="durationID" />
+                        <p:inputText id="durationID" value="#{durationController.selected.durationID}" title="#{bundle.CreateDurationTitle_durationID}" required="true" requiredMessage="#{bundle.CreateDurationRequiredMessage_durationID}"/>
+                        <p:outputLabel value="#{bundle.CreateDurationLabel_minDurationValue}" for="minDurationValue" />
+                        <p:inputText id="minDurationValue" value="#{durationController.selected.minDurationValue}" title="#{bundle.CreateDurationTitle_minDurationValue}" />
+                        <p:outputLabel value="#{bundle.CreateDurationLabel_maxDurationValue}" for="maxDurationValue" />
+                        <p:inputText id="maxDurationValue" value="#{durationController.selected.maxDurationValue}" title="#{bundle.CreateDurationTitle_maxDurationValue}" />
+                        <p:outputLabel value="#{bundle.CreateDurationLabel_durationValue}" for="durationValue" />
+                        <p:inputText id="durationValue" value="#{durationController.selected.durationValue}" title="#{bundle.CreateDurationTitle_durationValue}" />
+                        <p:outputLabel value="#{bundle.CreateDurationLabel_temporalUnitID}" for="temporalUnitID" />
+                        <p:selectOneMenu id="temporalUnitID" value="#{durationController.selected.temporalUnitID}" required="true" requiredMessage="#{bundle.EditDurationRequiredMessage_temporalUnitID}">
+                            <f:selectItems value="#{temporalUnitController.itemsAvailableSelectOne}"
+                                           var="temporalUnitIDItem"
+                                           itemValue="#{temporalUnitIDItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{durationController.create}" value="#{bundle.Save}" update="display,:DurationListForm:datalist,:growl" oncomplete="handleSubmit(args,'DurationCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DurationCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

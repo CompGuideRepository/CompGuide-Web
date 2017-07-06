@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ScheduleTaskEditDlg" widgetVar="ScheduleTaskEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditScheduleTaskTitle}">
+            <h:form id="ScheduleTaskEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{scheduleTaskController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditScheduleTaskLabel_scheduleTaskID}" for="scheduleTaskID" />
+                        <p:inputText id="scheduleTaskID" value="#{scheduleTaskController.selected.scheduleTaskID}" title="#{bundle.EditScheduleTaskTitle_scheduleTaskID}" required="true" requiredMessage="#{bundle.EditScheduleTaskRequiredMessage_scheduleTaskID}"/>
+                        <p:outputLabel value="#{bundle.EditScheduleTaskLabel_completedDate}" for="completedDate" />
+                        <p:calendar id="completedDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{scheduleTaskController.selected.completedDate}" title="#{bundle.EditScheduleTaskTitle_completedDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditScheduleTaskLabel_taskType}" for="taskType" />
+                        <p:inputText id="taskType" value="#{scheduleTaskController.selected.taskType}" title="#{bundle.EditScheduleTaskTitle_taskType}" />
+                        <p:outputLabel value="#{bundle.EditScheduleTaskLabel_taskFormat}" for="taskFormat" />
+                        <p:inputText id="taskFormat" value="#{scheduleTaskController.selected.taskFormat}" title="#{bundle.EditScheduleTaskTitle_taskFormat}" />
+                        <p:outputLabel value="#{bundle.EditScheduleTaskLabel_taskDescription}" for="taskDescription" />
+                        <p:inputTextarea rows="4" cols="30" id="taskDescription" value="#{scheduleTaskController.selected.taskDescription}" title="#{bundle.EditScheduleTaskTitle_taskDescription}" />
+                        <p:outputLabel value="#{bundle.EditScheduleTaskLabel_taskIdentifier}" for="taskIdentifier" />
+                        <p:inputText id="taskIdentifier" value="#{scheduleTaskController.selected.taskIdentifier}" title="#{bundle.EditScheduleTaskTitle_taskIdentifier}" />
+                        <p:outputLabel value="#{bundle.EditScheduleTaskLabel_taskPlan}" for="taskPlan" />
+                        <p:inputText id="taskPlan" value="#{scheduleTaskController.selected.taskPlan}" title="#{bundle.EditScheduleTaskTitle_taskPlan}" />
+                        <p:outputLabel value="#{bundle.EditScheduleTaskLabel_nextTask}" for="nextTask" />
+                        <p:inputTextarea rows="4" cols="30" id="nextTask" value="#{scheduleTaskController.selected.nextTask}" title="#{bundle.EditScheduleTaskTitle_nextTask}" />
+                        <p:outputLabel value="#{bundle.EditScheduleTaskLabel_completed}" for="completed" />
+                        <p:selectBooleanCheckbox id="completed" value="#{scheduleTaskController.selected.completed}" />
+                        <p:outputLabel value="#{bundle.EditScheduleTaskLabel_currentNumberOfRepetitions}" for="currentNumberOfRepetitions" />
+                        <p:inputText id="currentNumberOfRepetitions" value="#{scheduleTaskController.selected.currentNumberOfRepetitions}" title="#{bundle.EditScheduleTaskTitle_currentNumberOfRepetitions}" />
+                        <p:outputLabel value="#{bundle.EditScheduleTaskLabel_endDate}" for="endDate" />
+                        <p:calendar id="endDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{scheduleTaskController.selected.endDate}" title="#{bundle.EditScheduleTaskTitle_endDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditScheduleTaskLabel_startDate}" for="startDate" />
+                        <p:calendar id="startDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{scheduleTaskController.selected.startDate}" title="#{bundle.EditScheduleTaskTitle_startDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditScheduleTaskLabel_parentTaskID}" for="parentTaskID" />
+                        <p:selectOneMenu id="parentTaskID" value="#{scheduleTaskController.selected.parentTaskID}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{scheduleTaskController.itemsAvailableSelectOne}"
+                                           var="parentTaskIDItem"
+                                           itemValue="#{parentTaskIDItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditScheduleTaskLabel_guideExecID}" for="guideExecID" />
+                        <p:selectOneMenu id="guideExecID" value="#{scheduleTaskController.selected.guideExecID}" required="true" requiredMessage="#{bundle.EditScheduleTaskRequiredMessage_guideExecID}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{guideExecController.itemsAvailableSelectOne}"
+                                           var="guideExecIDItem"
+                                           itemValue="#{guideExecIDItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{scheduleTaskController.update}" value="#{bundle.Save}" update="display,:ScheduleTaskListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ScheduleTaskEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ScheduleTaskEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

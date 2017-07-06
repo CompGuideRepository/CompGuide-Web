@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ConditionCreateDlg" widgetVar="ConditionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateConditionTitle}">
+            <h:form id="ConditionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{conditionController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateConditionLabel_conditionID}" for="conditionID" />
+                        <p:inputText id="conditionID" value="#{conditionController.selected.conditionID}" title="#{bundle.CreateConditionTitle_conditionID}" required="true" requiredMessage="#{bundle.CreateConditionRequiredMessage_conditionID}"/>
+                        <p:outputLabel value="#{bundle.CreateConditionLabel_numericalValue}" for="numericalValue" />
+                        <p:inputText id="numericalValue" value="#{conditionController.selected.numericalValue}" title="#{bundle.CreateConditionTitle_numericalValue}" />
+                        <p:outputLabel value="#{bundle.CreateConditionLabel_qualitativeValue}" for="qualitativeValue" />
+                        <p:inputText id="qualitativeValue" value="#{conditionController.selected.qualitativeValue}" title="#{bundle.CreateConditionTitle_qualitativeValue}" />
+                        <p:outputLabel value="#{bundle.CreateConditionLabel_comparisonOperator}" for="comparisonOperator" />
+                        <p:inputText id="comparisonOperator" value="#{conditionController.selected.comparisonOperator}" title="#{bundle.CreateConditionTitle_comparisonOperator}" />
+                        <p:outputLabel value="#{bundle.CreateConditionLabel_parameterIdentifier}" for="parameterIdentifier" />
+                        <p:inputText id="parameterIdentifier" value="#{conditionController.selected.parameterIdentifier}" title="#{bundle.CreateConditionTitle_parameterIdentifier}" />
+                        <p:outputLabel value="#{bundle.CreateConditionLabel_conditionParameter}" for="conditionParameter" />
+                        <p:inputText id="conditionParameter" value="#{conditionController.selected.conditionParameter}" title="#{bundle.CreateConditionTitle_conditionParameter}" />
+                        <p:outputLabel value="#{bundle.CreateConditionLabel_unit}" for="unit" />
+                        <p:inputText id="unit" value="#{conditionController.selected.unit}" title="#{bundle.CreateConditionTitle_unit}" />
+                        <p:outputLabel value="#{bundle.CreateConditionLabel_canAsk}" for="canAsk" />
+                        <p:selectBooleanCheckbox id="canAsk" value="#{conditionController.selected.canAsk}" />
+                        <p:outputLabel value="#{bundle.CreateConditionLabel_asked}" for="asked" />
+                        <p:selectBooleanCheckbox id="asked" value="#{conditionController.selected.asked}" />
+                        <p:outputLabel value="#{bundle.CreateConditionLabel_conditionSetID}" for="conditionSetID" />
+                        <p:selectOneMenu id="conditionSetID" value="#{conditionController.selected.conditionSetID}" >
+                            <f:selectItems value="#{conditionSetController.itemsAvailableSelectOne}"
+                                           var="conditionSetIDItem"
+                                           itemValue="#{conditionSetIDItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateConditionLabel_temporalRestrictionID}" for="temporalRestrictionID" />
+                        <p:selectOneMenu id="temporalRestrictionID" value="#{conditionController.selected.temporalRestrictionID}" >
+                            <f:selectItems value="#{temporalRestrictionController.itemsAvailableSelectOne}"
+                                           var="temporalRestrictionIDItem"
+                                           itemValue="#{temporalRestrictionIDItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateConditionLabel_stopConditionSetID}" for="stopConditionSetID" />
+                        <p:selectOneMenu id="stopConditionSetID" value="#{conditionController.selected.stopConditionSetID}" >
+                            <f:selectItems value="#{stopConditionSetController.itemsAvailableSelectOne}"
+                                           var="stopConditionSetIDItem"
+                                           itemValue="#{stopConditionSetIDItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{conditionController.create}" value="#{bundle.Save}" update="display,:ConditionListForm:datalist,:growl" oncomplete="handleSubmit(args,'ConditionCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ConditionCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

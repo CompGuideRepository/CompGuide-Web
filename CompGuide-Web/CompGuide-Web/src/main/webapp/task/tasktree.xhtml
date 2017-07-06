@@ -1,0 +1,21 @@
+<ui:composition     xmlns="http://www.w3.org/1999/xhtml"
+                    xmlns:c="http://java.sun.com/jsp/jstl/core"
+                    xmlns:h="http://xmlns.jcp.org/jsf/html"
+                    xmlns:b="http://bootsfaces.net/ui"
+                    xmlns:f="http://java.sun.com/jsf/core"
+                    xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+                    xmlns:p="http://primefaces.org/ui"
+                    xmlns:pe="http://primefaces.org/ui/extensions">
+    <h:form id="tasktree">
+        <b:column col-sm="12">
+            <p:tree value="#{taskTreeController.root}" var="node" orientation="horizontal">
+                <p:treeNode>
+                    <h:outputText value="#{node}" />
+                </p:treeNode>
+            </p:tree>
+        </b:column>
+    </h:form>
+    <p/>
+
+</ui:composition>
+

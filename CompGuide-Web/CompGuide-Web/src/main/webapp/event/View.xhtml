@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EventViewDlg" widgetVar="EventViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEventTitle}">
+            <h:form id="EventViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{eventController.selected != null}">
+                        <h:outputText value="#{bundle.ViewEventLabel_eventID}"/>
+                        <h:outputText value="#{eventController.selected.eventID}" title="#{bundle.ViewEventTitle_eventID}"/>
+                        <h:outputText value="#{bundle.ViewEventLabel_startDate}"/>
+                        <h:outputText value="#{eventController.selected.startDate}" title="#{bundle.ViewEventTitle_startDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewEventLabel_endDate}"/>
+                        <h:outputText value="#{eventController.selected.endDate}" title="#{bundle.ViewEventTitle_endDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewEventLabel_checked}"/>
+                        <p:selectBooleanCheckbox value="#{eventController.selected.checked}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewEventLabel_canCheck}"/>
+                        <p:selectBooleanCheckbox value="#{eventController.selected.canCheck}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewEventLabel_numberOfRepetitions}"/>
+                        <h:outputText value="#{eventController.selected.numberOfRepetitions}" title="#{bundle.ViewEventTitle_numberOfRepetitions}"/>
+                        <h:outputText value="#{bundle.ViewEventLabel_repetitionNumber}"/>
+                        <h:outputText value="#{eventController.selected.repetitionNumber}" title="#{bundle.ViewEventTitle_repetitionNumber}"/>
+                        <h:outputText value="#{bundle.ViewEventLabel_postPonedDate}"/>
+                        <h:outputText value="#{eventController.selected.postPonedDate}" title="#{bundle.ViewEventTitle_postPonedDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewEventLabel_taskID}"/>
+                        <h:outputText value="#{eventController.selected.taskID}" title="#{bundle.ViewEventTitle_taskID}"/>
+                        <h:outputText value="#{bundle.ViewEventLabel_scheduleTaskID}"/>
+                        <h:outputText value="#{eventController.selected.scheduleTaskID}" title="#{bundle.ViewEventTitle_scheduleTaskID}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="EventViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

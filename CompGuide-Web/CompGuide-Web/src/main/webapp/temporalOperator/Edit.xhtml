@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TemporalOperatorEditDlg" widgetVar="TemporalOperatorEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTemporalOperatorTitle}">
+            <h:form id="TemporalOperatorEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{temporalOperatorController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTemporalOperatorLabel_temporalOperatorID}" for="temporalOperatorID" />
+                        <p:inputText id="temporalOperatorID" value="#{temporalOperatorController.selected.temporalOperatorID}" title="#{bundle.EditTemporalOperatorTitle_temporalOperatorID}" required="true" requiredMessage="#{bundle.EditTemporalOperatorRequiredMessage_temporalOperatorID}"/>
+                        <p:outputLabel value="#{bundle.EditTemporalOperatorLabel_value}" for="value" />
+                        <p:inputText id="value" value="#{temporalOperatorController.selected.value}" title="#{bundle.EditTemporalOperatorTitle_value}" required="true" requiredMessage="#{bundle.EditTemporalOperatorRequiredMessage_value}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{temporalOperatorController.update}" value="#{bundle.Save}" update="display,:TemporalOperatorListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TemporalOperatorEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TemporalOperatorEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

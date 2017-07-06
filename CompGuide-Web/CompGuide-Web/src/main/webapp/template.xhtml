@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title><ui:insert name="title">Default Title</ui:insert></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+        <h:outputStylesheet name="css/revolution/settings.css" />
+        <h:outputStylesheet name="css/revolution/extralayers.css" />
+        <h:outputStylesheet library="customthemes" name="style.css"/>
+        <h:outputStylesheet name="css/compguide/compguide.css" />
+        <ui:insert name="otherfiles" />
+        <ui:insert name="resourcefiles" />
+
+        <h:outputStylesheet name="css/pace/pace-theme-flash.css" position="first"/>
+        <h:outputScript name="js/pace/pace.js" position="first"/>
+        <h:outputScript name="js/jquery/jquery.nav.js" />
+        <h:outputScript name="js/owl.carousel.min.js" />
+        <h:outputScript name="js/jquery/jquery-ui-1.10.3.custom.js"/>
+        <h:outputScript name="js/jquery/jquery.easy-pie-chart.js" />
+        <h:outputScript name="js/twitter/jquery.tweet.min.js"/>
+        <h:outputScript name="js/jquery/jquery.appear.js"/>
+        <h:outputScript name="js/isotope/jquery.isotope.min.js"/>
+        <h:outputScript name="js/jquery/jquery.bgYtVideo.js" />
+        <h:outputScript name="js/revolution/jquery.themepunch.tools.min.js"/>
+        <h:outputScript name="js/revolution/jquery.themepunch.revolution.min.js"/>
+        <h:outputScript name="js/jquery/jquery.sky.carousel-1.0.2.min.js"/>
+        <h:outputScript name="js/bootstrap/bootstrap-slider.js" />
+        <h:outputScript name="js/jsfcrud.js" />
+        <h:outputScript name="js/script.js"/>
+        <h:outputScript name="js/compguide/compguideclient.js"/>
+
+    </h:head>
+
+    <h:body>
+        <ui:insert name="events" />
+        <ui:insert name="navbar" />
+        <ui:insert name="pageheader" />
+        <ui:insert name="beforebody" />
+        <ui:insert name="body"/>
+        <ui:insert name="register" />
+        <ui:insert name="footer" />
+    </h:body>
+</html>

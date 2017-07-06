@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DurationViewDlg" widgetVar="DurationViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewDurationTitle}">
+            <h:form id="DurationViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{durationController.selected != null}">
+                        <h:outputText value="#{bundle.ViewDurationLabel_durationID}"/>
+                        <h:outputText value="#{durationController.selected.durationID}" title="#{bundle.ViewDurationTitle_durationID}"/>
+                        <h:outputText value="#{bundle.ViewDurationLabel_minDurationValue}"/>
+                        <h:outputText value="#{durationController.selected.minDurationValue}" title="#{bundle.ViewDurationTitle_minDurationValue}"/>
+                        <h:outputText value="#{bundle.ViewDurationLabel_maxDurationValue}"/>
+                        <h:outputText value="#{durationController.selected.maxDurationValue}" title="#{bundle.ViewDurationTitle_maxDurationValue}"/>
+                        <h:outputText value="#{bundle.ViewDurationLabel_durationValue}"/>
+                        <h:outputText value="#{durationController.selected.durationValue}" title="#{bundle.ViewDurationTitle_durationValue}"/>
+                        <h:outputText value="#{bundle.ViewDurationLabel_temporalUnitID}"/>
+                        <h:outputText value="#{durationController.selected.temporalUnitID}" title="#{bundle.ViewDurationTitle_temporalUnitID}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="DurationViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

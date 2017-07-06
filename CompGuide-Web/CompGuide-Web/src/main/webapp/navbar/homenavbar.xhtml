@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://java.sun.com/jsf/html"
+             xmlns:ui="http://java.sun.com/jsf/facelets"
+             xmlns:f="http://java.sun.com/jsf/core"
+             xmlns:b="http://bootsfaces.net/ui">
+    <b:navBar class="collapse navbar-collapse navbar-collapse navbar-fixed-rigt"
+              brandHref="#{request.contextPath}/" brandImg="resources/images/logo_CompGuide_small.png"
+              fixed="top" id="navbar">
+        <b:container>
+            <b:navbarLinks pull="right">
+                <b:dropMenu value="Account" iconAwesome="map-signs">
+                    <b:navLink value="Register" 
+                               iconAwesome="user-plus" outcome="register"/>
+                    <b:navLink value="Sign-in"  iconAwesome="sign-in" outcome="login"/>
+                </b:dropMenu>
+                <b:navLink value="Contact"  icon="envelope" outcome="contact"/>
+            </b:navbarLinks>
+        </b:container>
+    </b:navBar>
+</ui:fragment>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/profiletemplate.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListPeriodicityTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="resourcefiles">
+            <link type="text/css" rel="stylesheet" href="#{request.contextPath}/javax.faces.resource/theme.css.xhtml?ln=primefaces-bootstrap"/>
+            <h:outputScript name="js/jquery/jquery.slimscroll.min.js"/>
+            <h:outputScript name="js/compguide/compguide.alert.js"/>
+            <h:outputScript name="js/jquery/jquery.timeago.js"/>
+            <h:outputScript name="js/jquery/jquery.livequery.js"/>
+            <h:outputScript name="js/jquery/jquery.countdown.js"/>
+            <h:outputScript name="js/jquery/jquery.tipsy.js"/>
+
+            <h:outputScript name="js/jquery/jquery.dataTables.js"/>
+            <h:outputScript name="js/datatables/dataTables.responsive.js"/>
+            <h:outputScript name="js/compguide/guidelinetabledetails.js" />
+            <h:outputScript name="js/datatables/dataTables.bootstrap.js" /> 
+            <h:outputScript name="js/compguide/compguidenotification.js"/>
+        </ui:define>
+        <ui:define name="navbar">
+            <ui:include src="/navbar/profilenavbar.xhtml" />
+        </ui:define>
+        <ui:define name="validatesession">
+            <f:metadata>
+                <f:event type="preRenderView" listener="#{userController.sessionValidate}" />
+            </f:metadata>
+        </ui:define>
+
+        <ui:define name="content">
+            <h:form id="PeriodicityListForm">
+
+                <p:dataTable id="datalist" value="#{periodicityController.items}" var="item"
+                             selectionMode="single" selection="#{periodicityController.selected}"
+                             paginator="true"
+                             rowKey="#{item.periodicityID}"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50" 
+                             >
+
+                    <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                    <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListPeriodicityTitle_periodicityID}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.periodicityID}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListPeriodicityTitle_repetitionValue}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.repetitionValue}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListPeriodicityTitle_periodicityValue}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.periodicityValue}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListPeriodicityTitle_cyclePartDefinitionID}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cyclePartDefinitionID}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListPeriodicityTitle_temporalUnitID}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.temporalUnitID}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListPeriodicityTitle_durationID}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.durationID}"/>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{periodicityController.prepareCreate}" update=":PeriodicityCreateForm" oncomplete="PF('PeriodicityCreateDialog').show()"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PeriodicityViewForm" oncomplete="PF('PeriodicityViewDialog').show()" disabled="#{empty periodicityController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":PeriodicityEditForm" oncomplete="PF('PeriodicityEditDialog').show()" disabled="#{empty periodicityController.selected}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{periodicityController.destroy}" update=":growl,datalist" disabled="#{empty periodicityController.selected}"/>
+                    </f:facet>
+                </p:dataTable>
+
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+
+        <ui:define name="footer">
+            <ui:include src="/footer/profilefooter.xhtml" />
+        </ui:define>
+    </ui:composition>
+
+</html>

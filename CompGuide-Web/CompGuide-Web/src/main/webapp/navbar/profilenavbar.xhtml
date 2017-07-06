@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://java.sun.com/jsf/html"
+             xmlns:ui="http://java.sun.com/jsf/facelets"
+             xmlns:f="http://java.sun.com/jsf/core"
+             xmlns:b="http://bootsfaces.net/ui">
+    <b:navBar class="collapse navbar-collapse navbar-collapse navbar-fixed-rigt"
+              brandHref="#{request.contextPath}/" brandImg="resources/images/logo_CompGuide_small.png"
+              fixed="top" id="navbar">
+        <b:container>
+            <h:form>
+                <b:navbarLinks pull="left">
+                    <b:dropMenu value="#{bundle.Maintenance}" iconAwesome="cogs" rendered="#{userController.admin}">
+                        <b:navLink iconAwesome="database" value="Manage Autentication" outcome="/autentication/List.xhtml" />
+                        <b:navLink iconAwesome="database" value="Manage Condition" outcome="/condition/List.xhtml" />
+                        <b:navLink iconAwesome="database" value="Manage ConditionSet" outcome="/conditionSet/List.xhtml" />
+                        <b:navLink iconAwesome="database" value="Manage CyclePartDefinition" outcome="/cyclePartDefinition/List.xhtml" />
+                        <b:navLink iconAwesome="database" value="Manage CyclePartPeriodicity" outcome="/cyclePartPeriodicity/List.xhtml" />
+                        <b:navLink iconAwesome="database" value="Manage Duration" outcome="/duration/List.xhtml" />
+                        <b:navLink iconAwesome="database" value="Manage Event" outcome="/event/List.xhtml" />
+                        <b:navLink iconAwesome="database" value="Manage Exam" outcome="/exam/List.xhtml" />
+                        <b:navLink iconAwesome="database" value="Manage Formula" outcome="/formula/List.xhtml" />
+                        <b:navLink iconAwesome="database" value="Manage GeneratedTask" outcome="/generatedTask/List.xhtml" />
+                        <b:navLink iconAwesome="database" value="Manage GuideExec" outcome="/guideExec/List.xhtml" />
+                        <b:navLink iconAwesome="database" value="Manage Guideline" outcome="/guideline/List.xhtml" />
+                        <b:navLink iconAwesome="database" value="Manage Medication" outcome="/medication/List.xhtml" />
+                        <b:navLink iconAwesome="database" value="Manage NonMedication" outcome="/nonMedication/List.xhtml" />
+                        <b:navLink iconAwesome="database" value="Manage Notification" outcome="/notification/List.xhtml" />
+                        <b:navLink iconAwesome="database" value="Manage Observation" outcome="/observation/List.xhtml" />
+                        <b:navLink iconAwesome="database" value="Manage Outcome" outcome="/outcome/List.xhtml" />
+                        <b:navLink iconAwesome="database" value="Manage Patient" outcome="/patient/List.xhtml" />
+                        <b:navLink iconAwesome="database" value="Manage Periodicity" outcome="/periodicity/List.xhtml" />
+                        <b:navLink iconAwesome="database" value="Manage Procedure" outcome="/procedure/List.xhtml" />
+                        <b:navLink iconAwesome="database" value="Manage StopConditionSet" outcome="/stopConditionSet/List.xhtml" />
+                        <b:navLink iconAwesome="database" value="Manage Task" outcome="/task/List.xhtml" />
+                        <b:navLink iconAwesome="database" value="Manage ScheduleTask" outcome="/scheduleTask/List.xhtml" />
+                        <b:navLink iconAwesome="database" value="Manage TemporalElement" outcome="/temporalElement/List.xhtml" />
+                        <b:navLink iconAwesome="database" value="Manage TemporalOperator" outcome="/temporalOperator/List.xhtml" />
+                        <b:navLink iconAwesome="database" value="Manage TemporalRestriction" outcome="/temporalRestriction/List.xhtml" />
+                        <b:navLink iconAwesome="database" value="Manage TemporalUnit" outcome="/temporalUnit/List.xhtml" />
+                        <b:navLink iconAwesome="database" value="Manage User" outcome="/user/List.xhtml" />
+                        <b:navLink iconAwesome="database" value="Manage WaitingTime" outcome="/waitingTime/List.xhtml" />
+                    </b:dropMenu>
+                    <b:dropMenu value="Guideline" iconAwesome="book" > 
+                        <b:navLink value="Manage Guidelines" 
+                                   iconAwesome="gear" rendered="#{userController.admin}" 
+                                   outcome="guideline"></b:navLink>
+                        <b:navLink value="Execute Guideline" 
+                                   iconAwesome="check" outcome="executeguideline"></b:navLink>
+
+                    </b:dropMenu>
+                    <b:navLink value="Patient" rendered="#{userController.admin}" iconAwesome="wheelchair" outcome="patient"/>
+                    <b:navLink value="Health Profissional" iconAwesome="user-md" rendered="#{userController.admin}"  outcome="user" />
+                </b:navbarLinks>
+                <b:navbarLinks pull="right">
+                    <li id="notification_li" name="notification_li" class="dropdown dropdown">
+                        <a id="notificationLink" 
+                           class="dropdown-toggle" href="#" 
+                           role="button" data-toggle="dropdown">
+                            <span>
+                                <i class="glyphicon glyphicon-envelope"></i>
+                            </span>
+
+                            Messages
+                        </a>
+                        <div id="notificationContainer" class="notificationContainer">
+                            <div id="notificationTitle" class="notificationTitle">
+                                Notifications
+                            </div>
+                            <div id="notificationsBody" class="notifications">
+
+                                <div id="notifications" class="notifications">
+
+                                    <div class="some-content-related-div notifications_container" 
+                                         id="notifications_container"> 
+                                    </div>
+
+                                    <div class="animation_image" 
+                                         style="display:none" align="center">
+                                        <h:graphicImage 
+                                            name="images/ajax-loader.gif" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="notificationFooter" 
+                                 class="notificationFooter">
+                                <a href="">See All</a>
+                            </div>
+                        </div>
+                    </li>
+                    <b:navLink value="Tasks " 
+                               outcome="schedule" iconAlign="left" 
+                               iconAwesome="tasks"/>
+
+                    <b:dropMenu value="Dr #{userController.userName}" 
+                                id="messages" class="notification-container">
+                        <b:navLink iconAwesome="cog" value="My Account" outcome="infouser"/>
+                        <b:navLink iconAwesome="pencil" value="Edit Settings" outcome="editinfo"/>
+                        <b:navCommandLink value="Sign-out" action="#{userController.logout}"
+                                          iconAwesome="sign-out"
+                                          class="text-warning"/>
+                    </b:dropMenu>
+                </b:navbarLinks>
+            </h:form>
+        </b:container>
+    </b:navBar>
+</ui:fragment>

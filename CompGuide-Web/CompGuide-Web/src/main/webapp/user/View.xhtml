@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UserViewDlg" widgetVar="UserViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewUserTitle}">
+            <h:form id="UserViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{userController.selected != null}">
+                        <h:outputText value="#{bundle.ViewUserLabel_iduser}"/>
+                        <h:outputText value="#{userController.selected.iduser}" title="#{bundle.ViewUserTitle_iduser}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_username}"/>
+                        <h:outputText value="#{userController.selected.username}" title="#{bundle.ViewUserTitle_username}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_password}"/>
+                        <h:outputText value="#{userController.selected.password}" title="#{bundle.ViewUserTitle_password}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_name}"/>
+                        <h:outputText value="#{userController.selected.name}" title="#{bundle.ViewUserTitle_name}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_lastname}"/>
+                        <h:outputText value="#{userController.selected.lastname}" title="#{bundle.ViewUserTitle_lastname}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_birthdate}"/>
+                        <h:outputText value="#{userController.selected.birthdate}" title="#{bundle.ViewUserTitle_birthdate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewUserLabel_phone}"/>
+                        <h:outputText value="#{userController.selected.phone}" title="#{bundle.ViewUserTitle_phone}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_email}"/>
+                        <h:outputText value="#{userController.selected.email}" title="#{bundle.ViewUserTitle_email}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_address}"/>
+                        <h:outputText value="#{userController.selected.address}" title="#{bundle.ViewUserTitle_address}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_homephone}"/>
+                        <h:outputText value="#{userController.selected.homephone}" title="#{bundle.ViewUserTitle_homephone}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_photo}"/>
+                        <h:outputText value="#{userController.selected.photo}" title="#{bundle.ViewUserTitle_photo}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_type}"/>
+                        <h:outputText value="#{userController.selected.type}" title="#{bundle.ViewUserTitle_type}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_googleCalendarToken}"/>
+                        <h:outputText value="#{userController.selected.googleCalendarToken}" title="#{bundle.ViewUserTitle_googleCalendarToken}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_reg}"/>
+                        <h:outputText value="#{userController.selected.reg}" title="#{bundle.ViewUserTitle_reg}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewUserLabel_active}"/>
+                        <h:outputText value="#{userController.selected.active}" title="#{bundle.ViewUserTitle_active}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" 
+                                     ajax="true" onclick="PF('UserViewDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

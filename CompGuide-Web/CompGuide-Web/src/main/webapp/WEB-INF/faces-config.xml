@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+    <application>
+        <!--<view-handler>com.compguide.web.ViewHandler.NullViewWorkaroundNavigationHandler</view-handler>-->
+        <resource-bundle>
+            <base-name>resources/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+        <converter>
+            <converter-id>userConverter</converter-id>
+            <converter-for-class>com.compguide.web.View.AutoComplete</converter-for-class>  
+            <converter-class>com.compguide.web.Converters.UserConverter</converter-class>
+        </converter>
+        <navigation-rule>
+            <from-view-id>*</from-view-id>
+            <navigation-case>
+                <from-outcome>contact</from-outcome>
+                <to-view-id>/contact.xhtml</to-view-id>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>home</from-outcome>
+                <to-view-id>/index.xhtml</to-view-id>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>login</from-outcome>
+                <to-view-id>/account/login.xhtml</to-view-id>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>register</from-outcome>
+                <to-view-id>/account/register.xhtml</to-view-id>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>error</from-outcome>
+                <to-view-id>/account/login.xhtml</to-view-id>
+                <redirect />
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>logout</from-outcome>
+                <to-view-id>/index.xhtml</to-view-id>
+                <redirect />
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>infouser</from-outcome>
+                <to-view-id>/account/info.xhtml</to-view-id>
+                <redirect />
+            </navigation-case>      
+        </navigation-rule>
+    
+        <!-- HOME -->
+        <navigation-rule>
+            <from-view-id>/index.xhtml</from-view-id>
+            <navigation-case>
+                <from-outcome>home</from-outcome>
+                <to-view-id>/index.xhtml</to-view-id>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>contact</from-outcome>
+                <to-view-id>/contact.xhtml</to-view-id>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>login</from-outcome>
+                <to-view-id>/account/login.xhtml</to-view-id>
+            </navigation-case>
+        </navigation-rule>
+        <!-- Signin-->
+        <navigation-rule>
+            <from-view-id>/account/login.xhtml</from-view-id>
+            <navigation-case>
+                <from-outcome>schedule</from-outcome>
+                <from-action>#{userController.login}</from-action>
+                <to-view-id>/task/tasks.xhtml</to-view-id>
+                <redirect />
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>schedule</from-outcome>
+                <to-view-id>/task/tasks.xhtml</to-view-id>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>home</from-outcome>
+                <to-view-id>/index.xhtml</to-view-id>
+            </navigation-case>
+            <navigation-case>
+                <from-action>login</from-action>
+                <to-view-id>/account/login.xhtml</to-view-id>
+            </navigation-case>
+            <navigation-case>
+                <from-action>register</from-action>
+                <to-view-id>/account/register.xhtml</to-view-id>
+            </navigation-case>
+        </navigation-rule>
+        <!-- Register -->
+        <navigation-rule>
+            <from-view-id>/account/register.xhtml</from-view-id>
+            <navigation-case>
+                <from-outcome>schedule</from-outcome>
+                <from-action>#{userController.createUser}</from-action>
+                <to-view-id>/task/tasks.xhtml</to-view-id>
+                <redirect />
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>schedule</from-outcome>
+                <to-view-id>/task/tasks.xhtml</to-view-id>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>home</from-outcome>
+                <to-view-id>/index.xhtml</to-view-id>
+            </navigation-case>
+            <navigation-case>
+                <from-action>login</from-action>
+                <to-view-id>/account/login.xhtml</to-view-id>
+            </navigation-case>
+            <navigation-case>
+                <from-action>register</from-action>
+                <to-view-id>/account/register.xhtml</to-view-id>
+            </navigation-case>
+        </navigation-rule>
+        <!-- SCHEDULE -->
+        <navigation-rule>
+            <from-view-id>/task/*</from-view-id>
+            <navigation-case>
+                <from-outcome>schedule</from-outcome>
+                <to-view-id>/task/tasks.xhtml</to-view-id>
+            </navigation-case>
+ 
+            <navigation-case>
+                <from-outcome>logout</from-outcome>
+                <from-action>#{userController.logout}</from-action>
+                <to-view-id>/index.xhtml</to-view-id>
+                <redirect />
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>home</from-outcome>
+                <to-view-id>/index.xhtml</to-view-id>
+            </navigation-case>
+    
+        </navigation-rule>
+        <navigation-rule>
+            <from-view-id>*</from-view-id>
+            <navigation-case>
+                <from-outcome>schedule</from-outcome>
+                <to-view-id>/task/tasks.xhtml</to-view-id>
+            </navigation-case>
+ 
+            <navigation-case>
+                <from-outcome>logout</from-outcome>
+                <from-action>#{userController.logout}</from-action>
+                <to-view-id>/index.xhtml</to-view-id>
+                <redirect />
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>home</from-outcome>
+                <to-view-id>/index.xhtml</to-view-id>
+            </navigation-case>
+            <!-- Guideline -->            
+            <navigation-case>
+                <from-outcome>guideline</from-outcome>
+                <to-view-id>/guideline/List.xhtml</to-view-id>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>executeguideline</from-outcome>
+                <to-view-id>/guideExec/execute.xhtml</to-view-id>
+            </navigation-case>
+            <!--Patient-->
+            <navigation-case>
+                <from-outcome>patient</from-outcome>
+                <to-view-id>/patient/List.xhtml</to-view-id>
+            </navigation-case>
+            
+            <!--User-->
+            <navigation-case>
+                <from-outcome>user</from-outcome>
+                <to-view-id>/user/List.xhtml</to-view-id>
+            </navigation-case>
+            
+            <!--User Settings-->
+            <navigation-case>
+                <from-outcome>infouser</from-outcome>
+                <to-view-id>/account/info.xhtml</to-view-id>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>editinfo</from-outcome>
+                <to-view-id>/account/editinfo.xhtml</to-view-id>
+            </navigation-case>
+      
+        </navigation-rule>
+    </application>
+</faces-config>

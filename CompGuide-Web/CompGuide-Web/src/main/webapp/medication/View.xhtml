@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MedicationViewDlg" widgetVar="MedicationViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewMedicationTitle}">
+            <h:form id="MedicationViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{medicationController.selected != null}">
+                        <h:outputText value="#{bundle.ViewMedicationLabel_idmedication}"/>
+                        <h:outputText value="#{medicationController.selected.idmedication}" title="#{bundle.ViewMedicationTitle_idmedication}"/>
+                        <h:outputText value="#{bundle.ViewMedicationLabel_name}"/>
+                        <h:outputText value="#{medicationController.selected.name}" title="#{bundle.ViewMedicationTitle_name}"/>
+                        <h:outputText value="#{bundle.ViewMedicationLabel_activeIngredient}"/>
+                        <h:outputText value="#{medicationController.selected.activeIngredient}" title="#{bundle.ViewMedicationTitle_activeIngredient}"/>
+                        <h:outputText value="#{bundle.ViewMedicationLabel_dosage}"/>
+                        <h:outputText value="#{medicationController.selected.dosage}" title="#{bundle.ViewMedicationTitle_dosage}"/>
+                        <h:outputText value="#{bundle.ViewMedicationLabel_pharmaceuticalForm}"/>
+                        <h:outputText value="#{medicationController.selected.pharmaceuticalForm}" title="#{bundle.ViewMedicationTitle_pharmaceuticalForm}"/>
+                        <h:outputText value="#{bundle.ViewMedicationLabel_posology}"/>
+                        <h:outputText value="#{medicationController.selected.posology}" title="#{bundle.ViewMedicationTitle_posology}"/>
+                        <h:outputText value="#{bundle.ViewMedicationLabel_description}"/>
+                        <h:outputText value="#{medicationController.selected.description}" title="#{bundle.ViewMedicationTitle_description}"/>
+                        <h:outputText value="#{bundle.ViewMedicationLabel_time}"/>
+                        <h:outputText value="#{medicationController.selected.time}" title="#{bundle.ViewMedicationTitle_time}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewMedicationLabel_identifier}"/>
+                        <h:outputText value="#{medicationController.selected.identifier}" title="#{bundle.ViewMedicationTitle_identifier}"/>
+                        <h:outputText value="#{bundle.ViewMedicationLabel_timeend}"/>
+                        <h:outputText value="#{medicationController.selected.timeend}" title="#{bundle.ViewMedicationTitle_timeend}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewMedicationLabel_idtask}"/>
+                        <h:outputText value="#{medicationController.selected.idtask}" title="#{bundle.ViewMedicationTitle_idtask}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="MedicationViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

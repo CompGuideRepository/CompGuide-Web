@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UserEditDlg" widgetVar="UserEditDialog" modal="true" resizable="false" width="860" appendTo="@(body)" header="#{bundle.EditUserTitle}">
+            <h:form id="UserEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{userController.selected != null}">
+                        <b:inputText id="username" value="#{userController.selected.username}" title="#{bundle.EditUserTitle_username}" 
+                                     label="#{bundle.EditUserLabel_username}" renderLabel="true" />
+                        <b:inputSecret id="password" value="#{userController.selected.password}" placeholder="#{bundle.EditUserTitle_password}" 
+                                       label="#{bundle.EditUserLabel_password}" renderLabel="true"  />
+                        <b:inputText id="name" value="#{userController.selected.name}" title="#{bundle.EditUserTitle_name}" 
+                                     label="#{bundle.EditUserLabel_name}" renderLabel="true"  />
+                        <b:inputText id="lastname" value="#{userController.selected.lastname}" title="#{bundle.EditUserTitle_lastname}" 
+                                     label="#{bundle.EditUserLabel_lastname}" renderLabel="true" />
+                        <b:row>
+                            <b:column col-sm="12">
+                                <div class="form-group">
+                                    <i class="fa fa-calendar-o">
+                                        <b:datepicker id="birthdate" 
+                                                      changeMonth="true" changeYear="true"
+                                                      mode="popup"
+                                                      value="#{userController.selected.birthdate}" 
+                                                      placeholder="#{bundle.EditUserTitle_birthdate}"/>
+                                    </i>
+                                </div>
+
+                            </b:column>
+                        </b:row>
+                        <b:inputText id="phone" value="#{userController.selected.phone}" title="#{bundle.EditUserTitle_phone}" 
+                                     label="#{bundle.EditUserLabel_phone}" renderLabel="true"/>
+                        <b:inputText id="email" value="#{userController.selected.email}" title="#{bundle.EditUserTitle_email}" 
+                                     label="#{bundle.EditUserLabel_email}" renderLabel="true"/>
+                        <b:inputText id="address" value="#{userController.selected.address}" title="#{bundle.EditUserTitle_address}" 
+                                     label="#{bundle.EditUserLabel_address}" renderLabel="true"/>
+                        <b:inputText id="homephone" value="#{userController.selected.homephone}" title="#{bundle.EditUserTitle_homephone}" 
+                                     label="#{bundle.EditUserLabel_homephone}" renderLabel="true"/>
+                        <b:inputText id="photo" value="#{userController.selected.photo}" title="#{bundle.EditUserTitle_photo}"
+                                     label="#{bundle.EditUserLabel_photo}" renderLabel="true"/>
+                        <b:inputText id="type" value="#{userController.selected.type}" title="#{bundle.EditUserTitle_type}" 
+                                     label="#{bundle.EditUserLabel_type}" renderLabel="true"/>
+                        <b:inputText id="googleCalendarToken" value="#{userController.selected.googleCalendarToken}" title="#{bundle.EditUserTitle_googleCalendarToken}" 
+                                     label="#{bundle.EditUserLabel_googleCalendarToken}" renderLabel="true"/>
+
+                        <b:row>
+                            <b:column id="panelbirthday" col-sm="12">
+                                <div class="form-group">
+                                    <i class="fa fa-calendar-o">
+                                        <b:datepicker id="reg" 
+                                                      mode="popup"
+                                                      value="#{userController.selected.reg}" 
+                                                      placeholder="#{bundle.EditUserTitle_reg}"/>
+                                    </i>
+                                </div>
+                            </b:column>
+                        </b:row>
+                        <b:inputText id="active" value="#{userController.selected.active}" title="#{bundle.EditUserTitle_active}" 
+                                     label="#{bundle.EditUserLabel_active}" renderLabel="true"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{userController.update}" value="#{bundle.Save}" update="display,:UserListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UserEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}"
+                                     ajax="true" onclick="PF('UserEditDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

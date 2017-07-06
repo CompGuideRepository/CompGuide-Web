@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AutenticationViewDlg" widgetVar="AutenticationViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewAutenticationTitle}">
+            <h:form id="AutenticationViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{autenticationController.selected != null}">
+                        <h:outputText value="#{bundle.ViewAutenticationLabel_id}"/>
+                        <h:outputText value="#{autenticationController.selected.id}" title="#{bundle.ViewAutenticationTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewAutenticationLabel_duracao}"/>
+                        <h:outputText value="#{autenticationController.selected.duracao}" title="#{bundle.ViewAutenticationTitle_duracao}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewAutenticationLabel_auth}"/>
+                        <h:outputText value="#{autenticationController.selected.auth}" title="#{bundle.ViewAutenticationTitle_auth}"/>
+                        <h:outputText value="#{bundle.ViewAutenticationLabel_utilizadorId}"/>
+                        <h:outputText value="#{autenticationController.selected.utilizadorId}" title="#{bundle.ViewAutenticationTitle_utilizadorId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="AutenticationViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

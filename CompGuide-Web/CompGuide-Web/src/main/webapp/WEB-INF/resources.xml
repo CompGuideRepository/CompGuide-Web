@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+<!--  <Resource id="jdbc/compguidedb" type="javax.sql.DataSource">#Tue Feb 23 21:38:25 GMT 2016
+        jdbcDriver=com.mysql.jdbc.Driver
+        password=YEMpGc5eDM7ApxQIKiHxMyBJrTanVeglpKUzQ2TPK
+        userName=PAm6IBWxt12k2dnx
+        jdbcUrl=jdbc\:mysql\://boxdb-antoniosilva9116-prod-compguideweb.cm8ujxf8qvtj.eu-central-1.rds.amazonaws.com\:3306/compguideweb
+    </Resource>-->
+    <Resource id="jdbc/compguide" type="javax.sql.DataSource">#Tue May 24 11:17:22 BST 2016
+        jdbcDriver=com.mysql.jdbc.Driver
+        password=123
+        userName=root
+        jdbcUrl=jdbc\:mysql\://localhost\:3306/compguidedb
+    </Resource>
+<!--  <Resource id="jdbc/compguide" type="javax.sql.DataSource">#Tue May 24 11:17:22 BST 2016
+jdbcDriver=com.mysql.jdbc.Driver
+password=YEMpGc5eDM7ApxQIKiHxMyBJrTanVeglpKUzQ2TPK
+userName=PAm6IBWxt12k2dnx
+jdbcUrl=jdbc\:mysql\://boxdb-antoniosilva9116-prod-compguideweb.cm8ujxf8qvtj.eu-central-1.rds.amazonaws.com\:3306/compguideweb
+</Resource>-->
+</resources>

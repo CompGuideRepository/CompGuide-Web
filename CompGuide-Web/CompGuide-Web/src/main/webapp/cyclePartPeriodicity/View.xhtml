@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CyclePartPeriodicityViewDlg" widgetVar="CyclePartPeriodicityViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCyclePartPeriodicityTitle}">
+            <h:form id="CyclePartPeriodicityViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{cyclePartPeriodicityController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCyclePartPeriodicityLabel_cyclePartPeriodicityID}"/>
+                        <h:outputText value="#{cyclePartPeriodicityController.selected.cyclePartPeriodicityID}" title="#{bundle.ViewCyclePartPeriodicityTitle_cyclePartPeriodicityID}"/>
+                        <h:outputText value="#{bundle.ViewCyclePartPeriodicityLabel_repetitionValue}"/>
+                        <h:outputText value="#{cyclePartPeriodicityController.selected.repetitionValue}" title="#{bundle.ViewCyclePartPeriodicityTitle_repetitionValue}"/>
+                        <h:outputText value="#{bundle.ViewCyclePartPeriodicityLabel_periodicityValue}"/>
+                        <h:outputText value="#{cyclePartPeriodicityController.selected.periodicityValue}" title="#{bundle.ViewCyclePartPeriodicityTitle_periodicityValue}"/>
+                        <h:outputText value="#{bundle.ViewCyclePartPeriodicityLabel_durationID}"/>
+                        <h:outputText value="#{cyclePartPeriodicityController.selected.durationID}" title="#{bundle.ViewCyclePartPeriodicityTitle_durationID}"/>
+                        <h:outputText value="#{bundle.ViewCyclePartPeriodicityLabel_temporalUnitID}"/>
+                        <h:outputText value="#{cyclePartPeriodicityController.selected.temporalUnitID}" title="#{bundle.ViewCyclePartPeriodicityTitle_temporalUnitID}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CyclePartPeriodicityViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,108 @@
+.featured-block-one{
+    background-image: url("../resources/images/bg/bg-featured-1.jpg");
+    background-position: center right;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+    overflow: hidden;
+}
+.featured-block-two{
+    background-image: url("../resources/images/bg/bg-featured-2.jpg");
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+    overflow: hidden;
+    margin: 40px 0 15px 0;
+}
+.featured-block-three{
+    background-image: url("../resources/images/bg/bg-featured-3.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+    padding-bottom: 300px;
+    overflow: hidden;
+}
+.featured-info-one{
+    background-color: @base-color;
+    width: 36%;
+    padding: 50px 50px 50px 50px;
+    text-align: left;
+    float: right;
+}
+.featured-info-two{
+    width: 100%;
+    padding: 50px 50px 50px 50px;
+    text-align: left;
+    float: right;
+    background-color: rgba(15,162,213,0.83);
+}
+.featured-info-three{
+    width: 100%;
+    padding: 30px 30px 30px 30px;
+    text-align: center;
+    margin: 0 auto;
+    background-color: @base-color;
+}
+.featured-info-one h3,
+.featured-info-one p,
+.featured-info-two h3,
+.featured-info-two p,
+.featured-info-three h3,
+.featured-info-three p,
+.featured-info-three span{
+    color: @body-bg;
+}
+.featured-info-three{
+    span{
+        font-size: @font-size-h5;
+    }
+}
+.featured-item {
+    background-color: #fff;
+    border: 1px solid #e4e9ef;
+    display: block;
+    margin: 30px auto;
+    max-width: 350px;
+    &:hover{
+        border-color: #0fa2d5;
+        -webkit-box-shadow: 0 0 10px #0fa2d5;
+        box-shadow: 0 0 10px #0fa2d5;
+        .people, .time, .views{
+            color: @link-hover-color;
+        }
+    }
+    figure{
+        margin: 0 0 20px 0;
+        max-height: 300px;
+    }
+    p{
+        font-size: 1.1em;
+    }
+    .content{
+        border-bottom: 1px solid #e4e9ef;
+        padding: 20px;
+    }
+    .foot{
+        padding: 10px 20px 0;
+    }
+    .foot ul li{
+        color: #1e7290;
+        display: inline-block;
+    }
+    .foot ul li span{
+        margin-right: 5px;
+    }
+    .foot ul li.right{
+        float: right;
+    }
+}
+@media handheld, only screen and (max-width: 768px){
+    .featured-info-one{
+        width: 100%;
+    }
+    .featured-block-three {
+        margin: 20px 0;
+    }
+}

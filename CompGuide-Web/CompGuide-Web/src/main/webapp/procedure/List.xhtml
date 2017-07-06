@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/profiletemplate.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListProcedureTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="resourcefiles">
+            <h:outputScript name="js/compguide/compguideclient.js" />
+            <link type="text/css" rel="stylesheet" href="#{request.contextPath}/javax.faces.resource/theme.css.xhtml?ln=primefaces-bootstrap"/>
+            <!--<link href="/javax.faces.resource/theme.css.xhtml?ln=primefaces-bootstrap" rel="stylesheet" type="text/css"/>-->
+        </ui:define>
+        <ui:define name="navbar">
+            <ui:include src="/navbar/profilenavbar.xhtml" />
+        </ui:define>
+        <ui:define name="validatesession">
+            <f:metadata>
+                <f:event type="preRenderView" listener="#{userController.sessionValidate}" />
+            </f:metadata>
+        </ui:define>
+
+        <ui:define name="content">
+            <h:form id="ProcedureListForm">
+
+                <p:dataTable id="datalist" value="#{procedureController.items}" var="item"
+                             selectionMode="single" selection="#{procedureController.selected}"
+                             paginator="true"
+                             rowKey="#{item.idprocedure}"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             >
+
+                    <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                    <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListProcedureTitle_idprocedure}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idprocedure}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListProcedureTitle_name}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.name}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListProcedureTitle_description}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.description}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListProcedureTitle_time}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.time}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListProcedureTitle_identifier}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.identifier}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListProcedureTitle_idtask}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idtask}"/>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{procedureController.prepareCreate}" update=":ProcedureCreateForm" oncomplete="PF('ProcedureCreateDialog').show()"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ProcedureViewForm" oncomplete="PF('ProcedureViewDialog').show()" disabled="#{empty procedureController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ProcedureEditForm" oncomplete="PF('ProcedureEditDialog').show()" disabled="#{empty procedureController.selected}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{procedureController.destroy}" update=":growl,datalist" disabled="#{empty procedureController.selected}"/>
+                    </f:facet>
+                </p:dataTable>
+
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+
+        <ui:define name="footer">
+            <ui:include src="/footer/profilefooter.xhtml" />
+        </ui:define>
+    </ui:composition>
+
+</html>
