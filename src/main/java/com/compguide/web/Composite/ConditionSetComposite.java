@@ -84,7 +84,11 @@ public class ConditionSetComposite implements Serializable {
         if (list != null) {
             for (Condition condition : list) {
                 condition.setConditionSetID(aux);
-                getConditionFacade().create(condition);
+                if(condition.getConditionID() == null){
+                    getConditionFacade().create(condition);
+                } else{
+                    getConditionFacade().edit(condition);
+                }
                 conditions.add(condition);
             }
         }

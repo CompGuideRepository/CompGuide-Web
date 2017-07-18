@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var webServicePath = "http://compguide.net/webresources/";
+var webServicePath = "http://localhost:8081/CompGuide/webresources/";
 var messages;
 var index = 11;
 var numberNotificationsRequested = 0;
@@ -34,7 +34,6 @@ function pushNotifications() {
 
         },
         error: function (err) {
-            alert(JSON.stringify(err));
         }
     });
 
@@ -62,7 +61,6 @@ function showOutcome() {
             }
         },
         error: function (err) {
-            alert(JSON.stringify(err));
         }
     });
 
@@ -80,7 +78,7 @@ function showStopCondition() {
             }
         },
         error: function (err) {
-            alert(JSON.stringify(err));
+
         }
     });
 
@@ -112,7 +110,6 @@ function msgNoti()
             }
         },
         error: function (err) {
-            alert(JSON.stringify(err));
         }
     });
 
@@ -126,7 +123,6 @@ function msgNoti()
             }
         },
         error: function (err) {
-            alert(JSON.stringify(err));
         }
     });
 }
@@ -179,7 +175,6 @@ $(document).ready(function ()
             success: function () {
             },
             error: function (err) {
-                alert(JSON.stringify(err));
             }
         });
         return false;

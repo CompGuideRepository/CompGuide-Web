@@ -113,9 +113,12 @@ public class GuideExecController implements Serializable {
 
         User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userPersistence");
 
+        selected = new GuideExec();
+        
         selected.setNextTasks(gson.toJson(controller));
         selected.setIdpatient(patient);
         selected.setIdguideline(guideline);
+        selected.setTime(new Date());
         selected.setIduser(user);
         selected.setStart(new Date());
         selected.setCompleted(new Short((short) 0));
@@ -125,7 +128,6 @@ public class GuideExecController implements Serializable {
         FacesContext.getCurrentInstance().
                 getExternalContext().getSessionMap().put("refreshTimeline", true);
 
-        selected.setIdguideexec(null);
         create();
 
         System.out.println("\n**************************************************************************\n");

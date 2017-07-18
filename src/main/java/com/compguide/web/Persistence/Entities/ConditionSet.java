@@ -8,6 +8,7 @@ package com.compguide.web.Persistence.Entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -48,7 +49,7 @@ public class ConditionSet implements Serializable {
     private Integer conditionSetCounter;
     @OneToMany(mappedBy = "conditionSetID")
     private List<Outcome> outcomeList;
-    @OneToMany(mappedBy = "conditionSetID")
+    @OneToMany(mappedBy = "conditionSetID", cascade = CascadeType.ALL)
     private List<Condition> conditionList;
 
     public ConditionSet() {

@@ -912,7 +912,6 @@ public class ScheduleTaskController implements Serializable {
 
                 deleteEventNotification(selectedEvent, getNotificationFacade().findByEventID(selectedEvent));
 
-                eventModel.deleteEvent(event);
                 break;
             }
         }
@@ -966,17 +965,20 @@ public class ScheduleTaskController implements Serializable {
         selectedEvent.getScheduleTaskID().setCurrentNumberOfRepetitions(value);
     }
 
-    public void deleteEventNotification(Event event, List<Notification> notifications) {
+    public List<Notification> deleteEventNotification(Event event, List<Notification> notifications) {
+        List<Notification> resultList = new ArrayList<>(notifications);
+        
         if (!notifications.isEmpty()) {
             for (Notification notification : notifications) {
                 if (Objects.equals(notification.getEventID().getEventID(), event.getEventID())) {
                     notification.setEventID(event);
                     getNotificationFacade().remove(notification);
-                    notifications.remove(notification);
-                    break;
+                    resultList.remove(notification);
                 }
             }
         }
+        
+        return resultList;
     }
 
     public List<ScheduleTask> requestNextTask(Event event, ProcessedTask processedTask) {
@@ -986,6 +988,12 @@ public class ScheduleTaskController implements Serializable {
                 getGuideExecID().getIdguideexec().
                 toString()
         );
+        
+        processedTask.setController(
+                com.compguide.web.Execution.Entities.TaskController
+                        .fromJson(event.getScheduleTaskID().getNextTask())
+        );
+        
         taskRequest.setTaskQuadruple(processedTask.
                 getController().getNextTask().
                 get(taskNumber(event, processedTask)));
@@ -1033,7 +1041,12 @@ public class ScheduleTaskController implements Serializable {
                 element.setScheduleTaskID(selected);
 
                 element.setTemporalElementID(null);
-                getTemporalElementFacade().create(element);
+                if (element.getTemporalElementID() == null) {
+                    getTemporalElementFacade().create(element);
+                } else{
+                    getTemporalElementFacade().edit(element);
+
+                }
             }
         }
         return scheduleTasks;
